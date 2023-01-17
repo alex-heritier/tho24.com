@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Bizzy: Business Partnership</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        #main-content {
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            document.getElementById("register-button").addEventListener("click", function () {
+                document.getElementById("register-form").style.display = "block";
+                document.getElementById("existing-account-form").style.display = "none";
+            });
+            document.getElementById("existing-account-button").addEventListener("click", function () {
+                document.getElementById("register-form").style.display = "none";
+                document.getElementById("existing-account-form").style.display = "block";
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="sign-up-screen">
+        <div id="button-container">
+            <button id="register-button">Register</button>
+            <button id="existing-account-button">Existing Account</button>
+        </div>
+        <div id="main-content">
+            <div id="register-form">
+                <!-- Form elements for registering a new account -->
+                <form method="post" action="/svr/register.php">
+                    <!-- Account info -->
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email"><br>
+                    <label for="phone">Phone Number:</label>
+                    <input type="phone" id="phone" name="phone"><br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password"><br>
+
+                    <!-- Account info -->
+                    <br>
+                    <label for="biz_name">Business Name:</label>
+                    <input type="text" id="biz_name" name="biz_name"><br>
+                    <label for="descr">Description:</label>
+                    <input type="text" id="descr" name="descr"><br>
+                    <label for="website">Website:</label>
+                    <input type="text" id="website" name="website"><br>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div id="existing-account-form" style="display:none">
+                <!-- Form elements for logging into an existing account -->
+                <form method="post" action="/svr/login.php">
+                    <label for="login">Login:</label>
+                    <input type="text" id="login" name="login" placeholder="Email or Phone"><br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password"><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
