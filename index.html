@@ -56,6 +56,10 @@
             width: 100%;
         }
 
+        #business-listing a {
+            text-decoration: none;
+        }
+
         .biz-item {
             margin: 20px 0;
 
@@ -64,14 +68,74 @@
         .biz-item .info {
             padding: 8px;
         }
+
+        .biz-item p,
+        .biz-item h2 {
+            color: black;
+            text-decoration: none;
+        }
     </style>
 
     <script>
+        let timer = null;
+
         // Function to get the value of a cookie
         function getCookie(name) {
             var value = "; " + document.cookie;
             var parts = value.split("; " + name + "=");
             if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+
+        async function searchBiz(searchText) {
+            let url = '/svr/biz_search.php';
+            if ((searchText || '').length > 0) {
+                url = url + "?query=" + searchText;
+            }
+            let response = await fetch(url)
+                .then((r) => r.json())
+                .catch((err) => console.log("ERROR", err));
+            console.log(response);
+
+            let bizListing = document.getElementById('business-listing');
+            bizListing.innerHTML = "";
+            response.forEach((e) => {
+                /*
+                <div class="biz-item">
+                    <img src="https://www.pho24.com.vn/wp-content/uploads/2018/10/Sala-1-2.jpg" />
+                    <div class="info">
+                        <p>Pho 24, the best pho ever</p>
+                        <p>555-555-5555 | support@pho24.vn</p>
+                    </div>
+                </div>
+                */
+                let outerDiv = document.createElement('div');
+                outerDiv.className = "biz-item";
+
+                let img = document.createElement("img");
+                img.src = e["main_img"];
+
+                let infoDiv = document.createElement('div');
+                infoDiv.className = "info";
+
+                let title = document.createElement("h2");
+                title.innerText = e["name"];
+
+                let descr = document.createElement("p");
+                descr.innerText = e["descr"];
+
+                infoDiv.appendChild(title);
+                infoDiv.appendChild(descr);
+
+                outerDiv.appendChild(img);
+                outerDiv.appendChild(infoDiv);
+
+                let base = document.createElement("a");
+                base.href = "/biz.html?id=" + e["id"];
+
+                base.appendChild(outerDiv);
+
+                bizListing.appendChild(base);
+            });
         }
 
         window.addEventListener("load", function () {
@@ -84,6 +148,19 @@
                 registerBtn.innerHTML = "Account";
                 registerBtn.href = "/account.html";
             }
+
+            searchBiz(null);
+
+            let searchField = document.getElementById('search');
+            search.addEventListener("input", function (e) {
+                console.log(e);
+
+                let data = searchField.value;
+                if (timer !== null) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => searchBiz(data), 250);
+            });
         });
     </script>
 </head>
@@ -101,7 +178,7 @@
     </div>
 
     <div id="business-listing">
-        <div class="biz-item">
+        <!-- <div class="biz-item">
             <img src="https://www.pho24.com.vn/wp-content/uploads/2018/10/Sala-1-2.jpg" />
             <div class="info">
                 <p>Pho 24, the best pho ever</p>
@@ -115,7 +192,7 @@
                 <p>Popular coffee shop that uses high-quality ingredients.</p>
                 <p>555-555-5555 | info@highlands.vn</p>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </body>
