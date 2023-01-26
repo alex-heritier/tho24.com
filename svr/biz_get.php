@@ -6,7 +6,7 @@ $id = $_GET['id'] ?? null;
 
 $conn = db_connect();
 
-$sql = "SELECT id, name, descr, url, main_img, email, phone FROM biz WHERE id = $id";
+$sql = "SELECT id, name, descr, trade, url, main_img, email, phone FROM biz WHERE id = $id";
 $result = $conn->query($sql);
 
 $conn->close();

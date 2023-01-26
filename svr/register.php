@@ -9,6 +9,7 @@ $phone = $_POST['phone'];
 $password = $_POST['password'];
 $biz_name = $_POST['biz_name'];
 $descr = $_POST['descr'];
+$trade = $_POST['trade'];
 $url = $_POST['website'];
 
 $file_result = complete_file_upload($_FILES['image']);
@@ -30,7 +31,7 @@ if ($result->num_rows > 0) {
 
     if ($result === TRUE) {
         // it worked
-        $sql = "INSERT INTO biz (user_id, name, descr, url, main_img) VALUES ($user_id, '$biz_name', '$descr', '$url', '$file_result')";
+        $sql = "INSERT INTO biz (user_id, name, descr, trade, url, main_img) VALUES ($user_id, '$biz_name', '$descr', '$trade', '$url', '$file_result')";
         $result = $conn->query($sql);
 
         if ($result === TRUE) {

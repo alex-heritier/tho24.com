@@ -6,9 +6,9 @@ $query = $_GET['query'] ?? null;
 
 $conn = db_connect();
 
-$sql = "SELECT id, name, descr, url, main_img, email, phone FROM biz";
+$sql = "SELECT id, name, descr, trade, url, main_img, email, phone FROM biz";
 if (strlen($query ?? '') > 0) {
-    $sql = $sql . " WHERE LOWER(name) LIKE '$query%' OR LOWER(email) LIKE '$query%'";
+    $sql = $sql . " WHERE LOWER(name) LIKE '$query%' OR LOWER(email) LIKE '$query%' OR LOWER(trade) LIKE '$query%'";
 }
 $result = $conn->query($sql);
 

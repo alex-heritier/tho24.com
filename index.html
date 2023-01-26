@@ -18,11 +18,13 @@
             display: flex;
             /* justify-content: flex-end; */
             justify-content: center;
-            gap: 5px;
+            gap: 10px;
         }
 
         #header-buttons a {
-            padding: 10px;
+            width: 100px;
+            padding: 10px 0;
+            text-align: center;
             text-decoration: none;
             color: black;
         }
@@ -54,10 +56,16 @@
 
         #business-listing img {
             width: 100%;
+            object-fit: scale-down;
+            object-position: center;
+            aspect-ratio: calc(16/9);
+            border: 1px solid lightgray;
+            box-sizing: border-box;
         }
 
         #business-listing a {
             text-decoration: none;
+            overflow: hidden;
         }
 
         .biz-item {
@@ -73,6 +81,13 @@
         .biz-item h2 {
             color: black;
             text-decoration: none;
+        }
+
+        @media only screen and (min-width: 600px) {
+            #business-listing {
+                margin: auto;
+                width: 60%;
+            }
         }
     </style>
 
@@ -118,7 +133,7 @@
                 infoDiv.className = "info";
 
                 let title = document.createElement("h2");
-                title.innerText = e["name"];
+                title.innerText = `${e["name"]} | ${e["trade"] || '?'}`;
 
                 let descr = document.createElement("p");
                 descr.innerText = e["descr"];
@@ -139,14 +154,15 @@
         }
 
         window.addEventListener("load", function () {
-            // Check for the existence of the cookie            
+            // Check for the existence of the cookie
             let key = "session_data";
+            let altBtn = document.getElementById("alt-btn");
             if (getCookie(key)) {
-                // Get the element with the ID 'register-btn'
-                let registerBtn = document.getElementById("register-btn");
-                // Change the text of the element
-                registerBtn.innerHTML = "Account";
-                registerBtn.href = "/account.html";
+                altBtn.innerText = "Account";
+                altBtn.href = "/account.html";
+            } else {
+                altBtn.innerText = "Sign In";
+                altBtn.href = "/register.html";
             }
 
             searchBiz(null);
@@ -155,11 +171,12 @@
             search.addEventListener("input", function (e) {
                 console.log(e);
 
+                let duration = 250; // millis
                 let data = searchField.value;
                 if (timer !== null) {
                     clearTimeout(timer);
                 }
-                timer = setTimeout(() => searchBiz(data), 250);
+                timer = setTimeout(() => searchBiz(data), duration);
             });
         });
     </script>
@@ -169,12 +186,12 @@
     <div id="header">
         <div id="header-buttons">
             <a id="explore-btn" href="#">Explore</a>
-            <a id="register-btn" href="/register.html">Sign In</a>
+            <a id="alt-btn"></a>
         </div>
     </div>
 
     <div id="search-field">
-        <input type="text" id="search" name="search" placeholder="Search for a business">
+        <input type="text" id="search" name="search" placeholder="Name, email, or trade">
     </div>
 
     <div id="business-listing">
