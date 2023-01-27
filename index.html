@@ -178,6 +178,11 @@
                 }
                 timer = setTimeout(() => searchBiz(data), duration);
             });
+
+            // Check current location
+            if (navigator.geolocation) {
+                let pos = navigator.geolocation.getCurrentPosition((pos) => console.log(pos));
+            }
         });
     </script>
 </head>

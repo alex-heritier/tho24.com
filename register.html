@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Bizzy: Business Partnership</title>
+    <title>Sign In | Bizzy</title>
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -23,8 +23,36 @@
     </style>
 
     <script type="text/javascript">
-        window.addEventListener("load", function () {
+        let locationData;
 
+        async function setupLocationDropdown() {
+            let response = await fetch("/saigon3.json").then((r) => r.json());
+            locationData = response['district'];
+
+            let districtDropdown = document.querySelector("[name='district']");
+            let html = '';
+            locationData.forEach(d => {
+                html += `<option value="${d["code"]}">${d["name"]}</option>`;
+            });
+            districtDropdown.innerHTML = html;
+
+            let onDistrictChange = function () {
+                // console.log(this.value);
+
+                let districtData = locationData.find(e => e["code"] == this.value);
+                let html = '';
+                districtData["ward"].forEach(w => {
+                    html += `<option value="${w["code"]}">${w["name"]}</option>`;
+                });
+                document.querySelector("[name='ward']").innerHTML = html;
+            };
+
+            districtDropdown.addEventListener("change", onDistrictChange);
+
+            onDistrictChange.apply(districtDropdown);
+        }
+
+        window.addEventListener("load", function () {
             document.getElementById("register-button").addEventListener("click", function () {
                 document.getElementById("register-form").style.display = "block";
                 document.getElementById("existing-account-form").style.display = "none";
@@ -33,6 +61,8 @@
                 document.getElementById("register-form").style.display = "none";
                 document.getElementById("existing-account-form").style.display = "block";
             });
+
+            setupLocationDropdown();
         });
     </script>
 </head>
@@ -63,6 +93,8 @@
                     <input type="text" id="descr" name="descr"><br>
                     <label for="website">Website:</label>
                     <input type="text" id="website" name="website"><br>
+
+                    <!-- Business trade -->
                     <select name="trade">
                         <option value="electrician">Electrician</option>
                         <option value="plumber">Plumber</option>
@@ -83,8 +115,15 @@
                         <option value="bricklayer">Bricklayer</option>
                         <option value="ironworker">Ironworker</option>
                         <option value="heavyequip">Heavy equipment operator</option>
-                        <option value="electricianhelper">Electrician helper</option>
                     </select>
+                    <br>
+
+                    <!-- Business location -->
+                    <select name="district">
+                    </select>
+                    <select name="ward">
+                    </select>
+                    <br>
 
                     <input type="file" name="image">
 
