@@ -64,6 +64,26 @@
 
             setupLocationDropdown();
         });
+
+
+        // function asdf() {
+        //     let totalSql = "";
+
+        //     // INSERT INTO basic_address (type, pretty_name, code, lat, lng) VALUES ('[value-2]','[value-3]','[value-4]','[value-5]','[value-6]')
+        //     locationData.forEach(district => {
+        //         let sql = `INSERT INTO basic_address (type, pretty_name, code, lat, lng) VALUES ('${"district"}','${district["name"]}','${district["code"]}',NULL,NULL);`;
+        //         totalSql += sql + "\n";
+
+        //         district["ward"].forEach(ward => {
+        //             let sql = `INSERT INTO basic_address (type, pretty_name, code, lat, lng, dummy) VALUES ('${"ward"}','${ward["name"]}','${ward["code"]}',NULL,NULL, '${district["code"]}');`;
+        //             totalSql += sql + "\n";
+        //         });
+        //     });
+
+        //     console.log(totalSql);
+        // }
+
+        // asdf();
     </script>
 </head>
 
@@ -114,11 +134,10 @@
                         <option value="sheetmetal">Sheet metal worker</option>
                         <option value="bricklayer">Bricklayer</option>
                         <option value="ironworker">Ironworker</option>
-                        <option value="heavyequip">Heavy equipment operator</option>
                     </select>
                     <br>
 
-                    <!-- Business location -->
+                    <!-- Business location (loaded dynamically) -->
                     <select name="district">
                     </select>
                     <select name="ward">

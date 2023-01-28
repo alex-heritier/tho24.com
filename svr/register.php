@@ -11,6 +11,8 @@ $biz_name = $_POST['biz_name'];
 $descr = $_POST['descr'];
 $trade = $_POST['trade'];
 $url = $_POST['website'];
+$district = $_POST['district'];
+$ward = $_POST['ward'];
 
 $file_result = complete_file_upload($_FILES['image']);
 if ($file_result === null) {
@@ -36,8 +38,42 @@ if ($result->num_rows > 0) {
 
         if ($result === TRUE) {
             // it worked
+            $biz_id = $conn->insert_id;
             $sql = "INSERT INTO pics (ref_id, ref_type, path) VALUES ($user_id, 'user', '$file_result')";
             $result = $conn->query($sql);
+
+            if ($result === TRUE) {                
+                // it worked
+
+                $sql = "SELECT id, code FROM basic_address WHERE code = '$district' OR code = '$ward'";
+                $result = $conn->query($sql);
+
+                $district_id = NULL;
+                $ward_id = NULL;
+                while ($r = $result->fetch_assoc()) {
+                    if ($r["code"] == $district) {
+                        $district_id = $r["id"];
+                    } else if ($r["code"] == $ward) {
+                        $ward_id = $r["id"];
+                    }
+                }
+
+                if ($district_id === NULL || $ward_id === NULL) {
+                    die("ERROR: invalid addresses codes provided");
+                }
+
+                $sql = "INSERT INTO basic_address_link (basic_address_id, ref_type, ref_id) VALUES ($district_id, 'biz', $biz_id), ($ward_id, 'biz', $biz_id)";
+                $result = $conn->query($sql);
+
+                if ($result === TRUE) {
+                } else {
+                    // it failed
+                    die("ERROR: failed to link addresses - $conn->error");
+                }
+            } else {
+                // it failed
+                die("ERROR: failed to create pics - $conn->error");
+            }
         } else {
             // it failed
             die("ERROR: failed to create biz - $conn->error");
