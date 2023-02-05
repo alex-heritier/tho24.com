@@ -4,11 +4,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/svr/lib/db.php';
 include_once 'lib/upload.php';
 include_once 'lib/account.php';
 
+$conn = db_connect();
+
 $email = $_POST['email'];
 $phone = $_POST['phone'];
 $password = $_POST['password'];
-$biz_name = $_POST['biz_name'];
-$descr = $_POST['descr'];
+$biz_name = $conn->real_escape_string($_POST['biz_name']);
+$descr = $conn->real_escape_string($_POST['descr']);
 $trade = $_POST['trade'];
 $url = $_POST['website'];
 $district = $_POST['district'];
@@ -19,7 +21,6 @@ if ($file_result === null) {
     die("ERROR: failed to upload image");
 }
 
-$conn = db_connect();
 
 $sql = "SELECT id FROM users WHERE email = '$email' OR phone = '$phone'";
 $result = $conn->query($sql);

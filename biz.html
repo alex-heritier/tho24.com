@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Business Details</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        body {
+            padding: 10px;
+        }
+
+        img {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,6 +26,10 @@
         //get the id value from the URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id');
+
+        function urlEncode(z) {
+            return z.replaceAll(" ", "+");
+        }
 
         //make a GET request to the server for the biz with the given id
         fetch('/svr/biz_get.php?id=' + id)
@@ -24,9 +40,18 @@
                     let biz = `<h1>${data.name}</h1>
                            <p>Description: ${data.descr}</p>
                            <p>Trade: ${data.trade}</p>
-                           <p>URL: <a href="${data.url}">${data.url}</a></p>
+                           <p>URL: <a target="_blank" href="http://${data.url}">${data.url}</a></p>
                            <p>Email: ${data.email}</p>
-                           <p>Phone: ${data.phone}</p>`;
+                           <p>Phone: ${data.phone}</p>
+                           <p>Zone: ${data.d_pretty}, ${data.w_pretty}</p>
+
+                           <br>
+                           <a target="_blank" href="https://www.google.com/maps/dir//${urlEncode(data.w_pretty)},+${urlEncode(data.d_pretty)},+Ho+Chi+Minh+City">Get Directions</a>
+                           
+                           <br>
+                           <br>
+                           <img src="${data.main_img}"/>
+                           `;
                     document.getElementById("biz").innerHTML = biz;
                 } else {
                     //if no biz with the given id exists, display an error message

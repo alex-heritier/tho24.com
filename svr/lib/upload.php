@@ -53,5 +53,10 @@ function complete_file_upload($file_metadata) {
         }
     }
 
-    return "http://wizbull.com/img/" . $basename;
+    $result_base = $_SERVER['SERVER_NAME'];
+    if ($result_base == "127.0.0.1" || $result_base == "localhost") {
+        $result_base = $result_base . ":" . $_SERVER['SERVER_PORT'];
+    }
+
+    return "http://" . $result_base . "/img/" . $basename;
 }
