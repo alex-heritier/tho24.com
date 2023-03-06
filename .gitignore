@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+
+img/*.png
+img/*.jpg
+img/*.jpeg
+db.ini
+saigon3.json
+sync.sh
