@@ -37,7 +37,7 @@
         fetch('/svr/biz_get.php?id=' + id)
             .then(response => response.json())
             .then(data => {
-                console.log("DATA", data);
+                // console.log("DATA", data);
                 //if a biz with the given id exists, display it
                 if (data !== null && data.name) {
                     let biz = `
@@ -79,7 +79,6 @@
             var parts = value.split("; " + name + "=");
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
-
     </script>
 </body>
 
