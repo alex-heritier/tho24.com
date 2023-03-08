@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>My Account Settings</title>
+
+    @vite(['resources/css/style.css'])
+    <style>
+        * {
+            padding: 4px;
+        }
+
+        #logout-btn {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+            display: block;
+        }
+    </style>
+
+    <script type="text/javascript">
+        // Function to get the value of a cookie
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+
+        function deleteCookie(name) {
+            document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+
+        window.addEventListener("load", function () {
+            // Load cookie info   
+            let key = "session_data";
+            let cookie = JSON.parse(getCookie(key));
+            if (!cookie) {
+                window.location.replace("/");
+            } else {
+                console.log(cookie);
+                document.getElementById("email").innerHTML = cookie['email'];
+            }
+
+            // Setup log out button onclick
+            document.getElementById("logout-btn").addEventListener("click", function () {
+                let key = "session_data";
+                deleteCookie(key);
+                window.location.replace("/");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h2>Account Settings</h2>
+
+    <p id="email">&nbsp;</p>
+
+    <button id="logout-btn">Log out</button>
+</body>
+
+</html>
