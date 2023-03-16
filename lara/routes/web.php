@@ -36,6 +36,6 @@ Route::get('/biz_search/{query?}', function ($query = null) {
 });
 
 // Account
-Route::post('acc.register', [AccountController::class, 'register_biz'])->name('register');
+Route::post('acc.register', [AccountController::class, 'register'])->name('register');
 Route::post('acc.login', [AccountController::class, 'login'])->name('login');
 Route::post('acc.logout', [AccountController::class, 'logout'])->name('logout');

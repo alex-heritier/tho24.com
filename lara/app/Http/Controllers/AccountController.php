@@ -13,23 +13,24 @@ class AccountController extends Controller
     /**
      * Register a business
      */
-    public function register_biz(Request $request, AccountService $accountService)
+    public function register(Request $request, AccountService $accountService)
     {
         // 0 - Validate info
         // Validate data
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
-            'name' => ['required'],
-            'phone_code' => ['required'],
-            'phone' => ['required'],
+            // 'name' => ['required'],
+            // 'phone_code' => ['required'],
+            // 'phone' => ['required'],
         ]);
 
-        // 1 - Create user + biz and save image 
-        [$user, $biz, $error_msg] = $accountService->register_biz(
+        // 1 - Create user + biz and save image
+        $image_path = $request->file('image')?->store('images');
+        [$user, $biz, $error_msg] = $accountService->register(
             user_data: $request->only(['name', 'email', 'phone_code', 'phone', 'password']),
             biz_data: $request->only(['biz_name', 'descr', 'trade', 'website', 'email', 'phone_code', 'phone']),
-            image_path: $request->file('image')->store('images'),
+            image_path: $image_path,
         );
 
         if ($error_msg) {

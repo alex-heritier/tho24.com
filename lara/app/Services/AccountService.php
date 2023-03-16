@@ -18,13 +18,12 @@ class AccountService
         return Hash::make($input);
     }
 
-    public function register_biz($user_data, $biz_data, $image_path): array
+    public function register($user_data, $biz_data, $image_path): array
     {
         // Check for duplicate user
         $users = DB::table('users')
             ->where(function (QueryBuilder $query) use ($user_data) {
-                $query->where('email', $user_data['email'])
-                    ->orWhere('phone', $user_data['phone']);
+                $query->where('email', $user_data['email']);
             })
             ->get();
         if (!empty($users) && count($users) > 0) {
@@ -41,6 +40,11 @@ class AccountService
                 'phone' => $user_data['phone'],
                 'password' => AccountService::hash($user_data['password']),
             ]);
+
+            $is_biz = $biz_data['biz_name'] && $biz_data['phone'];
+            if (!$is_biz) {
+                return [$user, null];
+            }
 
             // 2 - Save image
             $path = $image_path;
@@ -70,7 +74,7 @@ class AccountService
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-        
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
