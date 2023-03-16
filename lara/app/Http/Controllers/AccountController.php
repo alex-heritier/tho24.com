@@ -25,9 +25,6 @@ class AccountController extends Controller
             'phone' => ['required'],
         ]);
 
-        Log::debug("request->file " . $request->file('image'));
-        Log::debug("request->file->store " . $request->file('image')->store('images'));
-
         // 1 - Create user + biz and save image 
         [$user, $biz, $error_msg] = $accountService->register_biz(
             user_data: $request->only(['name', 'email', 'phone_code', 'phone', 'password']),
@@ -40,29 +37,19 @@ class AccountController extends Controller
             return response("ERROR - $error_msg", 500);
         }
 
+        if ((new AccountService())->login($request)) {
+            return redirect()->intended('/')->with('info', 'Success!');
+        }
+
         return redirect('/')->with('info', 'Success!');
     }
 
     /**
      * Login
      */
-    public function login(Request $request)
+    public function login(Request $request, AccountService $accountService)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            // Load user
-            $user = User::where('email', $request->email)->first();
-
-            // Store important user info in session
-            $request->session()->put('my.id', $user->id);
-            $request->session()->put('my.email', $user->email);
-
+        if ($accountService->login($request)) {
             return redirect()->intended('/');
         }
 

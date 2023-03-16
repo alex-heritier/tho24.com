@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@section('title', 'Register')
 
-    <title>Sign In | Bizzy</title>
-
-    @vite(['resources/css/style.css'])
-
+@section('style')
     <style>
         #main-content {
-            background-color: #f2f2f2;
-            border: 1px solid #ccc;
+            /* background-color: #f2f2f2;
+            border: 1px solid #ccc; */
             padding: 20px;
-            margin: 20px;
+            /* margin: 20px; */
         }
 
         #button-container {
@@ -27,26 +21,51 @@
 
         #button-container button {
             padding: 6px;
+            background-color: transparent;
+            border: none;
+            color: #777;
         }
 
-
         #button-container button.btn-on {
-            font-weight: bold;
+            color: #000;
         }
 
         label {
             display: block;
         }
 
-        #loc-picker {
-            display: flex;
-            justify-content: space-between;
+        label[for] {
+            margin-bottom: 4px; 
         }
 
-        select {
-            margin: 8px 0;
-            padding: 4px;
-            text-align: center;
+        input {
+            box-sizing: border-box;
+        }
+
+        input:not([type='submit']):not([type='checkbox']), select {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 12px;
+        }
+
+        input[type='submit'] {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-radius: 4px;
+            background-color: powderblue;
+            font-size: 1.1rem;
+        }
+
+        #loc-picker {
+            display: flex;
+            gap: 10px;
+        }
+
+        #loc-picker>div {
+            display: block;
+            flex: 1;
+            text-overflow: ellipsis;
         }
 
         option.inactive {
@@ -57,7 +76,9 @@
             content: "\00a0";
         }
     </style>
+@endsection
 
+@section('script')
     <script type="text/javascript">
         function validateSize(input) {
             const file = input.files[0];
@@ -81,6 +102,18 @@
                 inputError.innerText = "File must be under 2MB";
             } else {
                 inputError.innerText = null;
+            }
+        }
+
+        function onBizCheckChange(checkbox) {
+            const checked = checkbox.checked;
+            console.log("IS BIZ CHECK", checked);
+
+            const el = document.getElementById('biz-form-section');
+            if (checked) {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
             }
         }
 
@@ -120,13 +153,13 @@
             setupLocationDropdown();
         });
     </script>
-</head>
+@endsection
 
-<body>
+@section('content')
     <div id="sign-up-screen">
         <div id="button-container">
             <button id="register-button" class="btn-on">Register</button>
-            <button id="existing-account-button">Existing Account</button>
+            <button id="existing-account-button">Sign in</button>
         </div>
         
         @if(Session::has('email'))
@@ -143,68 +176,94 @@
                     <input type="hidden" name="phone_code" value="1" />
 
                     <!-- Account info -->
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" /><br>
-                    <label for="phone">Phone Number:</label>
-                    <input type="phone" id="phone" name="phone" /><br>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" /><br>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" placeholder="Enter email" /><br/>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="Create password"/><br/>
+
+                    <br/>
+                    <div style="display: flex; gap: 10px">
+                        <input type="checkbox" onchange="onBizCheckChange(this)">
+                        <label>I am a professional tradesman</label>
+                    </div>
+                    <br/>
 
                     <!-- Business info -->
-                    <br>
-                    <label for="biz_name">Business Name:</label>
-                    <input type="text" id="biz_name" name="biz_name" /><br>
-                    <label for="descr">Description:</label>
-                    <input type="text" id="descr" name="descr" /><br>
-                    <label for="website">Website:</label>
-                    <input type="text" id="website" name="website" /><br>
+                    <div id="biz-form-section" style="display: none">
+                        <label for="biz_name">Business name</label>
+                        <input type="text" name="biz_name" placeholder="Business name" /><br/>
+                        <div style="display: flex; gap: 10px;">
+                            <div>
+                                <label for="first_name">First name</label>
+                                <input type="text" name="first_name"  placeholder="First name" /><br/>
+                            </div>
+                            <div>
+                                <label for="last_name">Last name</label>
+                                <input type="text" name="last_name"  placeholder="Last name" /><br/>
+                            </div>
+                        </div>
+                        <label for="phone">Phone number</label>
+                        <input type="phone" name="phone"  placeholder="Phone number" /><br/>
+                        <label for="descr">Description</label>
+                        <input type="text" name="descr"  placeholder="Description" /><br/>
+                        <label for="website">Website</label>
+                        <input type="text" name="website"  placeholder="Website" /><br/>
 
-                    <!-- Business trade -->
-                    <select name="trade">
-                        <option value="electrician">Electrician</option>
-                        <option value="plumber">Plumber</option>
-                        <option value="carpenter">Carpenter</option>
-                        <option value="hvac">HVAC technician</option>
-                        <option value="welder">Welder</option>
-                        <option value="mechanic">Mechanic</option>
-                        <option value="painter">Painter</option>
-                        <option value="roofer">Roofer</option>
-                        <option value="mason">Mason</option>
-                        <option value="landscaper">Landscaper</option>
-                        <option value="drywall">Drywall installer</option>
-                        <option value="insulator">Insulator</option>
-                        <option value="concrete">Concrete worker</option>
-                        <option value="glazier">Glazier</option>
-                        <option value="flooring">Flooring installer</option>
-                        <option value="sheetmetal">Sheet metal worker</option>
-                        <option value="bricklayer">Bricklayer</option>
-                        <option value="ironworker">Ironworker</option>
-                    </select>
-                    <br>
+                        <!-- Business trade -->
+                        <label for="trade">Trade</label>
+                        <select name="trade">
+                            <option value="electrician">Electrician</option>
+                            <option value="plumber">Plumber</option>
+                            <option value="carpenter">Carpenter</option>
+                            <option value="hvac">HVAC technician</option>
+                            <option value="welder">Welder</option>
+                            <option value="mechanic">Mechanic</option>
+                            <option value="painter">Painter</option>
+                            <option value="roofer">Roofer</option>
+                            <option value="mason">Mason</option>
+                            <option value="landscaper">Landscaper</option>
+                            <option value="drywall">Drywall installer</option>
+                            <option value="insulator">Insulator</option>
+                            <option value="concrete">Concrete worker</option>
+                            <option value="glazier">Glazier</option>
+                            <option value="flooring">Flooring installer</option>
+                            <option value="sheetmetal">Sheet metal worker</option>
+                            <option value="bricklayer">Bricklayer</option>
+                            <option value="ironworker">Ironworker</option>
+                        </select>
+                        <br/>
 
-                    <!-- Business location (loaded dynamically) -->
-                    <div id="loc-picker">
-                        <select class="notranslate" name="district">
-                            @foreach ($districts as $district)
-                                <option value="{{ $district["code"] }}">{{ $district["name"] }}</option>
-                            @endforeach
-                        </select>
-                        <select class="notranslate" name="ward">
-                            @foreach ($districts as $district)
-                                @foreach ($district['ward'] as $ward)
-                                    <option 
-                                        class="{{ $district == $districts[0] ? '' : 'inactive' }}" 
-                                        x-district="{{ $district["code"] }}" 
-                                        value="{{ $ward["code"] }}">{{ $ward["name"] }}</option>
-                                @endforeach
-                            @endforeach
-                        </select>
+                        <!-- Business location (loaded dynamically) -->
+                        <div id="loc-picker">
+                            <div>
+                                <label for="district">District</label>
+                                <select class="notranslate" name="district">
+                                    @foreach ($districts as $district)
+                                        <option value="{{ $district["code"] }}">{{ $district["name"] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="ward">Ward</label>
+                                <select class="notranslate" name="ward">
+                                    @foreach ($districts as $district)
+                                        @foreach ($district['ward'] as $ward)
+                                            <option 
+                                                class="{{ $district == $districts[0] ? '' : 'inactive' }}" 
+                                                x-district="{{ $district["code"] }}" 
+                                                value="{{ $ward["code"] }}">{{ $ward["name"] }}</option>
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <input onchange="validateSize(this)" type="file" name="image" />
+                        <p id="file-error">&nbsp;</p>
+                        <br/>
                     </div>
-                    <br>
-
-                    <input onchange="validateSize(this)" type="file" name="image" />
-                    <p id="file-error">&nbsp;</p>
-                    <br>
 
                     <input type="submit" value="Submit" />
                 </form>
@@ -214,15 +273,13 @@
                 <form method="post" action="{{ route('login') }}">
                     @csrf
 
-                    <label for="login">Login:</label>
-                    <input type="text" id="login" name="email" placeholder="Email"><br>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password"><br>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" placeholder="jimmy@example.com" /><br/>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password"><br/>
                     <input type="submit" value="Submit">
                 </form>
             </div>
         </div>
     </div>
-</body>
-
-</html>
+@endsection

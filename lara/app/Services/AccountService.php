@@ -6,6 +6,7 @@ use App\Models\Biz;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -61,5 +62,28 @@ class AccountService
         });
 
         return [$user, $biz, null];
+    }
+
+    public function login($request): bool
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            // Load user
+            $user = User::where('email', $request->email)->first();
+
+            // Store important user info in session
+            $request->session()->put('my.id', $user->id);
+            $request->session()->put('my.email', $user->email);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
