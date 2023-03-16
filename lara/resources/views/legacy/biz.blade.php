@@ -1,85 +1,75 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@section('title', $biz['name'])
 
-    <title>Business Details</title>
-
-    @vite(['resources/css/style.css'])
+@section('style')
     <style>
-        #content {
+        .content {
             padding: 10px;
         }
 
         img {
             width: 100%;
             aspect-ratio: 16/9;
-            border: 1px solid black;
             box-sizing: border-box;
         }
+
+        #signup-btn {
+            display: block;
+            margin: auto;
+            background-color: #eee;
+            padding: 10px;
+            border: 1px grey solid;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
-</head>
+@endsection
 
-<body>
-    <div id="biz"></div>
-    <script>
-        //get the id value from the URL parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
+@section('content')
+    <div class="nav-bar">
+        <a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+        <div class="spacer"></div>
+        <i class="fa-solid fa-bars"></i>
+    </div>
 
-        function urlEncode(z) {
-            return z.replaceAll(" ", "+");
-        }
+    <img src="{{ $biz["main_img"] }}" />
 
-        //make a GET request to the server for the biz with the given id
-        fetch('/svr/biz_get.php?id=' + id)
-            .then(response => response.json())
-            .then(data => {
-                // console.log("DATA", data);
-                //if a biz with the given id exists, display it
-                if (data !== null && data.name) {
-                    let biz = `
-                           <img src="${data.main_img}"/>
+    @auth
+        <div class="content open">
+            <h2>{{ Str::ucfirst($biz['trade']) }}</h2>
+            <p>{{ $biz['name'] }}</p>
+            <p>{{ $biz['descr'] }}</p>
 
-                           <div id="content">
-                            <h1>${data.name} | ${data.trade}</h1>
-                            <p>${data.descr}</p>
+            <br/>
+            <h3>Contact</h3>
+            <p>{{ $biz['email'] }}</p>
+            <p>{{ '+'.$biz['phone_code'].' '.$biz['phone'] }}</p>
 
-                            <br>
-                            <a target="_blank" href="http://${data.url}">${data.url}</a>
-                            ${data.email == null ? "" : `<p>${data.email}</p>`}
-                            ${data.phone == null ? "" : `<p>${data.phone}</p>`}
-                            <p>Zone: ${data.d_pretty}, ${data.w_pretty}</p>
+            {{-- <br/>
+            <h3>Location</h3>
+            <p>{{ $biz['district'] }}, {{ $biz['ward'] }}</p> --}}
+        </div>
+    @endauth
+    @guest
+        <div class="content locked">
+            <h2>Sign up for free to view this</h2>
+            <ul></ul>
+                <li>Get access to our tradesman network</li>
+                <li>Check prices and previous work history</li>
+                <li>Read reviews left by other Bizzy members</li>
+            </ul>
 
-                            <br>
-                            <a id="google-btn" target="_blank" href="https://www.google.com/maps/dir//${urlEncode(data.w_pretty)},+${urlEncode(data.d_pretty)},+Ho+Chi+Minh+City">Get Directions</a>
-                           </div>
-                           
-                           `;
-                    document.getElementById("biz").innerHTML = biz;
-                    document.title = `${data.name} | Business Details`;
-
-                    let latlng = getCookie('my_latlng');
-                    if (latlng) {
-                        let lat = latlng.split(":")[0];
-                        let lng = latlng.split(":")[1];
-                        document.getElementById("google-btn").href = document.getElementById("google-btn").href.replace("dir//", `dir/${lat},${lng}/`);
-                    }
-                } else {
-                    //if no biz with the given id exists, display an error message
-                    document.getElementById("biz").innerHTML = "Business not found"; // data.error;
-                }
-            });
-
-        // Function to get the value of a cookie
-        function getCookie(name) {
-            var value = "; " + document.cookie;
-            var parts = value.split("; " + name + "=");
-            if (parts.length == 2) return parts.pop().split(";").shift();
-        }
-    </script>
-</body>
-
-</html>
+            <br/>
+            <a href="/register"><button id="signup-btn">Sign up for free</button></a>
+            {{-- <p>Sign up for free</p>
+            <input type="email" placeholder="Your email" />
+            <input type="submit" /> --}}
+        </div>
+    @endguest
+@endsection

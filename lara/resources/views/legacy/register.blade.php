@@ -52,9 +52,38 @@
         option.inactive {
             display: none;
         }
+
+        #file-error:empty::before {
+            content: "\00a0";
+        }
     </style>
 
     <script type="text/javascript">
+        function validateSize(input) {
+            const file = input.files[0];
+            const fileSize = file.size / 1024.0 / 1024.0; // in MiB
+            const fileType = file.type;
+            console.log("FILE SIZE", fileSize);
+
+            const inputError = document.getElementById('file-error');
+
+            // 1 - Validate file type
+            const validFileTypes = ['image/png', 'image/jpeg'];
+            if (!validFileTypes.includes(fileType)) {
+                input.value = null;
+                inputError.innerText = "File must be an image";
+                return;
+            }
+
+            // 2 - Validate image size
+            if (fileSize >= 2) {
+                input.value = null;
+                inputError.innerText = "File must be under 2MB";
+            } else {
+                inputError.innerText = null;
+            }
+        }
+
         async function setupLocationDropdown() {
             let onDistrictChange = function () {
                 // console.log('DATA', this.value);
@@ -99,31 +128,36 @@
             <button id="register-button" class="btn-on">Register</button>
             <button id="existing-account-button">Existing Account</button>
         </div>
+        
+        @if(Session::has('email'))
+            <p class="alert">{{ Session::get('email') }}</p>
+        @endif
+        
         <div id="main-content">
             <div id="register-form">
                 <!-- Form elements for registering a new account -->
-                <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('register') }}" enctype="multipart/form-data">
                     @csrf
 
-                    <input type="hidden" name="name" value="Billy Bob">
-                    <input type="hidden" name="phone_code" value="1">
+                    <input type="hidden" name="name" value="Billy Bob" />
+                    <input type="hidden" name="phone_code" value="1" />
 
                     <!-- Account info -->
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email"><br>
+                    <input type="email" id="email" name="email" /><br>
                     <label for="phone">Phone Number:</label>
-                    <input type="phone" id="phone" name="phone"><br>
+                    <input type="phone" id="phone" name="phone" /><br>
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password"><br>
+                    <input type="password" id="password" name="password" /><br>
 
                     <!-- Business info -->
                     <br>
                     <label for="biz_name">Business Name:</label>
-                    <input type="text" id="biz_name" name="biz_name"><br>
+                    <input type="text" id="biz_name" name="biz_name" /><br>
                     <label for="descr">Description:</label>
-                    <input type="text" id="descr" name="descr"><br>
+                    <input type="text" id="descr" name="descr" /><br>
                     <label for="website">Website:</label>
-                    <input type="text" id="website" name="website"><br>
+                    <input type="text" id="website" name="website" /><br>
 
                     <!-- Business trade -->
                     <select name="trade">
@@ -168,11 +202,11 @@
                     </div>
                     <br>
 
-                    <input type="file" name="image">
-                    <br>
+                    <input onchange="validateSize(this)" type="file" name="image" />
+                    <p id="file-error">&nbsp;</p>
                     <br>
 
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Submit" />
                 </form>
             </div>
             <div id="existing-account-form" style="display:none">
@@ -181,7 +215,7 @@
                     @csrf
 
                     <label for="login">Login:</label>
-                    <input type="text" id="login" name="login" placeholder="Email or Phone"><br>
+                    <input type="text" id="login" name="email" placeholder="Email"><br>
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password"><br>
                     <input type="submit" value="Submit">

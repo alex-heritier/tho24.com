@@ -7,7 +7,7 @@ use App\Models\Biz;
 use App\Services\SaigonService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Log;
 
 class LegacyController extends Controller
 {
@@ -25,9 +25,10 @@ class LegacyController extends Controller
         return view('legacy/account');
     }
 
-    public function biz()
+    public function biz(Request $request)
     {
-        return view('legacy/biz');
+        $biz = Biz::find($request->query('id'));
+        return view('legacy/biz', ['biz'=>$biz]);
     }
 
     public function register()
@@ -38,11 +39,9 @@ class LegacyController extends Controller
     /**
      * API Calls
      */
-    public function dummy()
+    public function biz_search(Request $request, string $query = null)
     {
-        $file = Storage::disk('local')->get('saigon3.json');
-        // $filePath = resource_path('json/saigon3.json');
-        // $jsonData = File::get($filePath);
-        return str_replace(["array(", "array (", "\n", "  ", "),"], ["[", "[", PHP_EOL . "  ", "    ", "],"], var_export(json_decode($file), true));
+        $results = Biz::where('name', 'LIKE', "%$query%")->get();
+        return view('biz/index', ['bizs' => $results]);
     }
 }

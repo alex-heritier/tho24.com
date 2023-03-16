@@ -1,48 +1,18 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@section('title', 'Business network')
 
-
-    <title>Bizzy: Business Network</title>
-
-    @vite(['resources/css/style.css'])
-
+@section('style')
     <style>
-        #header {
-            padding: 12px 0;
-        }
-
-        #header-buttons {
-            display: flex;
-            /* justify-content: flex-end; */
-            justify-content: center;
-            gap: 10px;
-        }
-
-        #header-buttons a {
-            width: 100px;
-            padding: 10px 0;
-            text-align: center;
-            text-decoration: none;
-            color: black;
-        }
-
-        #header-buttons a:hover {
-            color: blue;
-        }
-
         #search-field {
             text-align: center;
-            padding: 50px 0;
+            padding: 30px 0;
             background-color: lightblue;
         }
 
         #search {
             width: 80%;
-            height: 40px;
+            height: 20px;
             font-size: 20px;
             padding: 18px;
             border: 1px solid;
@@ -51,16 +21,16 @@
         }
 
         #business-listing {
-            /* padding: 10px; */
             padding-top: 20px;
         }
 
         #business-listing img {
+            padding: 0 10px;
             width: 100%;
             object-fit: contain;
             object-position: center;
             aspect-ratio: calc(16/9);
-            border: 1px solid lightgray;
+            /* border: 1px solid lightgray; */
             box-sizing: border-box;
         }
 
@@ -71,7 +41,6 @@
 
         .biz-item {
             margin: 20px 0;
-
         }
 
         .biz-item .info {
@@ -91,7 +60,9 @@
             }
         }
     </style>
+@endsection
 
+@section('script')
     <script>
         let timer = null;
 
@@ -103,71 +74,20 @@
         }
 
         async function searchBiz(searchText) {
-            let url = '/users'; // '/svr/biz_search.php';
+            let url = '/biz_search';
             if ((searchText || '').length > 0) {
-                url = url + "?query=" + searchText;
+                url = url + "/" + searchText;
             }
             let response = await fetch(url)
-                .then((r) => r.json())
+                .then((r) => r.text())
                 .catch((err) => console.log("ERROR", err));
             console.log(response);
 
             let bizListing = document.getElementById('business-listing');
-            bizListing.innerHTML = "";
-            response.forEach((e) => {
-                /*
-                <div class="biz-item">
-                    <img src="https://www.pho24.com.vn/wp-content/uploads/2018/10/Sala-1-2.jpg" />
-                    <div class="info">
-                        <p>Pho 24, the best pho ever</p>
-                        <p>555-555-5555 | support@pho24.vn</p>
-                    </div>
-                </div>
-                */
-                let outerDiv = document.createElement('div');
-                outerDiv.className = "biz-item";
-
-                let img = document.createElement("img");
-                img.src = e["main_img"];
-
-                let infoDiv = document.createElement('div');
-                infoDiv.className = "info";
-
-                let title = document.createElement("h2");
-                title.innerText = `${e["name"]} | ${e["trade"] || '?'}`;
-
-                let descr = document.createElement("p");
-                descr.innerText = e["descr"];
-
-                infoDiv.appendChild(title);
-                infoDiv.appendChild(descr);
-
-                outerDiv.appendChild(img);
-                outerDiv.appendChild(infoDiv);
-
-                let base = document.createElement("a");
-                base.href = "/biz.html?id=" + e["id"];
-
-                base.appendChild(outerDiv);
-
-                bizListing.appendChild(base);
-            });
+            bizListing.innerHTML = response;
         }
 
         window.addEventListener("load", function () {
-            // Check for the existence of the cookie
-            let key = "session_data";
-            let altBtn = document.getElementById("alt-btn");
-            if (getCookie(key)) {
-                altBtn.innerText = "Account";
-                altBtn.href = "/account.html";
-            } else {
-                altBtn.innerText = "Sign In";
-                altBtn.href = "/register.html";
-            }
-
-            searchBiz(null);
-
             let searchField = document.getElementById('search');
             search.addEventListener("input", function (e) {
                 console.log(e);
@@ -191,40 +111,26 @@
             }
         });
     </script>
-</head>
+@endsection
 
-<body>
-    <div id="header">
-        <div id="header-buttons">
-            <a id="explore-btn" href="#">Explore</a>
-            <a id="alt-btn"></a>
-        </div>
+@section('content')
+    <div class="nav-bar">
+        <span>{{ env('APP_NAME') }}</span>
+        <div style="flex-grow: 1"></div>
+        @auth
+            <a href="/account"><i class="fa-solid fa-user"></i></a>
+        @endauth
+        @guest
+            <a href="/register">Sign in</a>
+        @endguest
+        <a id="menu-btn" href="#"><i class="fa-solid fa-bars"></i></a>
     </div>
 
     <div id="search-field">
-        <input type="text" id="search" name="search" placeholder="Name, email, or trade">
+        <input type="text" id="search" name="search" placeholder="Search by business name">
     </div>
 
     <div id="business-listing">
-        <!-- <div class="biz-item">
-            <img src="https://www.pho24.com.vn/wp-content/uploads/2018/10/Sala-1-2.jpg" />
-            <div class="info">
-                <p>Pho 24, the best pho ever</p>
-                <p>555-555-5555 | support@pho24.vn</p>
-            </div>
-        </div>
-        <div class="biz-item">
-            <img
-                src="https://media.dautuvietnam.com.vn/2020/09/23/9861/1600834272-dautuvietnam-su-chung-lai-cua-highlands-coffee-la-ban-dap-cho-the-luc-khac.jpg" />
-            <div class="info">
-                <p>Popular coffee shop that uses high-quality ingredients.</p>
-                <p>555-555-5555 | info@highlands.vn</p>
-            </div>
-        </div> -->
-
         @include('biz/partial/index', ['bizs'=>$bizs])
     </div>
-
-</body>
-
-</html>
+@endsection

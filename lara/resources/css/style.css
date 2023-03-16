@@ -8,3 +8,22 @@
 p {
     font-weight: 400;
 }
+
+/** Nav Bar */
+.nav-bar {
+    padding: 6px 14px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-bar a {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-bar .spacer {
+    flex-grow: 1;
+}

@@ -4,21 +4,23 @@ namespace Tests\Feature;
 
 use App\Models\Biz;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class AccountTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     private $userTestData = [
         'name' => 'Yolo Chief',
         'email' => 'yolo@asdf.com',
         'phone_code' => '1',
-        'phone' => '6502136474',
+        'phone' => '6953674334',
         'password' => 'asdf',
     ];
 
@@ -30,7 +32,7 @@ class AccountTest extends TestCase
     ];
 
     /**
-     * A basic feature test example.
+     * Test User registration
      */
     public function test_that_register_is_successful(): void
     {
@@ -52,7 +54,7 @@ class AccountTest extends TestCase
         $response = $this->post(route('register'), $data);
 
         // Success response
-        $response->assertStatus(200);
+        $response->assertStatus(302);
 
         // User found in db
         $this->assertDatabaseHas('users', ['email' => $this->userTestData['email']]);
@@ -63,5 +65,23 @@ class AccountTest extends TestCase
         // Biz main_img field not null
         $this->assertTrue(Biz::all()->first()->main_img !== null);
         $this->assertTrue(Biz::all()->first()->user_id !== null);
+    }
+
+    /**
+     * Test User login
+     */
+    public function test_that_login_works(): void
+    {
+        $this->test_that_register_is_successful();
+
+        $data = Arr::only($this->userTestData, ['email', 'password']);
+
+        // User found in db
+        // $this->assertDatabaseHas('users', $data);
+
+        $response = $this->post(route('login'), $data);
+
+        // Success response
+        $response->assertStatus(302);
     }
 }

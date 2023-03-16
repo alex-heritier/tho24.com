@@ -14,9 +14,7 @@ class BizController extends Controller
     {
         $bizs = Biz::all();
         if (request()->ajax()) {
-            return view('bizs/partial/index')->with('bizs', $bizs);
-        } else if (request()->expectsJson()) {
-            return [];
+            return view('biz/partial/index')->with('bizs', $bizs);
         } else {
             return view('biz/index')->with('bizs', $bizs);
         }
