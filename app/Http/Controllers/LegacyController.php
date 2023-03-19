@@ -4,20 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Biz;
+use App\Services\BizService;
 use App\Services\SaigonService;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 
 class LegacyController extends Controller
 {
     /**
      * HTML Pages
      */
-    public function home()
+    public function home(BizService $bizService)
     {
-        $bizs = Biz::all();
-        return view('legacy/index')->with('bizs', $bizs);
+        $bizs = $bizService->search()->get();
+        $districts = SaigonService::DISTRICTS['district'];
+        array_unshift(
+            $districts,
+            ['code' => 'anywhere', 'name' => 'HCMC'],
+            null,
+        );
+        return view('legacy/index')->with(['bizs' => $bizs, 'districts' => $districts]);
     }
 
     public function account()
@@ -43,9 +47,9 @@ class LegacyController extends Controller
     /**
      * API Calls
      */
-    public function biz_search(Request $request, string $query = null)
+    public function biz_search(BizService $bizService, string $district, string $query = null)
     {
-        $results = Biz::where('name', 'LIKE', "%$query%")->get();
-        return view('biz/index', ['bizs' => $results]);
+        $results = $bizService->search(district: $district, query: $query);
+        return view('biz/index', ['bizs' => $results->get()]);
     }
 }

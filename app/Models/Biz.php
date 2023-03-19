@@ -65,6 +65,8 @@ class Biz extends Model
         'email',
         'phone_code',
         'phone',
+        'district',
+        'ward',
     ];
 
     public function averageRating(): float
