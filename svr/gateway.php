@@ -1,3 +1,0 @@
-<?php
-
-$payload = $_POST;
