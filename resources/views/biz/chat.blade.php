@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Chat')
+@section('title', 'Chat with ' . $biz['name'])
 
 @section('style')
     <style>
