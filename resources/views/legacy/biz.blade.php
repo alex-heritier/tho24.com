@@ -84,12 +84,7 @@
             {{-- RATING AND REVIEWS --}}
             <div class="info-section">
                 <h3>Rating</h3>
-                <div class="rating-stars">
-                    @for ($i = 0; $i < 5; $i++)
-                        <i class="fa-star {{ ($avg_rating - $i) > 1 ? 'fa-solid on' : 'fa-regular' }}"></i>
-                    @endfor
-                    <p style="display: inline; margin-left: 10px;">{{ $avg_rating }} out of 5</p>
-                </div>
+                <x-rating-field :rating="$avg_rating" />
 
                 @foreach ($reviews as $review)
                     <div class="review">

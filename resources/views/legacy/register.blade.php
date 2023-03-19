@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Register')
+@section('meta-description', 'Create an account to start finding professionals near you.')
 
 @section('style')
     <style>
@@ -165,6 +166,11 @@
 @endsection
 
 @section('content')
+    <div class="nav-bar">
+        <a href="/"><i class="fa fa-close"></i></a>
+        <div class="spacer"></div>
+    </div>
+
     @php
         $err_type = session('err_type');
         

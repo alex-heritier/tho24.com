@@ -19,8 +19,10 @@ p {
 }
 
 .nav-bar a {
+    padding: 4px 2px;
     text-align: center;
     text-decoration: none;
+    object-position: center;
     color: inherit;
 }
 
