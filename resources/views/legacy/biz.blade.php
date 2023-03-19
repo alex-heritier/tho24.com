@@ -59,6 +59,15 @@
         .review {
             margin: 4px 0;
         }
+
+        .send-msg button {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background-color: aliceblue;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+        }
     </style>
 @endsection
 
@@ -112,6 +121,12 @@
                 <h3>Contact</h3>
                 <p>{{ $biz['email'] }}</p>
                 <p>{{ '+'.$biz['phone_code'].' '.$biz['phone'] }}</p>
+                <a href="/biz/{{ $biz['id'] }}/chat" class="send-msg">
+                    <button>
+                        <i class="fa-regular fa-message"></i>
+                        <span>Send a message</span>
+                    </button>
+                </a>
             </div>
 
             {{-- <br/>

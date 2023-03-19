@@ -1,3 +1,7 @@
+:root {
+    --nav-height: 40px;
+}
+
 * {
     margin: 0;
     font-family: "Open Sans","Adjusted Arial",Tahoma,Geneva,sans-serif;
@@ -11,7 +15,8 @@ p {
 
 /** Nav Bar */
 .nav-bar {
-    padding: 6px 14px;
+    height: var(--nav-height);
+    padding: 0 14px;
     display: flex;
     justify-content: end;
     align-items: center;

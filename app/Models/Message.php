@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Message extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function sender()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'snd_id');
     }
 
-    public function biz()
+    public function receiver()
     {
-        return $this->belongsTo(Biz::class, 'biz_id');
+        return $this->belongsTo(User::class, 'rcv_id');
     }
 
     /**
@@ -25,9 +25,8 @@ class Review extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
-        'biz_id',
-        'message',
-        'rating',
+        'snd_id',
+        'rcv_id',
+        'msg_text',
     ];
 }

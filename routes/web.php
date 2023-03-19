@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BizController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LegacyController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MiscController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\App;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::resource('users', UserController::class);
 Route::resource('biz', BizController::class);
 Route::resource('reviews', ReviewController::class);
+Route::resource('messages', MessageController::class);
 
 // Misc
 Route::get('/misc/email_tester', [MiscController::class, 'email_tester_view']);
@@ -47,3 +49,6 @@ Route::get('/biz_search/{district}/{query?}', function ($district, $query = null
 Route::post('acc.register', [AccountController::class, 'register'])->name('register');
 Route::post('acc.login', [AccountController::class, 'login'])->name('login');
 Route::post('acc.logout', [AccountController::class, 'logout'])->name('logout');
+
+// Biz
+Route::get('/biz/{id}/chat', [BizController::class, 'showConversation']);

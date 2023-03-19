@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Biz;
+use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 
 class BizController extends Controller
 {
@@ -20,51 +22,18 @@ class BizController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function showConversation(Request $request, int $id)
     {
-        //
-    }
+        $biz = Biz::find($id);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $customer_user_id = Auth::id();
+        $biz_user_id = $biz->user_id;
+        $messages = Message::where(function ($builder) use ($customer_user_id, $biz_user_id) {
+            return $builder
+                ->where(['snd_id' => $customer_user_id, 'rcv_id' => $biz_user_id])
+                ->orWhere(['snd_id' => $biz_user_id, 'rcv_id' => $customer_user_id]);
+        });
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('/biz/chat')->with(['biz' => $biz, 'messages' => $messages->get()]);
     }
 }
