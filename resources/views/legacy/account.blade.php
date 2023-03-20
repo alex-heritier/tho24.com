@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@section('title', 'Account Settings')
 
-    <title>Account Settings</title>
-
-    @vite(['resources/css/style.css'])
+@section('style')
     <style>
-        * {
-            padding: 4px;
+        .content {
+            padding: 10px;
         }
 
         #logout-btn {
@@ -19,18 +14,44 @@
             margin-top: 50px;
             display: block;
         }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .inbox-btn button {
+            display: flex;
+            margin-top: 10px;
+            gap: 10px;
+            align-items: center;
+            background-color: aliceblue;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+        }
     </style>
-</head>
+@endsection
 
-<body>
-    <h2>Account Settings</h2>
+@section('content')
+    <div class="nav-bar">
+        <x-back-button url="/" />
+        <span>My Account</span>
+        <div class="spacer"></div>
+    </div>
 
-    <p id="email">{{ session('my.email') }}</p>
+    <div class="content">
+        <p>Email: <b>{{ session('my.email') }}</b></p>
 
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <input type="submit" id="logout-btn" value="Log out" />
-    </form>
-</body>
+        <a href="/users/{{ Auth::id() }}/messages" class="inbox-btn">
+            <button>
+                <i class="fa-solid fa-inbox"></i>
+                <span>Inbox</span>
+            </button>
+        </a>
 
-</html>
+        <form method="post" action="{{ route('logout') }}">
+            @csrf
+            <input type="submit" id="logout-btn" value="Log out" />
+        </form>
+    </div>
+@endsection

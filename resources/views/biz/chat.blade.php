@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Chat with ' . $biz['name'])
+@section('title', 'Chat with ' . $ref_user['email'])
 
 @section('style')
     <style>
@@ -65,8 +65,8 @@
 
 @section('content')
     <div class="nav-bar">
-        <x-back-button url="/biz?id={{ $biz['id'] }}" />
-        <span>{{ $biz['name'] }}</span>
+        <x-back-button url="/" />
+        <span>{{ $ref_user['email'] }}</span>
         <div class="spacer"></div>
     </div>
 
@@ -90,7 +90,7 @@
             @csrf
 
             <input hidden name="snd_id" value="{{ Auth::id() }}" />
-            <input hidden name="rcv_id" value="{{ $biz['user_id'] }}" />
+            <input hidden name="rcv_id" value="{{ $ref_user['id'] }}" />
             <input type="text" name="msg_text" placeholder="Enter a message" required minlength="10" />
             <input type="submit" value="Send" />
         </div>

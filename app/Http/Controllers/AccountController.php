@@ -26,7 +26,7 @@ class AccountController extends Controller
         $image_path = $request->file('image')?->store('images');
         [$user, $biz, $error_msg] = $accountService->register(
             user_data: $request->only(['name', 'email', 'phone_code', 'phone', 'password']),
-            biz_data: $request->only(['biz_name', 'descr', 'trade', 'website', 'email', 'phone_code', 'phone']),
+            biz_data: $request->only(['biz_name', 'descr', 'trade', 'website', 'email', 'phone_code', 'phone', 'district', 'ward']),
             image_path: $image_path,
         );
 

@@ -56,6 +56,8 @@ class AccountService
                 'descr' => $biz_data['descr'],
                 'trade' => $biz_data['trade'],
                 'url' => $biz_data['website'],
+                'district' => $biz_data['district'],
+                'ward' => $biz_data['ward'],
                 'main_img' => $path,
                 'email' => $user->email,
                 'phone_code' => $user->phone_code,

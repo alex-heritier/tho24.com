@@ -121,7 +121,7 @@
                 <h3>Contact</h3>
                 <p>{{ $biz['email'] }}</p>
                 <p>{{ '+'.$biz['phone_code'].' '.$biz['phone'] }}</p>
-                <a href="/biz/{{ $biz['id'] }}/chat" class="send-msg">
+                <a href="/chat/{{ Auth::id() }}::{{ $biz['user_id'] }}" class="send-msg">
                     <button>
                         <i class="fa-regular fa-message"></i>
                         <span>Send a message</span>

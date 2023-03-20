@@ -77,7 +77,7 @@ class Biz extends Model
     public function averageRating(): float
     {
         try {
-            return $this->reviews()->pluck('rating')->avg();
+            return $this->reviews()->pluck('rating')->avg() ?? 0;
         } catch (Exception $e) {
             return 0;
         }

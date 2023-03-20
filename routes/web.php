@@ -27,6 +27,19 @@ Route::resource('biz', BizController::class);
 Route::resource('reviews', ReviewController::class);
 Route::resource('messages', MessageController::class);
 
+// Account
+Route::post('acc.register', [AccountController::class, 'register'])->name('register');
+Route::post('acc.login', [AccountController::class, 'login'])->name('login');
+Route::post('acc.logout', [AccountController::class, 'logout'])->name('logout');
+
+// Chat
+// Route::get('/biz/{id}/chat', [BizController::class, 'showConversation']);
+Route::get('/chat/{token}', [MessageController::class, 'showChat']);
+
+// Users
+Route::get('/inbox', [MessageController::class, 'userInbox']);
+Route::get('/users/{id}/messages', [MessageController::class, 'userInbox']);
+
 // Misc
 Route::get('/misc/email_tester', [MiscController::class, 'email_tester_view']);
 Route::post('/misc/email_tester', [MiscController::class, 'email_tester_action']);
@@ -44,11 +57,3 @@ Route::get('/biz_search/{district}/{query?}', function($district, $query = null)
     $controller = App::make(LegacyController::class);
     return App::call([$controller, 'biz_search'], ['district' => $district, 'query' => $query]);
 });
-
-// Account
-Route::post('acc.register', [AccountController::class, 'register'])->name('register');
-Route::post('acc.login', [AccountController::class, 'login'])->name('login');
-Route::post('acc.logout', [AccountController::class, 'logout'])->name('logout');
-
-// Biz
-Route::get('/biz/{id}/chat', [BizController::class, 'showConversation']);
