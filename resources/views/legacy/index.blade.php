@@ -10,19 +10,35 @@
             gap: 6px;
             align-items: flex-end;
             text-align: center;
-            padding: 30px 20px 14px;
-            background-color: lightblue;
+            padding: 30px 6px 14px;
         }
 
         #search {
             width: 100%;
-            margin: auto;
             font-size: 20px;
             padding: 18px;
             border: 1px solid;
             border-color: #D1D1D5;
             border-radius: 4px;
             box-sizing: border-box;
+        }
+
+        #intro-section {
+            height: calc(80vh - var(--nav-height));
+            background-color: lightskyblue;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            align-items: stretch;
+            padding: 10px;
+        }
+
+        #intro-section h1 {
+            font-size: 2.2rem;
+            line-height: 2.6rem;
+            text-align: center;
+            color: white;
         }
 
         #business-listing {
@@ -65,6 +81,14 @@
             padding: 4px 8px;
             color: #222;
             font-size: 0.9rem;
+        }
+
+        footer {
+            padding: 30px 10px;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         @media only screen and (min-width: 600px) {
@@ -110,7 +134,7 @@
         }
 
         function onInputChanged(event) {
-            console.log("FIRED");
+            // console.log("FIRED");
 
             let duration = 250; // millis
             let searchText = document.getElementById('search').value;
@@ -141,7 +165,7 @@
 
 @section('content')
     <div class="nav-bar">
-        <span>{{ config('app.name') }}</span>
+        <span style="font-size: 1.2rem;">{{ config('app.name') }}</span>
         <div style="flex-grow: 1"></div>
         @auth
             <a href="/account"><i class="fa-solid fa-user"></i></a>
@@ -152,20 +176,29 @@
         <a id="menu-btn" href="#"><i class="fa-solid fa-bars"></i></a>
     </div>
 
-    <div id="search-field">
-        <input type="text" id="search" name="search" placeholder="Search by business name" />
-        <select class="district-picker">
-            @foreach ($districts as $district)
-                @if ($district)
-                    <option value="{{ $district['code'] }}">{{ $district['name'] }}</option>
-                @else
-                    <option disabled>------</option>
-                @endif
-            @endforeach
-        </select>
+    <div id="intro-section">
+        <h1>Find top-rated certified pros in your area.</h1>
+        {{-- <h1>Tìm các chuyên gia được chứng nhận hàng đầu trong khu vực của bạn.</h1> --}}
+
+        <div id="search-field">
+            <input type="text" id="search" name="search" placeholder="Search by business name" />
+            <select class="district-picker">
+                @foreach ($districts as $district)
+                    @if ($district)
+                        <option value="{{ $district['code'] }}">{{ $district['name'] }}</option>
+                    @else
+                        <option disabled>------</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
     </div>
 
     <div id="business-listing">
         @include('biz/partial/index', ['bizs'=>$bizs])
     </div>
+
+    <footer>
+        <p>tho24 &copy; 2023</p>
+    </footer>
 @endsection
