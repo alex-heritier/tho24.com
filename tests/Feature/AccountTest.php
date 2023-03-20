@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Biz;
 use App\Models\User;
+use App\Services\SaigonService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -29,6 +30,8 @@ class AccountTest extends TestCase
         'descr' => 'val=descr',
         'trade' => 'val=trade',
         'website' => 'val=website',
+        'district' => SaigonService::DISTRICTS['district'][0]['code'],
+        'ward' => SaigonService::DISTRICTS['district'][0]['ward'][0]['code'],
     ];
 
     /**
