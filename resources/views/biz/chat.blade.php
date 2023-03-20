@@ -54,23 +54,36 @@
             border-radius: 2px;
             padding: 2px 4px;
         }
+
+        .error {
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
     </style>
 @endsection
 
 @section('content')
     <div class="nav-bar">
-        <x-back-button />
+        <x-back-button url="/biz?id={{ $biz['id'] }}" />
         <span>{{ $biz['name'] }}</span>
         <div class="spacer"></div>
     </div>
 
     <div id="chat">
         <div id="msg-list">
-            @foreach ($messages as $msg)
-                <div class="chat-bubble {{ Auth::id() === $msg['snd_id'] ? 'me' : 'other' }}">
-                    <p>{{ $msg['msg_text'] }}</p>
+            @error('data')
+                <div class="error">
+                    <p>{{ $errors->first('data') }}</p>
+                    <a href="/">Go back</a>
                 </div>
-            @endforeach
+            @else
+                @foreach ($messages as $msg)
+                    <div class="chat-bubble {{ Auth::id() === $msg['snd_id'] ? 'me' : 'other' }}">
+                        <p>{{ $msg['msg_text'] }}</p>
+                    </div>
+                @endforeach
+            @enderror
         </div>
 
         <form id="send-box" method="post" action="/messages">

@@ -31,12 +31,14 @@ class LegacyController extends Controller
 
     public function biz(Request $request)
     {
-        $biz = Biz::with('reviews')->find($request->query('id'));
-        return view('legacy/biz', [
-            'biz' => $biz,
-            'avg_rating' => $biz->averageRating(),
-            'reviews' => $biz->reviews->take(2),
-        ]);
+        $id = $request->query('id');
+        return redirect('/biz/'.$id);
+        // $biz = Biz::with('reviews')->find($request->query('id'));
+        // return view('legacy/biz', [
+        //     'biz' => $biz,
+        //     'avg_rating' => $biz->averageRating(),
+        //     'reviews' => $biz->reviews->take(2),
+        // ]);
     }
 
     public function register()
