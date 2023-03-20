@@ -88,29 +88,7 @@ class MessageController extends Controller
         // Log::debug(">> \$max_id is " . $max_id);
         // Log::debug(">> \$other_user is " . $other_user);
 
-        // $customer_user_id = Auth::id();
-        // $biz_user_id = $biz->user_id;
-
-        // if (!$customer_user_id || !$biz_user_id) {
-        //     if (!$customer_user_id) {
-        //         $error = ['data' => 'Invalid user session'];
-        //     } else {
-        //         $error = ['data' => 'Business does not exist'];
-        //     }
-        //     return view('/biz/chat')
-        //         ->with(['biz' => $biz, 'messages' => []])
-        //         ->withErrors($error);
-        // }
-
         $messages = Message::where('chat_token', $fixed_token)->orderBy('created_at', 'asc');
-
-        // $messages = Message::where(['snd_id' => $min_id, 'rcv_id' => $max_id])
-        //     ->orWhere(function ($builder) use ($min_id, $max_id) {
-        //         return $builder
-        //             ->where('snd_id', $max_id)
-        //             ->where('rcv_id', $min_id);
-        //     })
-        //     ->orderByDesc('created_at');
 
         return view('/biz/chat')->with(['ref_user' => $other_user, 'messages' => $messages->get()]);
     }
