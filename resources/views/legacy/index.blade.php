@@ -88,7 +88,7 @@
         // }
 
         async function searchBiz(searchText, district) {
-            let url = '/biz_search';
+            let url = window.location.origin + '/biz_search';
             
             { // district
                 const token = district || '';
