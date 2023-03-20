@@ -10,7 +10,7 @@
         }
 
         #chat {
-            height: calc(100vh - var(--nav-height));
+            height: calc(100% - var(--nav-height));
             display: flex;
             flex-direction: column;
         }
@@ -42,6 +42,10 @@
         }
 
         #send-box {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
             display: flex;
             gap: 8px;
             border-top: 1px solid lightgray;
