@@ -22,6 +22,18 @@ class AccountController extends Controller
             'password' => ['required'],
         ]);
 
+        if ($request->only(['biz_name'])) {
+            $request->validate([
+                'biz_name' => ['required'],
+                'descr' => ['required'],
+                'trade' => ['required'],
+                // 'phone_code' => ['required'],
+                'phone' => ['required'],
+                'district' => ['required'],
+                'ward' => ['required'],
+            ]);
+        }
+
         // 1 - Create user + biz and save image
         $image_path = $request->file('image')?->store('images');
         [$user, $biz, $error_msg] = $accountService->register(

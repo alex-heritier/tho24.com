@@ -43,7 +43,7 @@
             box-sizing: border-box;
         }
 
-        input:not([type='submit']):not([type='checkbox']), select {
+        input:not([type='submit']):not([type='checkbox']):not([name='phone']), select:not([name='phone_code']) {
             width: 100%;
             padding: 6px;
             margin-bottom: 12px;
@@ -80,6 +80,25 @@
         p.alert {
             padding: 0 10px;
             color: black;
+        }
+
+        #phone-fields {
+            height: 40px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: row;
+            gap: 4px;
+            align-items: stretch;
+            align-content: stretch;
+            box-sizing: border-box;
+        }
+
+        #phone-fields input[type="tel"] {            
+            flex-grow: 1;
+        }
+
+        #phone-fields > * {
+            padding: 6px 4px;
         }
     </style>
 @endsection
@@ -161,6 +180,8 @@
             });
 
             setupLocationDropdown();
+
+            onBizCheckChange(document.querySelector('input[type="checkbox"]'));
         });
     </script>
 @endsection
@@ -211,7 +232,7 @@
 
                     <br/>
                     <div style="display: flex; gap: 10px">
-                        <input type="checkbox" onchange="onBizCheckChange(this)">
+                        <input type="checkbox" checked onchange="onBizCheckChange(this)">
                         <label>I am a professional tradesman</label>
                     </div>
                     <br/>
@@ -231,7 +252,13 @@
                             </div>
                         </div>
                         <label for="phone">Phone number</label>
-                        <input type="phone" name="phone"  placeholder="Phone number" /><br/>
+                        <div id="phone-fields">
+                            <select name="phone_code">
+                                <option value="1">🇺🇸 +1</option>
+                                <option value="84">🇻🇳 +84</option>
+                            </select>
+                            <input type="tel" name="phone"  placeholder="Phone number" />
+                        </div>
                         <label for="descr">Description</label>
                         <input type="text" name="descr"  placeholder="Description" /><br/>
                         <label for="website">Website</label>
@@ -304,9 +331,9 @@
                     <label for="email">Email</label>
                     <input type="email" name="email" placeholder="jimmy@example.com" /><br/>
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password"><br/>
+                    <input type="password" id="password" name="password" /><br/>
                     
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Submit" />
                 </form>
             </div>
         </div>
