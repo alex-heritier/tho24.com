@@ -88,7 +88,23 @@
             background-color: #f8f8f8;
             display: flex;
             flex-direction: column;
+            gap: 20px;
             align-items: center;
+        }
+
+        footer .links a {
+            display: inline;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        footer .links span:not(:first-child)::before {
+            content: " •  ";
+            white-space: pre-wrap;
+        }
+
+        footer .links {
+
         }
 
         @media only screen and (min-width: 600px) {
@@ -199,6 +215,11 @@
     </div>
 
     <footer>
-        <p>tho24 &copy; 2023</p>
+        <div class="links">            
+            <span><a href="/privacy">Privacy Policy</a></span>
+            <span><a href="/blog">Blog</a></span>
+        </div>
+
+        <p>tho24.com &copy; 2023</p>
     </footer>
 @endsection

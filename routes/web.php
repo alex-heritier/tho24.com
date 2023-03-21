@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BizController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LegacyController;
 use App\Http\Controllers\MessageController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\MiscController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+
+use function Termwind\render;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +36,7 @@ Route::post('acc.login', [AccountController::class, 'login'])->name('login');
 Route::post('acc.logout', [AccountController::class, 'logout'])->name('logout');
 
 // Chat
-// Route::get('/biz/{id}/chat', [BizController::class, 'showConversation']);
 Route::get('/chat/{token}', [MessageController::class, 'showChat']);
-
-// Users
 Route::get('/inbox', [MessageController::class, 'userInbox']);
 Route::get('/users/{id}/messages', [MessageController::class, 'userInbox']);
 
@@ -57,3 +57,10 @@ Route::get('/biz_search/{district}/{query?}', function($district, $query = null)
     $controller = App::make(LegacyController::class);
     return App::call([$controller, 'biz_search'], ['district' => $district, 'query' => $query]);
 });
+
+// Static
+Route::get('/privacy', fn() => view('static.privacy'));
+
+// Blog
+Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/blog/{slug}', [BlogController::class, 'show']);
