@@ -1,4 +1,4 @@
-@extends('layouts.blog')
+@extends('layouts.app')
 
 @section('title', 'The Power of Outsourcing for Small Businesses')
 

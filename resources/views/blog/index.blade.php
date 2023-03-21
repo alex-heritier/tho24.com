@@ -9,7 +9,8 @@
     }
 
     .blog-item {
-        padding: 5px;
+        margin: 10px 0;
+        padding: 8px;
         border: 0.5px solid lightgray;
         border-radius: 4px;
         display: flex;

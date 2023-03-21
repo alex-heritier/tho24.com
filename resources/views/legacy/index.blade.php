@@ -41,11 +41,11 @@
             color: white;
         }
 
-        #business-listing {
-            padding-top: 20px;
+        #biz-section {
+            padding-top: 32px;
         }
 
-        #business-listing img {
+        #biz-section img {
             padding: 0 10px;
             width: 100%;
             object-fit: contain;
@@ -55,13 +55,24 @@
             box-sizing: border-box;
         }
 
-        #business-listing a {
+        a {
+            color: inherit;
             text-decoration: none;
-            overflow: hidden;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 14px;
         }
 
         .biz-item {
-            margin: 20px 0;
+            margin: 20px 12px;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border: 0.5px solid lightgray;
+            border-radius: 6px;
         }
 
         .biz-item .info {
@@ -72,6 +83,10 @@
         .biz-item h2 {
             color: black;
             text-decoration: none;
+        }
+
+        .biz-item .title {
+            font-weight: 600;
         }
 
         .district-picker {
@@ -145,7 +160,7 @@
                 .catch((err) => console.log("ERROR", err));
             // console.log(response);
 
-            let bizListing = document.getElementById('business-listing');
+            let bizListing = document.getElementById('biz-list');
             bizListing.innerHTML = response;
         }
 
@@ -210,8 +225,12 @@
         </div>
     </div>
 
-    <div id="business-listing">
-        @include('biz/partial/index', ['bizs'=>$bizs])
+    <div id="biz-section">
+        <h2>Popular businesses</h2>
+
+        <div id="biz-list">
+            @include('biz/partial/index', ['bizs'=>$bizs])
+        </div>
     </div>
 
     <footer>
