@@ -92,8 +92,8 @@
 
             {{-- RATING AND REVIEWS --}}
             <div class="info-section">
-                <h3>Rating</h3>
-                <x-rating-field :rating="$avg_rating" />
+                <h3>{{ __('Rating') }}</h3>
+                <x-rating-field :rating="$avg_rating" :rating-count="$total_review_count" />
 
                 @foreach ($reviews as $review)
                     <div class="review">
@@ -118,33 +118,33 @@
 
             {{-- CONTACT INFO --}}
             <div class="info-section">
-                <h3>Contact</h3>
+                <h3>{{ __('Contact') }}</h3>
                 <p>{{ $biz['email'] }}</p>
                 <p>{{ '+'.$biz['phone_code'].' '.$biz['phone'] }}</p>
                 <a href="/chat/{{ Auth::id() }}::{{ $biz['user_id'] }}" class="send-msg">
                     <button>
                         <i class="fa-regular fa-message"></i>
-                        <span>Send a message</span>
+                        <span>{{ __('Send a message') }}</span>
                     </button>
                 </a>
             </div>
 
             {{-- <br/>
             <h3>Location</h3>
-            <p>{{ $biz['district'] }}, {{ $biz['ward'] }}</p> --}}
+            <p>{{ SaigonService::prettyDistrict($biz['district']) }}, {{ $biz['ward'] }}</p> --}}
         </div>
     @endauth
     @guest
         <div class="content locked">
-            <h2>Sign up for free to view this</h2>
+            <h2>{{ __('Sign up for free to view this') }}</h2>
             <ul></ul>
-                <li>Get access to our tradesman network</li>
-                <li>Check prices and previous work history</li>
-                <li>Read reviews left by other Bizzy members</li>
+                <li>{{ __('Get access to our tradesman network') }}</li>
+                <li>{{ __('Check prices and previous work history') }}</li>
+                <li>{{ __('Read reviews left by other Bizzy members') }}</li>
             </ul>
 
             <br/>
-            <a href="/register"><button id="signup-btn">Sign up for free</button></a>
+            <a href="/register"><button id="signup-btn">{{ __('Sign up for free') }}</button></a>
         </div>
     @endguest
 @endsection

@@ -3,5 +3,6 @@
     @for ($i = 0; $i < 5; $i++)
         <i class="fa-star {{ ($rating - $i) > 1 ? 'fa-solid on' : 'fa-regular' }}"></i>
     @endfor
-    <p style="display: inline; margin-left: 10px;">{{ $rating }} out of 5</p>
+    {{-- <p style="display: inline; margin-left: 10px;">{{ $rating }} out of 5</p> --}}
+    <p style="display: inline; margin-left: 8px;">{{ $ratingCount }} ratings</p>
 </div>

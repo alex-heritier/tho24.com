@@ -11,7 +11,7 @@ class RatingField extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public float $rating)
+    public function __construct(public float $rating, public $ratingCount)
     {
     }
 

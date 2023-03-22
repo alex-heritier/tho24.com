@@ -2183,4 +2183,13 @@ class SaigonService
       ],
     ],
   ];
+
+  public static function prettyDistrict(string $code): string
+  {
+    foreach (self::DISTRICTS['district'] as $district) {
+      if ($district['code'] == $code) {
+        return $district['name'];
+      }
+    }
+  }
 }

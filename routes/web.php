@@ -25,7 +25,7 @@ use function Termwind\render;
 */
 
 Route::get('language/{locale}', function ($locale) {
-    if (!in_array($locale, ['en', 'vi'])) {
+    if (!in_array($locale, config('app.available_locales'))) {
         abort(400);
     }
 
