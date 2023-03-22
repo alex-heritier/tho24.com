@@ -24,6 +24,17 @@ use function Termwind\render;
 |
 */
 
+Route::get('language/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'vi'])) {
+        abort(400);
+    }
+
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+
+    return redirect("/");
+});
+
 // Resources
 Route::resource('users', UserController::class);
 Route::resource('biz', BizController::class);
@@ -53,13 +64,13 @@ Route::get('/biz.html', function () {
 });
 Route::get('/register', [LegacyController::class, 'register']);
 Route::get('/dummy', [LegacyController::class, 'dummy']);
-Route::get('/biz_search/{district}/{query?}', function($district, $query = null) {
+Route::get('/biz_search/{district}/{query?}', function ($district, $query = null) {
     $controller = App::make(LegacyController::class);
     return App::call([$controller, 'biz_search'], ['district' => $district, 'query' => $query]);
 });
 
 // Static
-Route::get('/privacy', fn() => view('static.privacy'));
+Route::get('/privacy', fn () => view('static.privacy'));
 
 // Blog
 Route::get('/blog', [BlogController::class, 'index']);

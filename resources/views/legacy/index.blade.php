@@ -208,7 +208,7 @@
     </div>
 
     <div id="intro-section">
-        <h1>Find top-rated certified pros in your area.</h1>
+        <h1>{{ __('Find top-rated certified pros in your area.') }}</h1>
         {{-- <h1>Tìm các chuyên gia được chứng nhận hàng đầu trong khu vực của bạn.</h1> --}}
 
         <div id="search-field">
@@ -226,7 +226,7 @@
     </div>
 
     <div id="biz-section">
-        <h2>Popular businesses</h2>
+        <h2>{{ __('Popular businesses') }}</h2>
 
         <div id="biz-list">
             @include('biz/partial/index', ['bizs'=>$bizs])
@@ -235,7 +235,7 @@
 
     <footer>
         <div class="links">            
-            <span><a href="/privacy">Privacy Policy</a></span>
+            <span><a href="/privacy">{{ __('Privacy policy') }}</a></span>
             <span><a href="/blog">Blog</a></span>
         </div>
 

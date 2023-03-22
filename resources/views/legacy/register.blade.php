@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Register')
+@section('title', __('Register'))
 @section('meta-description', 'Create an account to start finding professionals near you.')
 
 @section('style')
     <style>
         #main-content {
-            /* background-color: #f2f2f2;
-            border: 1px solid #ccc; */
             padding: 20px;
-            /* margin: 20px; */
         }
 
         #button-container {
@@ -56,6 +53,7 @@
             border-radius: 4px;
             background-color: powderblue;
             font-size: 1.1rem;
+            margin-top: 10px;
         }
 
         #loc-picker {
@@ -135,8 +133,14 @@
             }
         }
 
-        function onBizCheckChange(checkbox) {
-            const checked = checkbox.checked;
+        function onCheckLabelClick() {
+            const checkbox = document.getElementById('is-biz-checkbox');
+            checkbox.checked = !checkbox.checked;
+            onBizCheckChange(checkbox.checked);
+            // onBizCheckChange(!checkbox.checked);
+        }
+
+        function onBizCheckChange(checked) {
             console.log("IS BIZ CHECK", checked);
 
             const el = document.getElementById('biz-form-section');
@@ -186,7 +190,7 @@
 
             setupLocationDropdown();
 
-            onBizCheckChange(document.querySelector('input[type="checkbox"]'));
+            onBizCheckChange(document.querySelector('input[type="checkbox"]').checked);
         });
     </script>
 @endsection
@@ -199,20 +203,15 @@
 
     @php
         $err_type = session('err_type');
-        
         $reg_class = ($err_type === 'register' || $err_type === null) ? 'btn-on' : '';
         $login_class = $err_type === 'login' ? 'btn-on' : '';
     @endphp
 
     <div id="sign-up-screen">
         <div id="button-container">
-            <button id="register-button" class="{{ $reg_class }}">Register</button>
-            <button id="existing-account-button" class="{{ $login_class }}">Sign in</button>
+            <button id="register-button" class="{{ $reg_class }}">{{ __('Register') }}</button>
+            <button id="existing-account-button" class="{{ $login_class }}">{{ __('Sign in') }}</button>
         </div>
-        
-        {{-- @if(Session::has('email'))
-            <p class="alert">{{ Session::get('email') }}</p>
-        @endif --}}
 
          @if($errors->count() > 0)
             @foreach ($errors->all() as $error)
@@ -226,51 +225,48 @@
                 <form method="post" action="{{ route('register') }}" enctype="multipart/form-data">
                     @csrf
 
-                    <input type="hidden" name="name" value="Billy Bob" />
-                    <input type="hidden" name="phone_code" value="1" />
-
                     <!-- Account info -->
-                    <label for="email">Email</label>
-                    <input type="email" name="email" placeholder="Enter email" /><br/>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" placeholder="Create password"/><br/>
+                    <label for="email">{{ __('Email') }}</label>
+                    <input type="email" name="email" placeholder="{{ __('Enter email') }}" /><br/>
+                    <label for="password">{{ __('Password') }}</label>
+                    <input type="password" name="password" placeholder="{{ __('Create password') }}"/><br/>
 
                     <br/>
                     <div style="display: flex; gap: 10px">
-                        <input type="checkbox" checked onchange="onBizCheckChange(this)">
-                        <label>I am a professional tradesman</label>
+                        <input id="is-biz-checkbox" type="checkbox" onchange="onBizCheckChange(this.checked)">
+                        <label onclick="onCheckLabelClick()">{{ __('I am a professional tradesman') }}</label>
                     </div>
                     <br/>
 
                     <!-- Business info -->
                     <div id="biz-form-section" style="display: none">
-                        <label for="biz_name">Business name</label>
-                        <input type="text" name="biz_name" placeholder="Business name" /><br/>
+                        <label for="biz_name">{{ __('Business name') }}</label>
+                        <input type="text" name="biz_name" placeholder="{{ __('Business name') }}" /><br/>
                         <div style="display: flex; gap: 10px;">
                             <div>
-                                <label for="first_name">First name</label>
-                                <input type="text" name="first_name"  placeholder="First name" /><br/>
+                                <label for="first_name">{{ __('First name') }}</label>
+                                <input type="text" name="first_name"  placeholder="{{ __('First name') }}" /><br/>
                             </div>
                             <div>
-                                <label for="last_name">Last name</label>
-                                <input type="text" name="last_name"  placeholder="Last name" /><br/>
+                                <label for="last_name">{{ __('Last name') }}</label>
+                                <input type="text" name="last_name"  placeholder="{{ __('Last name') }}" /><br/>
                             </div>
                         </div>
-                        <label for="phone">Phone number</label>
+                        <label for="phone">{{ __('Phone number') }}</label>
                         <div id="phone-fields">
                             <select name="phone_code">
                                 <option value="1">🇺🇸 +1</option>
                                 <option value="84">🇻🇳 +84</option>
                             </select>
-                            <input type="tel" name="phone"  placeholder="Phone number" />
+                            <input type="tel" name="phone"  placeholder="{{ __('Phone number') }}" />
                         </div>
-                        <label for="descr">Description</label>
-                        <input type="text" name="descr"  placeholder="Description" /><br/>
-                        <label for="website">Website</label>
-                        <input type="text" name="website"  placeholder="Website" /><br/>
+                        <label for="descr">{{ __('Description') }}</label>
+                        <input type="text" name="descr"  placeholder="{{ __('Description') }}" /><br/>
+                        <label for="website">{{ __('Website') }}</label>
+                        <input type="text" name="website"  placeholder="{{ __('Website') }}" /><br/>
 
                         <!-- Business trade -->
-                        <label for="trade">Trade</label>
+                        <label for="trade">{{ __('Trade') }}</label>
                         <select name="trade">
                             <option value="electrician">Electrician</option>
                             <option value="plumber">Plumber</option>
@@ -296,7 +292,7 @@
                         <!-- Business location (loaded dynamically) -->
                         <div id="loc-picker">
                             <div>
-                                <label for="district">District</label>
+                                <label for="district">{{ __('District') }}</label>
                                 <select class="notranslate" name="district">
                                     @foreach ($districts as $district)
                                         <option value="{{ $district["code"] }}">{{ $district["name"] }}</option>
@@ -305,7 +301,7 @@
                             </div>
 
                             <div>
-                                <label for="ward">Ward</label>
+                                <label for="ward">{{ __('Ward') }}</label>
                                 <select class="notranslate" name="ward">
                                     @foreach ($districts as $district)
                                         @foreach ($district['ward'] as $ward)
@@ -325,7 +321,7 @@
                         <br/>
                     </div>
 
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="{{ __('Submit') }}" />
                 </form>
             </div>
             <div id="existing-account-form" style="display:none">
@@ -333,12 +329,12 @@
                 <form method="post" action="{{ route('login') }}">
                     @csrf
 
-                    <label for="email">Email</label>
-                    <input type="email" name="email" placeholder="jimmy@example.com" /><br/>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" /><br/>
+                    <label for="email">{{ __('Email') }}</label>
+                    <input type="email" name="email" placeholder="{{ __('Enter email') }}" /><br/>
+                    <label for="password">{{ __('Password') }}</label>
+                    <input type="password" id="password" name="password" placeholder="{{ __('Create password') }}" /><br/>
                     
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="{{ __('Submit') }}" />
                 </form>
             </div>
         </div>
