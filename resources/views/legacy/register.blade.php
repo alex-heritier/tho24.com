@@ -93,6 +93,11 @@
             box-sizing: border-box;
         }
 
+        #phone-fields select[name="phone_code"] {
+            border: 0.9px solid black;
+            border-radius: 2px;
+        }
+
         #phone-fields input[type="tel"] {            
             flex-grow: 1;
         }
