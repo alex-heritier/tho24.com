@@ -22,7 +22,7 @@ class AccountController extends Controller
             'password' => ['required'],
         ]);
 
-        if ($request->only(['biz_name'])) {
+        if ($request->filled(['biz_name'])) {
             $request->validate([
                 'biz_name' => ['required'],
                 'descr' => ['required'],

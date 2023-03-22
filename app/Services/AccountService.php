@@ -34,7 +34,7 @@ class AccountService
         [$user, $biz] = DB::transaction(function () use ($user_data, $biz_data, $image_path) {
             // 1 - Create user
             $user =  User::create([
-                'name' => $user_data['name'],
+                'name' => $user_data['name'] ?? null,
                 'email' => $user_data['email'],
                 'phone_code' => $user_data['phone_code'],
                 'phone' => $user_data['phone'],

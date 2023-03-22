@@ -22,3 +22,4 @@ yarn-error.log
 /__old/
 .DS_Store
 *.swp
+deploy.sh

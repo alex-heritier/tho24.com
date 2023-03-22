@@ -27,8 +27,8 @@ class Localization
                 $availableLocales = config('app.available_locales');
                 $locale = $request->getPreferredLanguage($availableLocales);
 
-                Log::debug("BROWSER HEADER - " . $request->server('HTTP_ACCEPT_LANGUAGE'));
-                Log::debug(">>>> PREFFERED LANGUAGE - " . $locale);
+                // Log::debug("BROWSER HEADER - " . $request->server('HTTP_ACCEPT_LANGUAGE'));
+                // Log::debug(">>>> PREFFERED LANGUAGE - " . $locale);
 
                 Session::put('locale', $locale);
                 App::setLocale($locale);
