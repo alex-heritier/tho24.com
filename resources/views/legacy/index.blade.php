@@ -4,7 +4,7 @@
 
 @section('style')
     <style>
-        #search-field {
+        #search-form {
             display: flex;
             flex-direction: column;
             gap: 6px;
@@ -13,14 +13,25 @@
             padding: 30px 6px 14px;
         }
 
-        #search {
+        #search-box {
+            align-self: stretch;
+            display: flex;
+        }
+
+        #search-box input {
             width: 100%;
             font-size: 20px;
             padding: 18px;
-            border: 1px solid;
-            border-color: #D1D1D5;
-            border-radius: 4px;
+            border: 1px solid #D1D1D5;
+            border-radius: 10px 0 0 10px;
             box-sizing: border-box;
+        }
+
+        #search-box button {
+            border: 1px solid #D1D1D5;
+            border-radius: 0 10px 10px 0;
+            box-sizing: border-box;
+            padding: 0 12px;
         }
 
         #intro-section {
@@ -118,10 +129,6 @@
             white-space: pre-wrap;
         }
 
-        footer .links {
-
-        }
-
         @media only screen and (min-width: 600px) {
             #business-listing {
                 margin: auto;
@@ -202,23 +209,25 @@
             <a href="/account"><i class="fa-solid fa-user"></i></a>
         @endauth
         @guest
-            <a href="/register">Sign in</a>
+            <a href="/register">{{ __('Sign in') }}</a>
         @endguest
         <a id="menu-btn" href="#"><i class="fa-solid fa-bars"></i></a>
     </div>
 
     <div id="intro-section">
         <h1>{{ __('Find top-rated certified pros in your area.') }}</h1>
-        {{-- <h1>Tìm các chuyên gia được chứng nhận hàng đầu trong khu vực của bạn.</h1> --}}
 
-        <div id="search-field">
-            <input type="text" id="search" name="search" placeholder="Search by business name" />
+        <div id="search-form">
+            <div id="search-box">
+                <input type="text" id="search" name="search" placeholder="How can we help?" />
+                <button>Search</button>
+            </div>
             <select class="district-picker">
                 @foreach ($districts as $district)
                     @if ($district)
                         <option value="{{ $district['code'] }}">{{ $district['name'] }}</option>
                     @else
-                        <option disabled>------</option>
+                        <option disabled></option>
                     @endif
                 @endforeach
             </select>
