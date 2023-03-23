@@ -6,6 +6,9 @@
     <style>
         .content {
             padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         img {
@@ -68,6 +71,20 @@
             border: 1px solid lightgray;
             border-radius: 4px;
         }
+
+        #calendar {
+            margin-top: 6px;
+            display: grid;
+            grid-template-columns: repeat(7, auto);
+            grid-template-rows: 24px repeat(5, 32px);
+        }
+
+        .calendar-cell {
+            border: 0.5px solid lightgray;
+            box-sizing: border-box;
+            text-align: center;
+            color: lightgray;
+        }
     </style>
 @endsection
 
@@ -114,6 +131,22 @@
                 @if($errors->has('review'))
                     <p>{{ $errors->first('review') }}</p>
                 @endif
+            </div>
+
+            {{-- AVAILABILITY --}}
+            <div class="info-section">
+                <h3>{{ __('Schedule an appointment') }}</h3>
+                <div id="calendar">
+                    @for ($i = 0; $i < (5 + 1); $i++)
+                        @for ($j = 0; $j < 7; $j++)
+                            @if ($i == 0)
+                                <span style="text-align: center">{{ ['Su','M','Tu','W','Th','F','Sa'][$j] }}</span>
+                            @else
+                                <div class="calendar-cell">{{ $calendar[$i - 1][$j] }}</div>
+                            @endif
+                        @endfor
+                    @endfor
+                </div>
             </div>
 
             {{-- CONTACT INFO --}}
