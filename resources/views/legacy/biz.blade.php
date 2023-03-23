@@ -76,16 +76,62 @@
             margin-top: 6px;
             display: grid;
             grid-template-columns: repeat(7, auto);
-            grid-template-rows: 24px repeat(5, 32px);
+            grid-template-rows: 24px repeat(5, 36px);
+            border: 0.5px solid lightgray;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #calendar span {
+            background-color: #fafafa;
+            border: 0.5px solid lightgray;
+            box-sizing: border-box;
         }
 
         .calendar-cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border: 0.5px solid lightgray;
             box-sizing: border-box;
             text-align: center;
             color: lightgray;
         }
+
+        .calendar-cell.busy {
+            background-color: red;
+            color: white;
+        }
+
+        .calendar-cell.open {
+            /* background-color: lightgreen; */
+        }
     </style>
+@endsection
+
+@section('script')
+<script>
+    function onCalendarCellClick(event) {
+        if (this.classList.contains('busy')) {
+            this.classList.remove('busy');
+            this.classList.add('open');
+        } else {
+            this.classList.add('busy');
+            this.classList.remove('open');
+        }
+        // console.log(event, this);
+    }
+
+    function setupCalendarHandlers() {
+        const calendarCells = document.querySelectorAll('.calendar-cell');
+        // console.log("CELLS", calendarCells);
+        calendarCells.forEach(e => e.addEventListener('click', onCalendarCellClick));
+    }
+
+    window.addEventListener("load", function () {
+        // setupCalendarHandlers();
+    });
+</script>
 @endsection
 
 @section('content')
@@ -142,7 +188,11 @@
                             @if ($i == 0)
                                 <span style="text-align: center">{{ ['Su','M','Tu','W','Th','F','Sa'][$j] }}</span>
                             @else
-                                <div class="calendar-cell">{{ $calendar[$i - 1][$j] }}</div>
+                                <a href="/biz/{{ $biz['id'] }}/appointment/{{ $calendar[$i - 1][$j]['pretty_date'] }}" class="calendar-cell {{ (7 * $i + $j) % 3 == 0 ? 'open' : 'busy' }}">
+                                    {{-- <a href="/biz/{{ $biz['id'] }}/appointment"> --}}
+                                        {{ $calendar[$i - 1][$j]['day_number'] }}
+                                    {{-- </a> --}}
+                                </a>
                             @endif
                         @endfor
                     @endfor

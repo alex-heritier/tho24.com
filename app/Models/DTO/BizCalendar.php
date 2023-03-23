@@ -41,8 +41,11 @@ class BizCalendar
                 $main_month_value = 7 * $i + $j - $this->first_day_weekcode;
                 $prev_month_value = $this->num_days_in_prev_month - $days_away_from_main_month + 1;
 
-                $value = ($days_away_from_main_month <= 0) ? (($main_month_value % $this->num_days_in_current_month) + 1) : $prev_month_value;
-                $grid[$i][$j] = $value;
+                $day_num = ($days_away_from_main_month <= 0) ? (($main_month_value % $this->num_days_in_current_month) + 1) : $prev_month_value;
+                $grid[$i][$j] = [
+                    'day_number' => $day_num,
+                    'pretty_date' => date('m-d-Y', strtotime(date('n'))),
+                ];
 
                 $days_away_from_main_month--;
             }
