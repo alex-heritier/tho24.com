@@ -43,7 +43,7 @@
         input:not([type='submit']):not([type='checkbox']):not([name='phone']), select:not([name='phone_code']) {
             width: 100%;
             padding: 6px;
-            margin-bottom: 12px;
+            margin-bottom: 18px;
         }
 
         input[type='submit'] {
@@ -85,7 +85,7 @@
             margin-bottom: 10px;
             display: flex;
             flex-direction: row;
-            gap: 4px;
+            gap: 8px;
             align-items: stretch;
             align-content: stretch;
             box-sizing: border-box;
@@ -242,7 +242,7 @@
                     <div id="biz-form-section" style="display: none">
                         <label for="biz_name">{{ __('Business name') }}</label>
                         <input type="text" name="biz_name" placeholder="{{ __('Business name') }}" /><br/>
-                        <div style="display: flex; gap: 10px;">
+                        <div style="display: flex; gap: 8px;">
                             <div>
                                 <label for="first_name">{{ __('First name') }}</label>
                                 <input type="text" name="first_name"  placeholder="{{ __('First name') }}" /><br/>
@@ -262,8 +262,10 @@
                         </div>
                         <label for="descr">{{ __('Description') }}</label>
                         <input type="text" name="descr"  placeholder="{{ __('Description') }}" /><br/>
-                        <label for="website">{{ __('Website') }}</label>
-                        <input type="text" name="website"  placeholder="{{ __('Website') }}" /><br/>
+                        {{-- <label for="website">{{ __('Website') }}</label>
+                        <input type="text" name="website"  placeholder="{{ __('Website') }}" /><br/> --}}
+                        <label for="pricing">{{ __('Pricing').' ('.$currency_symbol.')' }}</label>
+                        <input type="number" name="pricing"  placeholder="{{ __('Pricing') }}" /><br/>
 
                         <!-- Business trade -->
                         <label for="trade">{{ __('Trade') }}</label>

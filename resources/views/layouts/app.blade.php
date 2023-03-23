@@ -7,6 +7,17 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="description" content="@yield('meta-description', 'An online network of businesses, we faciliate business networking and customer-business interaction.')">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-435BPF426T">
+    </script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-435BPF426T');
+    </script>
+
     <title>{{ config('app.name') }} | @yield('title', 'Business network')</title>
 
     <link rel="icon" href="/favicon.ico">

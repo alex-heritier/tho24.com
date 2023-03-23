@@ -4,12 +4,10 @@ namespace App\Services;
 
 use App\Models\Biz;
 use App\Models\User;
-use Exception;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 
 class AccountService
 {
@@ -18,12 +16,12 @@ class AccountService
         return Hash::make($input);
     }
 
-    public function register($user_data, $biz_data, $image_path): array
+    public function register($userData, $bizData, $imagePath): array
     {
         // Check for duplicate user
         $users = DB::table('users')
-            ->where(function (QueryBuilder $query) use ($user_data) {
-                $query->where('email', $user_data['email']);
+            ->where(function (QueryBuilder $query) use ($userData) {
+                $query->where('email', $userData['email']);
             })
             ->get();
         if (!empty($users) && count($users) > 0) {
@@ -31,34 +29,32 @@ class AccountService
             return [null, null, "User already exists"];
         }
 
-        [$user, $biz] = DB::transaction(function () use ($user_data, $biz_data, $image_path) {
+        [$user, $biz] = DB::transaction(function () use ($userData, $bizData, $imagePath) {
             // 1 - Create user
+            $optionalName = array_key_exists('first_name', $bizData) ? ($bizData['first_name'] . ' ' . $bizData['last_name']) : null;
             $user =  User::create([
-                'name' => $user_data['name'] ?? null,
-                'email' => $user_data['email'],
-                'phone_code' => $user_data['phone_code'],
-                'phone' => $user_data['phone'],
-                'password' => AccountService::hash($user_data['password']),
+                'name' => $userData['name'] ?? $optionalName ?? null,
+                'email' => $userData['email'],
+                'phone_code' => $userData['phone_code'],
+                'phone' => $userData['phone'],
+                'password' => AccountService::hash($userData['password']),
             ]);
 
-            $is_biz = $biz_data['biz_name'] && $biz_data['phone'];
+            $is_biz = $bizData['biz_name'] && $bizData['phone'];
             if (!$is_biz) {
                 return [$user, null];
             }
 
-            // 2 - Save image
-            $path = $image_path;
-
             // 3 - Create biz
             $biz = Biz::create([
                 'user_id' => $user->id,
-                'name' => $biz_data['biz_name'],
-                'descr' => $biz_data['descr'],
-                'trade' => $biz_data['trade'],
-                'url' => $biz_data['website'],
-                'district' => $biz_data['district'],
-                'ward' => $biz_data['ward'],
-                'main_img' => $path,
+                'name' => $bizData['biz_name'],
+                'descr' => $bizData['descr'],
+                'trade' => $bizData['trade'],
+                'url' => $bizData['website'] ?? null,
+                'district' => $bizData['district'],
+                'ward' => $bizData['ward'],
+                'main_img' => $imagePath,
                 'email' => $user->email,
                 'phone_code' => $user->phone_code,
                 'phone' => $user->phone,

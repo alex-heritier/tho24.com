@@ -183,13 +183,13 @@
             districtPicker.addEventListener("change", onInputChanged);
 
             // Check current location
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (pos) {
-                    // console.log(pos);
-                    let data = `${pos.coords.latitude}:${pos.coords.longitude}`;
-                    document.cookie = `my_latlng=${data}; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/`;
-                });
-            }
+            // if (navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(function (pos) {
+            //         // console.log(pos);
+            //         let data = `${pos.coords.latitude}:${pos.coords.longitude}`;
+            //         document.cookie = `my_latlng=${data}; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/`;
+            //     });
+            // }
         });
     </script>
 @endsection

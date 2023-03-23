@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Biz;
 use App\Services\BizService;
+use App\Services\MoneyService;
 use App\Services\SaigonService;
 
 class LegacyController extends Controller
@@ -32,7 +32,7 @@ class LegacyController extends Controller
     public function biz(Request $request)
     {
         $id = $request->query('id');
-        return redirect('/biz/'.$id);
+        return redirect('/biz/' . $id);
         // $biz = Biz::with('reviews')->find($request->query('id'));
         // return view('legacy/biz', [
         //     'biz' => $biz,
@@ -41,9 +41,11 @@ class LegacyController extends Controller
         // ]);
     }
 
-    public function register()
+    public function register(MoneyService $moneyService)
     {
-        return view('legacy/register')->with(['districts' => SaigonService::DISTRICTS['district']]);
+        $districts = SaigonService::DISTRICTS['district'];
+        $currencySymbol = $moneyService->getLocaleCurrencySymbol();
+        return view('legacy/register')->with(['districts' => $districts, 'currency_symbol' => $currencySymbol]);
     }
 
     /**

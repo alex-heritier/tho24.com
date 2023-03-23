@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Services\AccountService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,16 +34,16 @@ class AccountController extends Controller
         }
 
         // 1 - Create user + biz and save image
-        $image_path = $request->file('image')?->store('images');
-        [$user, $biz, $error_msg] = $accountService->register(
-            user_data: $request->only(['name', 'email', 'phone_code', 'phone', 'password']),
-            biz_data: $request->only(['biz_name', 'descr', 'trade', 'website', 'email', 'phone_code', 'phone', 'district', 'ward']),
-            image_path: $image_path,
+        $imagePath = $request->file('image')?->store('images');
+        [$user, $biz, $errorMsg] = $accountService->register(
+            userData: $request->only(['name', 'email', 'phone_code', 'phone', 'password']),
+            bizData: $request->only(['biz_name', 'descr', 'trade', 'website', 'email', 'phone_code', 'phone', 'district', 'ward']),
+            imagePath: $imagePath,
         );
 
-        if ($error_msg) {
-            Log::debug("AccountController.register_biz ERROR " . $error_msg);
-            return response("ERROR - $error_msg", 500);
+        if ($errorMsg) {
+            Log::debug("AccountController.register_biz ERROR " . $errorMsg);
+            return response("ERROR - $errorMsg", 500);
         }
 
         if ((new AccountService())->login($request)) {
