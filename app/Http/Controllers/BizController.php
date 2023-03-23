@@ -23,10 +23,10 @@ class BizController extends Controller
         }
     }
 
-    public function show(Request $request, $id)
+    public function show(int $id)
     {
         $biz = Biz::with('reviews')->find($id);
-        $calendar = (new BizCalendar(date('n')))->getCalendarGrid();
+        $calendar = (new BizCalendar())->getCalendarGrid();
         return view('legacy/biz', [
             'biz' => $biz,
             'avg_rating' => $biz->averageRating(),

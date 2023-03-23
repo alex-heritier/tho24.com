@@ -73,7 +73,7 @@
         }
 
         #calendar {
-            margin-top: 6px;
+            margin: 6px 10px 0;
             display: grid;
             grid-template-columns: repeat(7, auto);
             grid-template-rows: 24px repeat(5, 36px);
@@ -190,7 +190,7 @@
                             @else
                                 <a href="/biz/{{ $biz['id'] }}/appointment/{{ $calendar[$i - 1][$j]['pretty_date'] }}" class="calendar-cell {{ (7 * $i + $j) % 3 == 0 ? 'open' : 'busy' }}">
                                     {{-- <a href="/biz/{{ $biz['id'] }}/appointment"> --}}
-                                        {{ $calendar[$i - 1][$j]['day_number'] }}
+                                        {{ $calendar[$i - 1][$j]['dotm'] }}
                                     {{-- </a> --}}
                                 </a>
                             @endif
