@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Business network')
+@section('title', 'Expert Home Services')
 
 @section('style')
     <style>
@@ -99,7 +99,11 @@
 
         #overlay-search-bar select {
             width: 90px;
-            font-size: 0.9rem !important;
+            border: 1px solid lightgray;
+            border-radius: var(--search-rounding);
+            padding: 2px;
+            color: #222;
+            font-size: 0.9rem;
         }
 
         #overlay-search-bar button {
@@ -136,15 +140,6 @@
             padding-top: 32px;
         }
 
-        #biz-section img {
-            padding: 0 10px;
-            width: 100%;
-            object-fit: contain;
-            object-position: center;
-            aspect-ratio: calc(16/9);
-            box-sizing: border-box;
-        }
-
         a {
             color: inherit;
             text-decoration: none;
@@ -159,14 +154,31 @@
             margin: 20px 12px;
             padding: 4px;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: stretch;
             gap: 4px;
             border: 0.5px solid lightgray;
             border-radius: 6px;
         }
 
+        .biz-item img {
+            display: block;
+            height: 10vh;
+            flex-grow: 0;
+            padding: 0 10px;
+            object-fit: contain;
+            object-position: center;
+            aspect-ratio: 1;
+            box-sizing: border-box;
+        }
+
         .biz-item .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
             padding: 8px;
+            flex-grow: 1;
         }
 
         .biz-item p,
@@ -177,15 +189,6 @@
 
         .biz-item .title {
             font-weight: 600;
-        }
-
-        .district-picker {
-            border: 1px solid lightgray;
-            border-radius: 4px;
-            background-color: white;
-            padding: 4px 8px;
-            color: #222;
-            font-size: 0.9rem;
         }
 
         footer {

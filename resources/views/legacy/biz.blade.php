@@ -223,7 +223,7 @@
             <ul></ul>
                 <li>{{ __('Get access to our tradesman network') }}</li>
                 <li>{{ __('Check prices and previous work history') }}</li>
-                <li>{{ __('Read reviews left by other Bizzy members') }}</li>
+                <li>{{ __('Read reviews left by other Tho24.com members') }}</li>
             </ul>
 
             <br/>
