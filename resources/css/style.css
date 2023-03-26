@@ -1,5 +1,7 @@
 :root {
     --nav-height: 60px;
+    --color-primary: lightskyblue;
+    --color-secondary: #FB8500;
 }
 
 * {

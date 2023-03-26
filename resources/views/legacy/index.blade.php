@@ -6,6 +6,9 @@
     <style>
         :root {
             --search-padding: 14px;
+            --search-rounding: 4px;
+            --color-primary: lightskyblue;
+            --color-secondary: #FB8500;
         }
 
         #search-form {
@@ -34,10 +37,9 @@
 
         #search-box input {
             width: 100%;
-            font-size: 20px;
             padding: var(--search-padding) var(--search-padding) var(--search-padding) calc(var(--search-padding) + 24px);
             border: 1px solid #D1D1D5;
-            border-radius: 10px 0 0 10px;
+            border-radius: var(--search-rounding) 0 0 var(--search-rounding);
             box-sizing: border-box;
             grid-row: 1;
             grid-column: 1;
@@ -45,17 +47,76 @@
         }
 
         #search-box button {
-            border: 1px solid #D1D1D5;
-            border-radius: 0 10px 10px 0;
+            /* border: 1px solid #D1D1D5; */
+            border: none;
+            border-radius: 0 var(--search-rounding) var(--search-rounding) 0;
             box-sizing: border-box;
             padding: 0 var(--search-padding);
             grid-row: 1;
             grid-column: 2;
+            background-color: var(--color-secondary);
+            color: white;
+        }
+
+        #search-overlay {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow: auto;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 2;
+        }
+
+        #search-overlay.hidden {
+            display: none;
+        }
+
+        #overlay-search-bar {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: stretch;
+            padding: 6px 10px;
+        }
+
+        #overlay-search-bar i {
+            align-self: center;
+            padding: 4px;
+        }
+
+        #overlay-search-bar input {
+            flex-grow: 1;
+            padding: 4px;
+            border: none;
+            outline: none;
+        }
+
+        #overlay-search-bar select {
+            width: 90px;
+            font-size: 0.9rem !important;
+        }
+
+        #overlay-search-bar button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--search-rounding);
+            background-color: var(--color-secondary);
+            color: white;
+        }
+
+        #search-result-list {
+            border-top: 2px solid black;
         }
 
         #intro-section {
             height: calc(80vh - var(--nav-height));
-            background-color: lightskyblue;
+            background-color: var(--color-primary);
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -160,13 +221,6 @@
     <script>
         let timer = null;
 
-        // Function to get the value of a cookie
-        // function getCookie(name) {
-        //     var value = "; " + document.cookie;
-        //     var parts = value.split("; " + name + "=");
-        //     if (parts.length == 2) return parts.pop().split(";").shift();
-        // }
-
         async function searchBiz(searchText, district) {
             let url = window.location.origin + '/biz_search';
             
@@ -185,37 +239,37 @@
                 .catch((err) => console.log("ERROR", err));
             // console.log(response);
 
-            let bizListing = document.getElementById('biz-list');
+            let bizListing = document.getElementById('search-result-list');
             bizListing.innerHTML = response;
         }
 
-        function onInputChanged(event) {
+        function onSearchTriggered(event) {
             // console.log("FIRED");
 
-            let duration = 250; // millis
-            let searchText = document.getElementById('search').value;
-            let district = document.querySelector('.district-picker').value;
+            const duration = 250; // millis
+            const searchText = document.querySelector("#overlay-search-bar input").value;
+            const district = document.querySelector('#district-picker').value;
+
             if (timer !== null) {
                 clearTimeout(timer);
             }
-            timer = setTimeout(() => searchBiz(searchText, district), duration);
+            if ((searchText ?? "").length > 0) {
+                timer = setTimeout(() => searchBiz(searchText, district), duration);
+            } else {
+                document.getElementById('search-result-list').innerHTML = '';
+            }
         }
 
-        window.addEventListener("load", function () {
-            let searchField = document.getElementById('search');
-            let districtPicker = document.querySelector('.district-picker');
-            search.addEventListener("input", onInputChanged);
-            districtPicker.addEventListener("change", onInputChanged);
+        function onSearchFocus(input) {
+            const searchOverlay = document.getElementById('search-overlay');
+            searchOverlay.classList.remove('hidden');
+            document.querySelector('#search-overlay input').focus();
+        }
 
-            // Check current location
-            // if (navigator.geolocation) {
-            //     navigator.geolocation.getCurrentPosition(function (pos) {
-            //         // console.log(pos);
-            //         let data = `${pos.coords.latitude}:${pos.coords.longitude}`;
-            //         document.cookie = `my_latlng=${data}; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/`;
-            //     });
-            // }
-        });
+        function onCloseOverlayClick(button) {
+            const searchOverlay = document.getElementById('search-overlay');
+            searchOverlay.classList.add('hidden');
+        }
     </script>
 @endsection
 
@@ -238,10 +292,17 @@
         <div id="search-form">
             <div id="search-box">
                 <i class="fa fa-search"></i>
-                <input type="text" id="search" name="search" placeholder="How can we help?" />
+                <input type="text" id="search" name="search" placeholder="{{ __('How can we help?') }}" readonly onfocus="onSearchFocus(this)"  />
                 <button>Search</button>
             </div>
-            <select class="district-picker">
+        </div>
+    </div>
+
+    <div id="search-overlay" class="hidden">
+        <div id="overlay-search-bar">
+            <i class="fa fa-arrow-left" onclick="onCloseOverlayClick(this)"></i>
+            <input placeholder="{{ __('How can we help?') }}" oninput="onSearchTriggered(event)" />
+            <select id="district-picker" onchange="onSearchTriggered(event)">
                 @foreach ($districts as $district)
                     @if ($district)
                         <option value="{{ $district['code'] }}">{{ $district['name'] }}</option>
@@ -250,7 +311,9 @@
                     @endif
                 @endforeach
             </select>
+            <button>Go</button>
         </div>
+        <div id="search-result-list"></div>
     </div>
 
     <div id="biz-section">
