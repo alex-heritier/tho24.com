@@ -47,9 +47,12 @@ class LegacyController extends Controller
     /**
      * API Calls
      */
-    public function biz_search(BizService $bizService, string $district, string $query = null)
+    public function bizSearch(Request $result, BizService $bizService)
     {
-        $results = $bizService->search(district: $district, query: $query);
+        $district = $result->query('district');
+        $trade = $result->query('trade');
+        $query = $result->query('query');
+        $results = $bizService->search(district: $district, trade: $trade, query: $query);
         return view('biz/index', ['bizs' => $results->get()]);
     }
 }

@@ -248,16 +248,20 @@
     <script>
         let timer = null;
 
-        async function searchBiz(searchText, district) {
-            let url = window.location.origin + '/biz_search';
+        async function searchBiz(searchText, district, trade) {
+            let url = window.location.origin + '/biz_search?';
             
             { // district
                 const token = district || '';
-                url = url + "/" + token;
+                url = url + "district=" + token;
+            }
+            { // trade
+                const token = trade || '';
+                url = url + "&trade=" + token;
             }
             { // searchText
                 const token = searchText || '';
-                url = url + "/" + token;
+                url = url + "&query=" + token;
             }
 
             console.log(url);
@@ -279,12 +283,13 @@
             const duration = 250; // millis
             const searchText = document.querySelector("#overlay-search-bar input").value;
             const district = document.querySelector('#district-picker').value;
+            const trade = document.querySelector('#trade-picker').value;
 
             if (timer !== null) {
                 clearTimeout(timer);
             }
             if ((searchText ?? "").length > 0) {
-                timer = setTimeout(() => searchBiz(searchText, district), duration);
+                timer = setTimeout(() => searchBiz(searchText, district, trade), duration);
             } else {
                 document.getElementById('search-result-list').innerHTML = '';
             }
@@ -299,6 +304,16 @@
         function onCloseOverlayClick(button) {
             const searchOverlay = document.getElementById('search-overlay');
             searchOverlay.classList.add('hidden');
+
+            const searchText = document.querySelector("#overlay-search-bar input");
+            const district = document.querySelector('#district-picker');
+            const trade = document.querySelector('#trade-picker');
+
+            // Reset overlay state
+            searchText.value = '';
+            district.value = district.children[0].value;
+            trade.value = trade.children[0].value;
+            document.getElementById('search-result-list').innerHTML = '';
         }
     </script>
 @endsection
@@ -346,7 +361,7 @@
                 @endforeach
             </select>
 
-            <select class="search-filter" onchange="onSearchTriggered(event)">
+            <select id="trade-picker" class="search-filter" onchange="onSearchTriggered(event)">
                 @foreach ($trades as $key => $val)
                     <option value="{{ $key }}">{{ $val }}</option>
                 @endforeach

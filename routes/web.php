@@ -67,10 +67,7 @@ Route::get('/biz.html', function () {
 });
 Route::get('/register', [LegacyController::class, 'register']);
 Route::get('/dummy', [LegacyController::class, 'dummy']);
-Route::get('/biz_search/{district}/{query?}', function ($district, $query = null) {
-    $controller = App::make(LegacyController::class);
-    return App::call([$controller, 'biz_search'], ['district' => $district, 'query' => $query]);
-});
+Route::get('/biz_search', [LegacyController::class, 'bizSearch']);
 
 // Static
 Route::get('/privacy', fn () => view('static.privacy'));

@@ -9,16 +9,18 @@ class BizService
 {
     const ANYWHERE = 'anywhere';
 
-    public function search(string $district = self::ANYWHERE, string $query = null): Builder
+    public function search(string $district = self::ANYWHERE, string $trade = null, string $query = null): Builder
     {
         $results = $district === self::ANYWHERE ? Biz::where([]) : Biz::where('district', $district);
+        if ($trade) {
+            $results = $results->where('trade', $trade);
+        }
         if ($query) {
-            $results = $results
-                ->where(function ($builder) use ($query) {
-                    return $builder
-                        ->where('name', 'LIKE', "$query%")
-                        ->orWhere('trade', 'LIKE', "$query%");
-                });
+            $results = $results->where(function ($builder) use ($query) {
+                return $builder
+                    ->where('name', 'LIKE', "$query%")
+                    ->orWhere('phone', 'LIKE', "$query%");
+            });
         }
         return $results->limit(5);
     }
