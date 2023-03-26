@@ -4,6 +4,10 @@
 
 @section('style')
     <style>
+        :root {
+            --search-padding: 14px;
+        }
+
         #search-form {
             display: flex;
             flex-direction: column;
@@ -15,23 +19,38 @@
 
         #search-box {
             align-self: stretch;
-            display: flex;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+        }
+
+        #search-box i {
+            margin-left: var(--search-padding);
+            grid-row: 1;
+            grid-column: 1;
+            z-index: 1;
+            align-self: center;
+            justify-self: start;
         }
 
         #search-box input {
             width: 100%;
             font-size: 20px;
-            padding: 18px;
+            padding: var(--search-padding) var(--search-padding) var(--search-padding) calc(var(--search-padding) + 24px);
             border: 1px solid #D1D1D5;
             border-radius: 10px 0 0 10px;
             box-sizing: border-box;
+            grid-row: 1;
+            grid-column: 1;
+            font-size: 1rem;
         }
 
         #search-box button {
             border: 1px solid #D1D1D5;
             border-radius: 0 10px 10px 0;
             box-sizing: border-box;
-            padding: 0 12px;
+            padding: 0 var(--search-padding);
+            grid-row: 1;
+            grid-column: 2;
         }
 
         #intro-section {
@@ -62,7 +81,6 @@
             object-fit: contain;
             object-position: center;
             aspect-ratio: calc(16/9);
-            /* border: 1px solid lightgray; */
             box-sizing: border-box;
         }
 
@@ -219,6 +237,7 @@
 
         <div id="search-form">
             <div id="search-box">
+                <i class="fa fa-search"></i>
                 <input type="text" id="search" name="search" placeholder="How can we help?" />
                 <button>Search</button>
             </div>
