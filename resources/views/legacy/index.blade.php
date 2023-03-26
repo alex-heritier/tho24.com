@@ -136,10 +136,6 @@
             color: white;
         }
 
-        #biz-section {
-            padding-top: 32px;
-        }
-
         a {
             color: inherit;
             text-decoration: none;
@@ -148,6 +144,25 @@
         h2 {
             font-size: 1.5rem;
             margin: 14px;
+        }
+
+        #howitworks-section {
+            padding: 32px 0;
+            background-color: #f5f5f2;
+        }
+
+        #howitworks-section .howitworks-item {
+            padding: 18px 0;
+        }
+
+        #howitworks-section p,
+        #howitworks-section i {
+            margin: 8px 14px;
+            line-height: 1.6rem;
+        }
+
+        #biz-section {
+            padding: 32px 0;
         }
 
         .biz-item {
@@ -319,11 +334,31 @@
         <div id="search-result-list"></div>
     </div>
 
+    <div id="howitworks-section">
+        <h2>{{ __('How it works') }}</h2>
+
+        <div class="howitworks-item">
+            <i class="fa-regular fa-xl fa-message"></i>
+            <p><b>1. Tell us what you need</b></p>
+            <p>From housecleaning to home cooking, we can help with it all.</p>
+        </div>
+        <div class="howitworks-item">
+            <i class="fa-solid fa-xl fa-hammer"></i>
+            <p><b>2. We'll connect you with pros nearby</b></p>
+            <p>See your price and book an appointment right away.</p>
+        </div>
+        <div class="howitworks-item">
+            <i class="fa-regular fa-xl fa-thumbs-up"></i>
+            <p><b>3. Let us take care of the rest</b></p>
+            <p>Now just wait for the appointment date and your service pro will arrive to make your dreams come true.</p>
+        </div>
+    </div>
+
     <div id="biz-section">
         <h2>{{ __('Popular businesses') }}</h2>
 
         <div id="biz-list">
-            @include('biz/partial/index', ['bizs'=>$bizs])
+            @include('biz/partial/index', ['bizs' => $bizs])
         </div>
     </div>
 
