@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Biz;
 use App\Models\DTO\BizCalendar;
-use App\Models\Message;
-use Illuminate\Support\Facades\Auth;
 
 class BizController extends Controller
 {
@@ -34,5 +31,11 @@ class BizController extends Controller
             'reviews' => $biz->reviews->take(2),
             'calendar' => $calendar
         ]);
+    }
+
+    public function createAgenda(int $bizID, string $agendaDate)
+    {
+        $biz = Biz::findOrFail($bizID);
+        return view('biz.create_agenda')->with(['biz' => $biz, 'aptDate' => $agendaDate]);
     }
 }

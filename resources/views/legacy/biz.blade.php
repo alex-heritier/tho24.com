@@ -5,7 +5,7 @@
 @section('style')
     <style>
         .content {
-            padding: 10px;
+            padding: 32px 10px;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -60,10 +60,24 @@
         }
 
         .review {
+            margin: 8px 2px;
+        }
+
+        .timeago {
+            color: gray;
+        }
+
+        .contact > p {
             margin: 4px 0;
         }
 
-        .send-msg button {
+        .contact .btn-row {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+        }
+
+        button .t24-btn {
             display: flex;
             gap: 10px;
             align-items: center;
@@ -160,7 +174,7 @@
 
                 @foreach ($reviews as $review)
                     <div class="review">
-                        <p>{{ $review['rating'] }} out of 5</p>
+                        <p>{{ $review['rating'] }} out of 5<span class="timeago"> - {{ $review['created_at']->diffForHumans() }}</span></p>
                         <p>"{{ $review['message'] }}"</p>                        
                     </div>
                 @endforeach
@@ -188,10 +202,8 @@
                             @if ($i == 0)
                                 <span style="text-align: center">{{ ['Su','M','Tu','W','Th','F','Sa'][$j] }}</span>
                             @else
-                                <a href="/biz/{{ $biz['id'] }}/appointment/{{ $calendar[$i - 1][$j]['pretty_date'] }}" class="calendar-cell {{ (7 * $i + $j) % 3 == 0 ? 'open' : 'busy' }}">
-                                    {{-- <a href="/biz/{{ $biz['id'] }}/appointment"> --}}
-                                        {{ $calendar[$i - 1][$j]['dotm'] }}
-                                    {{-- </a> --}}
+                                <a href="/biz/{{ $biz['id'] }}/agenda/{{ $calendar[$i - 1][$j]['pretty_date'] }}" class="calendar-cell {{ (7 * $i + $j) % 3 == 0 ? 'open' : 'busy' }}">
+                                    {{ $calendar[$i - 1][$j]['dotm'] }}
                                 </a>
                             @endif
                         @endfor
@@ -200,16 +212,31 @@
             </div>
 
             {{-- CONTACT INFO --}}
-            <div class="info-section">
+            <div class="info-section contact">
                 <h3>{{ __('Contact') }}</h3>
                 <p>{{ $biz['email'] }}</p>
                 <p>{{ '+'.$biz['phone_code'].' '.$biz['phone'] }}</p>
-                <a href="/chat/{{ Auth::id() }}::{{ $biz['user_id'] }}" class="send-msg">
-                    <button>
-                        <i class="fa-regular fa-message"></i>
-                        <span>{{ __('Send a message') }}</span>
-                    </button>
-                </a>
+                
+                <div class="btn-row">
+                    <a href="mailto:{{ $biz['email'] }}" class="t24-btn">
+                        <button>
+                            <i class="fa-regular fa-at"></i>
+                            <span>{{ __('Email') }}</span>
+                        </button>
+                    </a>
+                    <a href="tel:{{ $biz['phone_code'].$biz['phone'] }}" class="t24-btn">
+                        <button>
+                            <i class="fa-solid fa-phone"></i>
+                            <span>{{ __('Phone') }}</span>
+                        </button>
+                    </a>
+                    <a href="/chat/{{ Auth::id() }}::{{ $biz['user_id'] }}" class="t24-btn">
+                        <button>
+                            <i class="fa-regular fa-message"></i>
+                            <span>{{ __('Send a message') }}</span>
+                        </button>
+                    </a>
+                </div>
             </div>
 
             {{-- <br/>

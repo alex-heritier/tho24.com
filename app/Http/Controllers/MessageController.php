@@ -90,6 +90,6 @@ class MessageController extends Controller
 
         $messages = Message::where('chat_token', $fixed_token)->orderBy('created_at', 'asc');
 
-        return view('/biz/chat')->with(['ref_user' => $other_user, 'messages' => $messages->get()]);
+        return view('chat.show')->with(['ref_user' => $other_user, 'messages' => $messages->get()]);
     }
 }

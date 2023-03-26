@@ -358,7 +358,9 @@
         <h2>{{ __('Popular businesses') }}</h2>
 
         <div id="biz-list">
-            @include('biz/partial/index', ['bizs' => $bizs])
+            @foreach ($bizs as $biz)
+                @include('biz/partial/show', ['biz' => $biz])
+            @endforeach
         </div>
     </div>
 
