@@ -78,40 +78,49 @@
         }
 
         #overlay-search-bar {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
+            display: grid;
+            grid-template-areas: "back search go";
+            gap: 4px;
+            grid-template-columns: 20px 1fr 48px;
             align-items: stretch;
-            padding: 6px 10px;
+            padding: 4px 14px;
         }
 
         #overlay-search-bar i {
+            grid-area: back;
             align-self: center;
-            padding: 4px;
         }
 
         #overlay-search-bar input {
-            flex-grow: 1;
-            padding: 4px;
+            grid-area: search;
+            padding: 4px 10px;
             border: none;
             outline: none;
         }
 
-        #overlay-search-bar select {
-            width: 90px;
-            border: 1px solid lightgray;
-            border-radius: var(--search-rounding);
-            padding: 2px;
-            color: #222;
-            font-size: 0.9rem;
-        }
-
         #overlay-search-bar button {
-            padding: 12px 20px;
+            grid-area: go;
+            padding: 12px 0;
             border: none;
             border-radius: var(--search-rounding);
             background-color: var(--color-secondary);
             color: white;
+            flex-basis: 100%;
+        }
+
+        #overlay-search-filters {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            padding: 4px 14px 10px;
+        }
+
+        #overlay-search-filters .search-filter {
+            border: 1px solid lightgray;
+            border-radius: var(--search-rounding);
+            padding: 2px 0;
+            color: #222;
+            font-size: 0.9rem;
         }
 
         #search-result-list {
@@ -252,7 +261,10 @@
             }
 
             console.log(url);
-            let response = await fetch(url)
+            let response = await fetch(url, {
+                method: "GET",
+                headers: {"X-CSRF-TOKEN": "{{ csrf_token() }}"},
+            })
                 .then((r) => r.text())
                 .catch((err) => console.log("ERROR", err));
             // console.log(response);
@@ -320,7 +332,11 @@
         <div id="overlay-search-bar">
             <i class="fa fa-arrow-left" onclick="onCloseOverlayClick(this)"></i>
             <input placeholder="{{ __('How can we help?') }}" oninput="onSearchTriggered(event)" />
-            <select id="district-picker" onchange="onSearchTriggered(event)">
+            <button>Go</button>
+        </div>
+
+        <div id="overlay-search-filters">
+            <select id="district-picker" class="search-filter" onchange="onSearchTriggered(event)">
                 @foreach ($districts as $district)
                     @if ($district)
                         <option value="{{ $district['code'] }}">{{ $district['name'] }}</option>
@@ -329,8 +345,14 @@
                     @endif
                 @endforeach
             </select>
-            <button>Go</button>
+
+            <select class="search-filter" onchange="onSearchTriggered(event)">
+                @foreach ($trades as $key => $val)
+                    <option value="{{ $key }}">{{ $val }}</option>
+                @endforeach
+            </select>
         </div>
+
         <div id="search-result-list"></div>
     </div>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\BizService;
 use App\Services\MoneyService;
 use App\Services\SaigonService;
+use App\Services\TradeService;
 
 class LegacyController extends Controller
 {
@@ -16,12 +17,13 @@ class LegacyController extends Controller
     {
         $bizs = $bizService->search()->get();
         $districts = SaigonService::DISTRICTS['district'];
+        $trades = TradeService::TRADES;
         array_unshift(
             $districts,
             ['code' => 'anywhere', 'name' => 'HCMC'],
             null,
         );
-        return view('legacy/index')->with(['bizs' => $bizs, 'districts' => $districts]);
+        return view('legacy/index')->with(['bizs' => $bizs, 'districts' => $districts, 'trades' => $trades]);
     }
 
     public function account()

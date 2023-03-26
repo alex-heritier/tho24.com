@@ -23,12 +23,13 @@ class BizController extends Controller
     public function show(int $id)
     {
         $biz = Biz::with('reviews')->find($id);
+        $reviews = $biz->reviews->sortByDesc('created_at')->take(2);
         $calendar = (new BizCalendar())->getCalendarGrid();
         return view('legacy/biz', [
             'biz' => $biz,
             'avg_rating' => $biz->averageRating(),
             'total_review_count' => count($biz->reviews),
-            'reviews' => $biz->reviews->take(2),
+            'reviews' => $reviews,
             'calendar' => $calendar
         ]);
     }
