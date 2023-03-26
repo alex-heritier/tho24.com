@@ -18,7 +18,7 @@
     gtag('config', 'G-435BPF426T');
     </script>
 
-    <title>{{ config('app.name') }} | @yield('title', 'Business network')</title>
+    <title>{{ Str::ucfirst(config('app.name')) }} | @yield('title', 'Business network')</title>
 
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
