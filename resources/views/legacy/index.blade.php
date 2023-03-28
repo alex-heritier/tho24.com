@@ -146,6 +146,32 @@
             border-top: 2px solid black;
         }
 
+        #trade-quick-search {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            width: 80%;
+            align-self: center;
+            margin-top: 20px;
+        }
+
+        #trade-quick-search .item {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            object-position: center;
+            text-align: center;
+        }
+
+        #trade-quick-search .item i {
+            color: white;
+        }
+
+        #trade-quick-search .item p {
+            color: #333;
+            font-size: 0.85rem;
+        }
+
         a {
             color: inherit;
             text-decoration: none;
@@ -266,16 +292,17 @@
             }
 
             console.log(url);
-            let response = await fetch(url, {
+            const response = await fetch(url, {
                 method: "GET",
                 headers: {"X-CSRF-TOKEN": "{{ csrf_token() }}"},
             })
                 .then((r) => r.text())
                 .catch((err) => console.log("ERROR", err));
-            // console.log(response);
+            // console.log("Response: ", response);
 
-            let bizListing = document.getElementById('search-result-list');
-            bizListing.innerHTML = response;
+            const bizListing = document.getElementById('search-result-list');
+            let responseView = response ? response : '<p style="margin: 14px">{{ __('No results') }}</p>';
+            bizListing.innerHTML = responseView;
         }
 
         function onSearchTriggered(_) {
@@ -298,22 +325,30 @@
             // }
         }
 
-        function onIntroSearchFocus() {
+        function showOverlay({tradeValue}) {
             const searchOverlay = document.getElementById('search-overlay');
             searchOverlay.classList.remove('hidden');
+            if (tradeValue) {
+                const trade = document.querySelector('#trade-picker');
+                trade.value = tradeValue;
+            }
             onSearchTriggered(null);
+        }
+
+        function onIntroSearchFocus() {
+            showOverlay({});
         }
 
         function onCloseOverlayClick() {
             const searchOverlay = document.getElementById('search-overlay');
             searchOverlay.classList.add('hidden');
 
-            const searchText = document.querySelector("#overlay-search-bar input");
+            // const searchText = document.querySelector("#overlay-search-bar input");
             const district = document.querySelector('#district-picker');
             const trade = document.querySelector('#trade-picker');
 
             // Reset overlay state
-            searchText.value = '';
+            // searchText.value = '';
             district.value = district.children[0].value;
             trade.value = trade.children[0].value;
             document.getElementById('search-result-list').innerHTML = '';
@@ -348,6 +383,15 @@
                 <input type="text" id="search" name="search" placeholder="{{ __('How can we help?') }}" readonly onfocus="onIntroSearchFocus(this)"  />
                 <button>Search</button>
             </div>
+        </div>
+
+        <div id="trade-quick-search">
+            @foreach (array_slice($trades, 2) as $key => $value)
+                <a class="item" href="#" onclick="showOverlay({tradeValue: '{{ $key }}'})">
+                    <i class="fa fa-2xl fa-bolt"></i>
+                    <p>{{ $value }}</p>
+                </a>
+            @endforeach
         </div>
     </div>
 

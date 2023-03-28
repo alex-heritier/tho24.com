@@ -7,6 +7,7 @@ use App\Services\BizService;
 use App\Services\MoneyService;
 use App\Services\SaigonService;
 use App\Services\TradeService;
+use Illuminate\Support\Facades\View;
 
 class LegacyController extends Controller
 {
@@ -61,7 +62,10 @@ class LegacyController extends Controller
         $district = $result->query('district');
         $trade = $result->query('trade');
         $query = $result->query('query');
-        $results = $bizService->search(district: $district, trade: $trade, query: $query);
-        return view('biz/index', ['bizs' => $results->get()]);
+        $results = $bizService->search(district: $district, trade: $trade, query: $query)->get();
+
+        // return view('biz/index', ['bizs' => $results]);
+        $view = View::make('biz.partial.show');
+        return implode('', $results->map(fn($el) => $view->with(['biz' => $el])->render())->toArray());
     }
 }
