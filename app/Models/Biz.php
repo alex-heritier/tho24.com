@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\TradeService;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -81,5 +82,10 @@ class Biz extends Model
         } catch (Exception $e) {
             return 0;
         }
+    }
+
+    public function prettyTrade(): string
+    {
+        return TradeService::TRADES[$this->trade];
     }
 }

@@ -163,7 +163,7 @@
         <div class="content open">
             {{-- BIZ INFO --}}
             <div class="info-section">
-                <h3>{{ $biz['name'] }}&nbsp;&nbsp;•&nbsp;&nbsp;{{ Str::ucfirst($biz['trade']) }}</h3>
+                <h3>{{ $biz['name'] }}&nbsp;&nbsp;•&nbsp;&nbsp;{{ $biz->prettyTrade() }}</h3>
                 <p>{{ $biz['descr'] }}</p>
             </div>
 
@@ -194,7 +194,7 @@
             </div>
 
             {{-- AVAILABILITY --}}
-            <div class="info-section">
+            <div class="info-section" style="display: none">
                 <h3>{{ __('Schedule an appointment') }}</h3>
                 <div id="calendar">
                     @for ($i = 0; $i < (5 + 1); $i++)

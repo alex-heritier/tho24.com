@@ -18,11 +18,15 @@ class LegacyController extends Controller
         $bizs = $bizService->search()->get();
         $districts = SaigonService::DISTRICTS['district'];
         $trades = TradeService::TRADES;
+
+        // Add 'all' fields
         array_unshift(
             $districts,
-            ['code' => 'anywhere', 'name' => 'HCMC'],
+            ['code' => '@all', 'name' => 'HCMC'],
             null,
         );
+        $trades = ['@all' => 'All'] + [null => ''] + $trades;
+
         return view('legacy/index')->with(['bizs' => $bizs, 'districts' => $districts, 'trades' => $trades]);
     }
 
@@ -40,8 +44,13 @@ class LegacyController extends Controller
     public function register(MoneyService $moneyService)
     {
         $districts = SaigonService::DISTRICTS['district'];
+        $trades = TradeService::TRADES;
         $currencySymbol = $moneyService->getLocaleCurrencySymbol();
-        return view('legacy/register')->with(['districts' => $districts, 'currency_symbol' => $currencySymbol]);
+        return view('legacy/register')->with([
+            'districts' => $districts,
+            'trades' => $trades,
+            'currency_symbol' => $currencySymbol,
+        ]);
     }
 
     /**

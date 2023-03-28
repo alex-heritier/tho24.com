@@ -270,7 +270,10 @@
                         <!-- Business trade -->
                         <label for="trade">{{ __('Trade') }}</label>
                         <select name="trade">
-                            <option value="electrician">Electrician</option>
+                            @foreach ($trades as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                            {{-- <option value="electrician">Electrician</option>
                             <option value="plumber">Plumber</option>
                             <option value="carpenter">Carpenter</option>
                             <option value="hvac">HVAC technician</option>
@@ -287,7 +290,7 @@
                             <option value="flooring">Flooring installer</option>
                             <option value="sheetmetal">Sheet metal worker</option>
                             <option value="bricklayer">Bricklayer</option>
-                            <option value="ironworker">Ironworker</option>
+                            <option value="ironworker">Ironworker</option> --}}
                         </select>
                         <br/>
 

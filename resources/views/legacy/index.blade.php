@@ -11,6 +11,24 @@
             --color-secondary: #FB8500;
         }
 
+        #intro-section {
+            height: calc(87vh - var(--nav-height));
+            background-color: var(--color-primary);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            align-items: stretch;
+            padding: 10px;
+        }
+
+        #intro-section h1 {
+            font-size: 2.2rem;
+            line-height: 2.6rem;
+            text-align: center;
+            color: white;
+        }
+
         #search-form {
             display: flex;
             flex-direction: column;
@@ -111,38 +129,21 @@
         #overlay-search-filters {
             display: flex;
             flex-direction: row;
+            align-items: center;
             gap: 10px;
-            padding: 4px 14px 10px;
+            padding: 10px 14px;
         }
 
         #overlay-search-filters .search-filter {
             border: 1px solid lightgray;
             border-radius: var(--search-rounding);
-            padding: 2px 0;
+            padding: 6px 4px;
             color: #222;
             font-size: 0.9rem;
         }
 
         #search-result-list {
             border-top: 2px solid black;
-        }
-
-        #intro-section {
-            height: calc(80vh - var(--nav-height));
-            background-color: var(--color-primary);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            justify-content: center;
-            align-items: stretch;
-            padding: 10px;
-        }
-
-        #intro-section h1 {
-            font-size: 2.2rem;
-            line-height: 2.6rem;
-            text-align: center;
-            color: white;
         }
 
         a {
@@ -277,31 +278,33 @@
             bizListing.innerHTML = response;
         }
 
-        function onSearchTriggered(event) {
+        function onSearchTriggered(_) {
             // console.log("FIRED");
 
             const duration = 250; // millis
-            const searchText = document.querySelector("#overlay-search-bar input").value;
+            // const searchText = document.querySelector("#overlay-search-bar input").value;
             const district = document.querySelector('#district-picker').value;
             const trade = document.querySelector('#trade-picker').value;
 
             if (timer !== null) {
                 clearTimeout(timer);
             }
-            if ((searchText ?? "").length > 0) {
-                timer = setTimeout(() => searchBiz(searchText, district, trade), duration);
-            } else {
-                document.getElementById('search-result-list').innerHTML = '';
-            }
+
+            timer = setTimeout(() => searchBiz(null, district, trade), duration);
+            // if ((searchText ?? "").length > 0) {
+            //     timer = setTimeout(() => searchBiz(searchText, district, trade), duration);
+            // } else {
+            //     document.getElementById('search-result-list').innerHTML = '';
+            // }
         }
 
-        function onSearchFocus(input) {
+        function onIntroSearchFocus() {
             const searchOverlay = document.getElementById('search-overlay');
             searchOverlay.classList.remove('hidden');
-            document.querySelector('#search-overlay input').focus();
+            onSearchTriggered(null);
         }
 
-        function onCloseOverlayClick(button) {
+        function onCloseOverlayClick() {
             const searchOverlay = document.getElementById('search-overlay');
             searchOverlay.classList.add('hidden');
 
@@ -314,6 +317,11 @@
             district.value = district.children[0].value;
             trade.value = trade.children[0].value;
             document.getElementById('search-result-list').innerHTML = '';
+        }
+
+        function isOverlayShowing() {
+            const overlay = document.getElementById('search-overlay');
+            return !overlay.classList.has('hidden');
         }
     </script>
 @endsection
@@ -337,20 +345,22 @@
         <div id="search-form">
             <div id="search-box">
                 <i class="fa fa-search"></i>
-                <input type="text" id="search" name="search" placeholder="{{ __('How can we help?') }}" readonly onfocus="onSearchFocus(this)"  />
+                <input type="text" id="search" name="search" placeholder="{{ __('How can we help?') }}" readonly onfocus="onIntroSearchFocus(this)"  />
                 <button>Search</button>
             </div>
         </div>
     </div>
 
     <div id="search-overlay" class="hidden">
-        <div id="overlay-search-bar">
+        {{-- <div id="overlay-search-bar">
             <i class="fa fa-arrow-left" onclick="onCloseOverlayClick(this)"></i>
             <input placeholder="{{ __('How can we help?') }}" oninput="onSearchTriggered(event)" />
             <button>Go</button>
-        </div>
+        </div> --}}
 
         <div id="overlay-search-filters">
+            <i class="fa fa-arrow-left" onclick="onCloseOverlayClick(this)"></i>
+
             <select id="district-picker" class="search-filter" onchange="onSearchTriggered(event)">
                 @foreach ($districts as $district)
                     @if ($district)
@@ -363,7 +373,11 @@
 
             <select id="trade-picker" class="search-filter" onchange="onSearchTriggered(event)">
                 @foreach ($trades as $key => $val)
-                    <option value="{{ $key }}">{{ $val }}</option>
+                    @if ($key)
+                        <option value="{{ $key }}">{{ $val }}</option>
+                    @else                  
+                        <option disabled></option>
+                    @endif
                 @endforeach
             </select>
         </div>

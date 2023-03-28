@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Builder;
 
 class BizService
 {
-    const ANYWHERE = 'anywhere';
+    const ALL = '@all';
 
-    public function search(string $district = self::ANYWHERE, string $trade = null, string $query = null): Builder
+    public function search(string $district = self::ALL, string $trade = null, string $query = null): Builder
     {
-        $results = $district === self::ANYWHERE ? Biz::where([]) : Biz::where('district', $district);
+        $results = $district === self::ALL ? Biz::where([]) : Biz::where('district', $district);
         if ($trade) {
-            $results = $results->where('trade', $trade);
+            $results = $trade === self::ALL ? $results : $results->where('trade', $trade);
         }
         if ($query) {
             $results = $results->where(function ($builder) use ($query) {
