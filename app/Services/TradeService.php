@@ -7,7 +7,7 @@ class TradeService
     const TRADES = [
         'house_cleaning' => 'House cleaning',
         'water_delivery' => 'Water delivery',
-        'moving' => 'Moving',
+        'moving' => 'Movers',
         'catering' => 'Catering',
         // 'electrician' => 'Electrician',
         // 'plumber' => 'Plumber',

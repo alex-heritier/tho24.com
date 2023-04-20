@@ -12,7 +12,7 @@
         }
 
         #intro-section {
-            height: calc(87vh - var(--nav-height));
+            height: calc(82vh - var(--nav-height));
             background-color: var(--color-primary);
             display: flex;
             flex-direction: column;
@@ -387,8 +387,16 @@
 
         <div id="trade-quick-search">
             @foreach (array_slice($trades, 2) as $key => $value)
+                @php
+                    $iconClasses = match ($key) {
+                        'house_cleaning' => 'fa fa-soap',
+                        'water_delivery' => 'fa fa-droplet',
+                        'moving' => 'fa fa-dolly',
+                        'catering' => 'fa fa-bowl-rice',
+                    };
+                @endphp 
                 <a class="item" href="#" onclick="showOverlay({tradeValue: '{{ $key }}'})">
-                    <i class="fa fa-2xl fa-bolt"></i>
+                    <i class="fa-2xl {{ $iconClasses }}"></i>
                     <p>{{ $value }}</p>
                 </a>
             @endforeach

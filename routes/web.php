@@ -8,6 +8,7 @@ use App\Http\Controllers\LegacyController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MiscController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -75,3 +76,6 @@ Route::get('/privacy', fn () => view('static.privacy'));
 // Blog
 Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{slug}', [BlogController::class, 'show']);
+
+// Survey
+Route::get('/survey/{slug}', [SurveyController::class, 'show']);
