@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.page')
 
 
-@section('title', 'Expert Home Services')
+@section('title', Str::ucfirst(config('app.name')) . ' | Expert Home Services')
 
 
 @section('style')
@@ -258,89 +258,89 @@
 <script>
     let timer = null;
 
-        async function searchBiz(searchText, district, trade) {
-            let url = window.location.origin + '/biz_search?';
-            
-            { // district
-                const token = district || '';
-                url = url + "district=" + token;
-            }
-            { // trade
-                const token = trade || '';
-                url = url + "&trade=" + token;
-            }
-            { // searchText
-                const token = searchText || '';
-                url = url + "&query=" + token;
-            }
-
-            console.log(url);
-            const response = await fetch(url, {
-                method: "GET",
-                headers: {"X-CSRF-TOKEN": "{{ csrf_token() }}"},
-            })
-                .then((r) => r.text())
-                .catch((err) => console.log("ERROR", err));
-            // console.log("Response: ", response);
-
-            const bizListing = document.getElementById('search-result-list');
-            let responseView = response ? response : '<p style="margin: 14px">{{ __('No results') }}</p>';
-            bizListing.innerHTML = responseView;
+    async function searchBiz(searchText, district, trade) {
+        let url = window.location.origin + '/biz_search?';
+        
+        { // district
+            const token = district || '';
+            url = url + "district=" + token;
+        }
+        { // trade
+            const token = trade || '';
+            url = url + "&trade=" + token;
+        }
+        { // searchText
+            const token = searchText || '';
+            url = url + "&query=" + token;
         }
 
-        function onSearchTriggered(_) {
-            // console.log("FIRED");
+        console.log(url);
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {"X-CSRF-TOKEN": "{{ csrf_token() }}"},
+        })
+            .then((r) => r.text())
+            .catch((err) => console.log("ERROR", err));
+        // console.log("Response: ", response);
 
-            const duration = 250; // millis
-            // const searchText = document.querySelector("#overlay-search-bar input").value;
-            const district = document.querySelector('#district-picker').value;
-            const trade = document.querySelector('#trade-picker').value;
+        const bizListing = document.getElementById('search-result-list');
+        let responseView = response ? response : '<p style="margin: 14px">{{ __('No results') }}</p>';
+        bizListing.innerHTML = responseView;
+    }
 
-            if (timer !== null) {
-                clearTimeout(timer);
-            }
+    function onSearchTriggered(_) {
+        // console.log("FIRED");
 
-            timer = setTimeout(() => searchBiz(null, district, trade), duration);
-            // if ((searchText ?? "").length > 0) {
-            //     timer = setTimeout(() => searchBiz(searchText, district, trade), duration);
-            // } else {
-            //     document.getElementById('search-result-list').innerHTML = '';
-            // }
+        const duration = 250; // millis
+        // const searchText = document.querySelector("#overlay-search-bar input").value;
+        const district = document.querySelector('#district-picker').value;
+        const trade = document.querySelector('#trade-picker').value;
+
+        if (timer !== null) {
+            clearTimeout(timer);
         }
 
-        function showOverlay({tradeValue}) {
-            const searchOverlay = document.getElementById('search-overlay');
-            searchOverlay.classList.remove('hidden');
-            if (tradeValue) {
-                const trade = document.querySelector('#trade-picker');
-                trade.value = tradeValue;
-            }
-            onSearchTriggered(null);
-        }
+        timer = setTimeout(() => searchBiz(null, district, trade), duration);
+        // if ((searchText ?? "").length > 0) {
+        //     timer = setTimeout(() => searchBiz(searchText, district, trade), duration);
+        // } else {
+        //     document.getElementById('search-result-list').innerHTML = '';
+        // }
+    }
 
-        function onIntroSearchFocus() {
-            showOverlay({});
-        }
-
-        function onCloseOverlayClick() {
-            const searchOverlay = document.getElementById('search-overlay');
-            searchOverlay.classList.add('hidden');
-
-            // const searchText = document.querySelector("#overlay-search-bar input");
-            const district = document.querySelector('#district-picker');
+    function showOverlay({tradeValue}) {
+        const searchOverlay = document.getElementById('search-overlay');
+        searchOverlay.classList.remove('hidden');
+        if (tradeValue) {
             const trade = document.querySelector('#trade-picker');
-
-            // Reset overlay state
-            // searchText.value = '';
-            district.value = district.children[0].value;
-            trade.value = trade.children[0].value;
-            document.getElementById('search-result-list').innerHTML = '';
+            trade.value = tradeValue;
         }
+        onSearchTriggered(null);
+    }
 
-        function isOverlayShowing() {
-            const overlay = document.getElementById('search-overlay');
-            return !overlay.classList.has('hidden');
-        }
+    function onIntroSearchFocus() {
+        showOverlay({});
+    }
+
+    function onCloseOverlayClick() {
+        const searchOverlay = document.getElementById('search-overlay');
+        searchOverlay.classList.add('hidden');
+
+        // const searchText = document.querySelector("#overlay-search-bar input");
+        const district = document.querySelector('#district-picker');
+        const trade = document.querySelector('#trade-picker');
+
+        // Reset overlay state
+        // searchText.value = '';
+        district.value = district.children[0].value;
+        trade.value = trade.children[0].value;
+        document.getElementById('search-result-list').innerHTML = '';
+    }
+
+    function isOverlayShowing() {
+        const overlay = document.getElementById('search-overlay');
+        return !overlay.classList.has('hidden');
+    }
 </script>
 @endsection
 

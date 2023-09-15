@@ -1,7 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.page')
+
 
 @section('title', __('Register'))
 @section('meta-description', 'Create an account to start finding professionals near you.')
+
 
 @section('style')
     <style>
