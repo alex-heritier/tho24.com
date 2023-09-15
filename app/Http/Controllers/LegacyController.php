@@ -54,6 +54,11 @@ class LegacyController extends Controller
         ]);
     }
 
+    public function index2()
+    {
+        return view('legacy/index2');
+    }
+
     /**
      * API Calls
      */

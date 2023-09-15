@@ -60,6 +60,7 @@ Route::get('/misc/email_tester', [MiscController::class, 'email_tester_view']);
 Route::post('/misc/email_tester', [MiscController::class, 'email_tester_action']);
 
 // Legacy
+Route::get('/index2', [LegacyController::class, 'index2']);
 Route::get('/', [LegacyController::class, 'home']);
 Route::get('/account', [LegacyController::class, 'account']);
 Route::get('/biz.html', function () {

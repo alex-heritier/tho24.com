@@ -34,7 +34,7 @@ class AccountController extends Controller
         }
 
         // 1 - Create user + biz and save image
-        $imagePath = $request->file('image')?->store('images');
+        $imagePath = $request->file('image')?->store('images/biz_pfp');
         [$user, $biz, $errorMsg] = $accountService->register(
             userData: $request->only(['name', 'email', 'phone_code', 'phone', 'password']),
             bizData: $request->only(['biz_name', 'descr', 'trade', 'website', 'email', 'phone_code', 'phone', 'district', 'ward']),
