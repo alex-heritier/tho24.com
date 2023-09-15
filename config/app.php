@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env('DEFAULT_LOCALE', 'vi'),
 
     /*
     |--------------------------------------------------------------------------
@@ -95,7 +95,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => env('DEFAULT_LOCALE', 'vi'),
 
     /*
     |--------------------------------------------------------------------------
@@ -221,7 +221,8 @@ return [
     |
     */
     'available_locales' => [
-        'English' => 'en',
-        'Vietnamese' => 'vi',
+        'en', 'vi'
+        // 'English' => 'en',
+        // 'Vietnamese' => 'vi',
     ],
 ];

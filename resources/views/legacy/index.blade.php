@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
+
 @section('title', 'Expert Home Services')
+
 
 @section('style')
     <style>
@@ -271,6 +273,7 @@
     </style>
 @endsection
 
+
 @section('script')
     <script>
         let timer = null;
@@ -360,6 +363,7 @@
         }
     </script>
 @endsection
+
 
 @section('content')
     <div class="nav-bar">

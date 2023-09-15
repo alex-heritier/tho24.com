@@ -36,18 +36,18 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Resources
-Route::resource('users', UserController::class);
-Route::resource('biz', BizController::class);
-Route::resource('reviews', ReviewController::class);
-Route::resource('messages', MessageController::class);
+Route::resource('/users', UserController::class);
+Route::resource('/biz', BizController::class);
+Route::resource('/reviews', ReviewController::class);
+Route::resource('/messages', MessageController::class);
 
 // Biz
 Route::get('/biz/{id}/agenda/{date}', [BizController::class, 'createAgenda']);
 
 // Account
-Route::post('acc.register', [AccountController::class, 'register'])->name('register');
-Route::post('acc.login', [AccountController::class, 'login'])->name('login');
-Route::post('acc.logout', [AccountController::class, 'logout'])->name('logout');
+Route::post('/acc/register', [AccountController::class, 'register'])->name('register');
+Route::post('/acc/login', [AccountController::class, 'login'])->name('login');
+Route::post('/acc/logout', [AccountController::class, 'logout'])->name('logout');
 
 // Chat
 Route::get('/chat/{token}', [MessageController::class, 'showChat']);
