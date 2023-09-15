@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('descr');
             $table->string('trade');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->string('main_img');
             $table->string('email');
             $table->string('phone_code', 8);

@@ -26,7 +26,7 @@
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-    @vite(['resources/scss/main.scss'])
+    @vite(['resources/js/app.js', 'resources/scss/main.scss'])
 </head>
 
 <body>

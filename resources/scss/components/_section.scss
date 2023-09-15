@@ -1,0 +1,9 @@
+section {
+    margin: auto;
+    max-width: 800px;
+    padding: 20px 12px;
+
+    @media screen and (min-width: 600px) {
+        padding-inline: 0;
+    }
+}

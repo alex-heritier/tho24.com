@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <p class="navbar__title">tho24.com</p>
+    <a href="/" class="navbar__title">tho24.com</a>
     <div class="navbar__menu">
         @auth
         <a class="nav-link" href="/account">Account</a>

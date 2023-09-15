@@ -1,8 +1,19 @@
+@import 'abstracts/mixins';
+
 @import 'base/reset';
 @import 'base/color';
 @import 'base/typography';
 
 @import 'layout/header';
+@import 'layout/content';
 @import 'layout/footer';
 
+@import 'components/section';
+@import 'components/anchor';
+@import 'components/button';
+@import 'components/input';
+@import 'components/form';
+@import 'components/solo-box';
+
 @import 'pages/index';
+@import 'pages/positions/index';

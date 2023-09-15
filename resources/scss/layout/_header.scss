@@ -1,22 +1,45 @@
+/* Navbar Styles */
 .navbar {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    /* Vertically center items */
     gap: 10px;
     padding: 16px;
+    border-bottom: 1px solid lightgray;
+    /* Slightly thicker border */
+    background-color: var(--color-primary);
+    /* Use your primary color variable for background */
+    color: white;
+    /* Text color */
 
     &__title {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
+        /* Slightly larger title */
+        font-weight: bold;
+        /* Bolder title text */
+        text-transform: uppercase;
+        /* Uppercase title text */
+        margin-right: auto;
+        /* Push title to the left */
     }
 
     &__menu {
-        flex: 1;
         display: flex;
-        flex-direction: row;
-        justify-content: end;
-        gap: 10px;
+        gap: 20px;
+        /* Slightly larger gap between menu items */
+        list-style: none;
+        /* Remove bullet points for list items */
     }
 }
 
 .nav-link {
+    text-decoration: none;
+    color: inherit;
+    transition: text-decoration 0.2s ease;
+    /* Smooth underline transition */
 
+    &:hover {
+        text-decoration: underline;
+        /* Underline on hover */
+    }
 }

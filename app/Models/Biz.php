@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Services\TradeService;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Redis;
@@ -21,23 +22,16 @@ use Illuminate\Support\Facades\Redis;
  * @property string $email
  * @property string $phone_code
  * @property string $phone
+ * @property string $district
+ * @property string $ward
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Review> $reviews
+ * @property-read int|null $reviews_count
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Biz newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Biz newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Biz query()
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereDescr($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereMainImg($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz wherePhoneCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereTrade($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Biz whereUserId($value)
  * @mixin \Eloquent
  */
 class Biz extends Model
@@ -54,6 +48,11 @@ class Biz extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class, 'biz_id');
+    }
+
+    public function positions()
+    {
+        return $this->hasMany(Position::class, 'biz_id');
     }
 
     /**
@@ -75,6 +74,8 @@ class Biz extends Model
         'ward',
     ];
 
+
+    // CUSTOM
     public function averageRating(): float
     {
         try {

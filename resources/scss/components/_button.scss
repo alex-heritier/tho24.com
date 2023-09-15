@@ -1,0 +1,9 @@
+.btn {
+    @include button;
+
+    background-color: var(--color-primary);
+
+    &--red {
+        background-color: red;
+    }
+}

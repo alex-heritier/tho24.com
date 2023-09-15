@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LegacyController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MiscController;
+use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\App;
@@ -29,6 +30,7 @@ Route::resource('/users', UserController::class);
 Route::resource('/biz', BizController::class);
 Route::resource('/reviews', ReviewController::class);
 Route::resource('/messages', MessageController::class);
+Route::resource('/positions', PositionController::class);
 
 // Biz
 Route::get('/biz/{id}/agenda/{date}', [BizController::class, 'createAgenda']);

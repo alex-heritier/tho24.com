@@ -1,0 +1,39 @@
+.form-24 {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+
+    /* Button Styles */
+    input[type=submit] {
+        margin-top: 10px;
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: var(--color-primary);
+        color: white;
+        border: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+            background-color: var(--color-secondary);
+            /* Use your secondary color variable */
+            transform: scale(1.05);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+            /* Add a focus indicator */
+        }
+
+        /* Disable button when form is submitting */
+        &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    }
+}
