@@ -24,12 +24,16 @@
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-    @vite(['resources/css/style.css'])
+    @vite(['resources/css/style.css', 'resources/scss/main.scss'])
 </head>
 <body>
+    @include('partials.header')
+
     <div class="__content">
         @yield('content')
     </div>
+
+    @include('partials.footer')
 
     @yield('style')
     @yield('script')

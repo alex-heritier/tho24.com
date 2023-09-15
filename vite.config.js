@@ -5,6 +5,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                // SCSS
+                'resources/scss/main.scss',
+
+                // Old
                 'resources/css/app.css',
                 'resources/css/style.css',
                 'resources/js/app.js',

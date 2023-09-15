@@ -1,0 +1,19 @@
+.footer {
+    padding: 30px 10px;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+
+    &__link {
+        display: inline;
+        color: inherit;
+        text-decoration: none;
+
+        &:not(:first-child)::before {
+            content: " •  ";
+            white-space: pre-wrap;
+        }
+    }
+}
