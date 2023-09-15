@@ -12,7 +12,6 @@ use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
-use function Termwind\render;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,16 +24,16 @@ use function Termwind\render;
 |
 */
 
-Route::get('language/{locale}', function ($locale) {
-    if (!in_array($locale, config('app.available_locales'))) {
-        abort(400);
-    }
+// Route::get('language/{locale}', function ($locale) {
+//     if (!in_array($locale, config('app.available_locales'))) {
+//         abort(400);
+//     }
 
-    app()->setLocale($locale);
-    session()->put('locale', $locale);
+//     app()->setLocale($locale);
+//     session()->put('locale', $locale);
 
-    return redirect("/");
-});
+//     return redirect("/");
+// });
 
 // Resources
 Route::resource('users', UserController::class);
