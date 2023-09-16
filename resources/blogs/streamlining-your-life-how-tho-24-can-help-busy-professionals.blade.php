@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.page')
+
 
 @section('title', 'The Power of Outsourcing for Small Businesses')
 
-@section('content')
 
+@section('content')
 <div class="blog-post">
     <h1>Streamlining Your Life: How Tho24.com Can Help Busy Professionals</h1>
     <h2>Introduction</h2>
@@ -26,8 +27,8 @@
     <h2>Conclusion</h2>
     <p>Tho24.com is the perfect solution for busy professionals looking to streamline their lives and save time on daily tasks. With our platform, you can easily find and book reliable service providers for a wide range of services, from home maintenance to personal assistance. Give yourself the gift of time and peace of mind by exploring Tho24.com today. Experience the convenience and freedom of outsourcing, and make the most of your busy life.</p>
 </div>
-
 @endsection
+
 
 @section('style')
 <style>

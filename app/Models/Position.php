@@ -69,4 +69,8 @@ class Position extends Model
             $builder->whereNot('status', 'X');
         });
     }
+
+    public function biz() {
+        return $this->belongsTo(Biz::class, 'biz_id');
+    }
 }

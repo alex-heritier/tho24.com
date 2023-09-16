@@ -1,6 +1,8 @@
 @extends('layouts.page')
 
+
 @section('title', 'Account Settings')
+
 
 @section('style')
     <style>
@@ -32,13 +34,8 @@
     </style>
 @endsection
 
-@section('content')
-    <div class="nav-bar">
-        <x-back-button url="/" />
-        <span>My Account</span>
-        <div class="spacer"></div>
-    </div>
 
+@section('content')
     <div class="content">
         <p>Email: <b>{{ session('my.email') }}</b></p>
 

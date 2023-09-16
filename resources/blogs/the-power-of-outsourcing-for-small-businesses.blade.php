@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.page')
+
 
 @section('title', 'The Power of Outsourcing for Small Businesses')
 
-@section('content')
 
+@section('content')
 <div class="blog-post">
     <h1>The Power of Outsourcing for Small Businesses</h1>
     <p>Running a small business can be challenging, especially when you have limited resources and a small team. However, outsourcing can be a powerful tool to help you grow your business and overcome these challenges.</p>
@@ -22,6 +23,7 @@
 </div>
 
 @endsection
+
 
 @section('style')
 <style>

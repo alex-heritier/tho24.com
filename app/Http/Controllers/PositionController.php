@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 // # Verb       # URI                   # Action   # Route Name
-// GET          /positions                 index      positions.index
-// GET          /positions/create          create     positions.create
-// POST         /positions                 store      positions.store
-// GET          /positions/{photo}         show       positions.show
-// GET          /positions/{photo}/edit    edit       positions.edit
-// PUT/PATCH    /positions/{photo}         update     positions.update
-// DELETE       /positions/{photo}         destroy    positions.destroy
+// GET          /positions              index      positions.index
+// GET          /positions/create       create     positions.create
+// POST         /positions              store      positions.store
+// GET          /positions/{id}         show       positions.show
+// GET          /positions/{id}/edit    edit       positions.edit
+// PUT/PATCH    /positions/{id}         update     positions.update
+// DELETE       /positions/{id}         destroy    positions.destroy
 
 class PositionController extends Controller
 {
@@ -50,6 +50,12 @@ class PositionController extends Controller
         ]);
 
         return $position;
+    }
+
+    public function show(string $id)
+    {
+        $position = Position::with('biz')->findOrFail($id);
+        return view('positions.show')->with('position', $position);
     }
 
     public function destroy(string $id)

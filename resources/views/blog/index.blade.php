@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.page')
+
 
 @section('title', 'Blog')
+
 
 @section('style')
 <style>
@@ -26,14 +28,8 @@
 </style>
 @endsection
 
+
 @section('content')
-
-<div class="nav-bar">
-    <x-back-button/>
-    <span>Blog</span>
-    <div class="spacer"></div>
-</div>
-
 <div class="blog-list">
     @foreach ($blogs as $blog)
         <a href="/blog/{{ $blog['slug'] }}" class="blog-item">
@@ -42,5 +38,4 @@
         </a>
     @endforeach
 </div>
-
 @endsection

@@ -108,6 +108,7 @@
     </style>
 @endsection
 
+
 @section('script')
     <script type="text/javascript">
         function validateSize(input) {
@@ -197,11 +198,12 @@
     </script>
 @endsection
 
+
 @section('content')
-    <div class="nav-bar">
+    {{-- <div class="nav-bar">
         <a href="/"><i class="fa fa-close"></i></a>
         <div class="spacer"></div>
-    </div>
+    </div> --}}
 
     @php
         $err_type = session('err_type');

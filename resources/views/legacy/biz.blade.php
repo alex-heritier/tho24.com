@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.page')
+
 
 @section('title', $biz['name'])
+
 
 @section('style')
     <style>
@@ -123,6 +125,7 @@
     </style>
 @endsection
 
+
 @section('script')
 <script>
     function onCalendarCellClick(event) {
@@ -148,12 +151,13 @@
 </script>
 @endsection
 
+
 @section('content')
-    <div class="nav-bar">
+    {{-- <div class="nav-bar">
         <a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
         <div class="spacer"></div>
         <i class="fa-solid fa-bars"></i>
-    </div>
+    </div> --}}
 
     {{-- BANNER IMAGE --}}
     <img src="/{{ $biz["main_img"] }}" />

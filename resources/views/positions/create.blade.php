@@ -9,7 +9,7 @@
         @csrf
 
         <input type="text" name="title" placeholder="Title" required>
-        <input type="text" name="description" placeholder="Description" required>
+        <input type="text" name="description" placeholder="Description" required minlength="30">
         <input type="text" name="address" placeholder="Address" required>
         <input type="number" min="0" step="1" name="min_salary" placeholder="Min salary" required>
         <input type="number" min="0" step="1" name="max_salary" placeholder="Max salary" required>

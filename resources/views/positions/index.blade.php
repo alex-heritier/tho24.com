@@ -7,7 +7,7 @@
     <div class="m-position">
         <span class="m-position__id">{{ $pos->id }}</span>
 
-        <h2 class="m-position__title">{{ $pos->title }}</h2>
+        <h2 class="m-position__title"><a href="/positions/{{$pos->id}}">{{ $pos->title }}</a></h2>
         {{-- <p class="m-position__description">{{ $pos->description }}</p> --}}
         <p class="m-position__address"><i class="fa fa-location-dot"></i>{{ $pos->address }}</p>
         <p class="m-position__salary">{{ $pos->min_salary / 100 }} to {{ $pos->max_salary / 100 }} VND ({{ $pos->salary_rate }})</p>
