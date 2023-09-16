@@ -13,7 +13,16 @@
 
         <p class="m-position__description">{{ $position->description }}</p>
 
-        <a href="/" class="btn m-position__apply-btn">Apply</a>
+        {{-- <a href="/" class="btn m-position__apply-btn">Apply</a> --}}
+
+        @if (!$isBiz)
+        <form action="/applies" method="POST">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="position_id" value="{{ $position->id }}">
+            <input class="btn" type="submit" value="Apply">
+        </form>
+        @endif
     </div>
 </section>
 @endsection

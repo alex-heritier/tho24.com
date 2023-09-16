@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('position_id')->constrained('positions');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->string('status', 16);
             $table->timestamps();
         });

@@ -49,13 +49,15 @@ class PositionController extends Controller
             ...$validated,
         ]);
 
-        return $position;
+        // return $position;
+        return redirect('/positions');
     }
 
     public function show(string $id)
     {
+        $biz = Auth::user()?->biz;
         $position = Position::with('biz')->findOrFail($id);
-        return view('positions.show')->with('position', $position);
+        return view('positions.show', ['position' => $position, 'isBiz' => $position?->biz->id === $biz?->id]);
     }
 
     public function destroy(string $id)

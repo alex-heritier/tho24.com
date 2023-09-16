@@ -269,7 +269,7 @@
                         {{-- <label for="website">{{ __('Website') }}</label>
                         <input type="text" name="website"  placeholder="{{ __('Website') }}" /><br/> --}}
                         <label for="pricing">{{ __('Pricing').' ('.$currency_symbol.')' }}</label>
-                        <input type="number" name="pricing"  placeholder="{{ __('Pricing') }}" /><br/>
+                        <input type="number" name="pricing" step="0.01" placeholder="{{ __('Pricing') }}" /><br/>
 
                         <!-- Business trade -->
                         <label for="trade">{{ __('Trade') }}</label>

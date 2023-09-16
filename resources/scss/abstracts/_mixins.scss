@@ -26,6 +26,11 @@
     text-decoration: none;
     /* Remove underlines by default */
 
+    // Uhhhhh
+    form & {
+        width: 100%;
+    }
+
     &:hover {
         filter: brightness(85%);
         /* Darken on hover for subtle interaction */

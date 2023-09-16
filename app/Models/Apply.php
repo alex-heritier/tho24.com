@@ -24,6 +24,18 @@ class Apply extends Model
 {
     use HasFactory;
 
+    public static $statusValues = [
+        'P' => 'Pending',
+        'A' => 'Accepted',
+        'R' => 'Rejected',
+    ];
+
+    protected $fillable = [
+        'user_id',
+        'position_id',
+        'status',
+    ];
+
     public function position()
     {
         return $this->belongsTo(Position::class, 'position_id');
