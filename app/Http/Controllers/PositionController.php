@@ -56,7 +56,7 @@ class PositionController extends Controller
     public function show(string $id)
     {
         $biz = Auth::user()?->biz;
-        $position = Position::with('biz')->findOrFail($id);
+        $position = Position::with(['biz', 'myApplies'])->findOrFail($id);
         return view('positions.show', ['position' => $position, 'isBiz' => $position?->biz->id === $biz?->id]);
     }
 

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Models\Position
@@ -71,7 +72,21 @@ class Position extends Model
         });
     }
 
-    public function biz() {
+    public function biz()
+    {
         return $this->belongsTo(Biz::class, 'biz_id');
+    }
+
+    public function applies()
+    {
+        return $this->hasMany(Apply::class, 'position_id');
+    }
+
+    public function myApplies()
+    {
+        if (Auth::user() === null) {
+            throw new Exception('Position relationship myApplies needs an auth user');
+        }
+        return $this->applies()->where('user_id', Auth::user()->id);
     }
 }
