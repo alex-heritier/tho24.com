@@ -21,7 +21,7 @@
     gtag('config', 'G-435BPF426T');
     </script>
 
-    <title>@yield('title', Str::ucfirst(config('app.name')) . ' | Services network')</title>
+    <title>@yield('title', Str::ucfirst(config('app.name')) . ' | Find Your Next Job')</title>
 
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">

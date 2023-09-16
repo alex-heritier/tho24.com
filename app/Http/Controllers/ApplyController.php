@@ -34,6 +34,7 @@ class ApplyController extends Controller
     public function show(string $id)
     {
         $apply = Apply::with('position')->findOrFail($id);
-        return view('applies.show')->with('apply', $apply);
+        // return view('applies.show')->with('apply', $apply);
+        return redirect('/positions/'.$apply->position_id);
     }
 }
