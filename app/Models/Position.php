@@ -32,8 +32,21 @@ class Position extends Model
 {
     use HasFactory;
 
-    protected $table = 'positions';
+    public static $salaryRateValues = [
+        'hourly' => 'Hourly',
+        'daily' => 'Daily',
+        'weekly' => 'Weekly',
+        'monthly' => 'Monthly',
+        'yearly' => 'Yearly',
+    ];
 
+    public static $employmentTypeValues = [
+        'fulltime' => 'Full-time',
+        'parttime' => 'Part-time',
+        'internship' => 'Internship',
+    ];
+
+    protected $table = 'positions';
     protected $fillable = [
         'biz_id',
         'title',
@@ -52,7 +65,7 @@ class Position extends Model
      */
     protected static function booted(): void
     {
-        static::addGlobalScope('hide-inactive', function (Builder $builder) {
+        static::addGlobalScope('hide-deletes', function (Builder $builder) {
             $builder->whereNot('status', 'X');
         });
     }

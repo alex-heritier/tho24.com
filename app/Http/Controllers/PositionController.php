@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Biz;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +19,9 @@ class PositionController extends Controller
 {
     public function index()
     {
-        $positions = Auth::user()->biz->positions;
-        return view('positions.index')->with('positions', $positions);
+        $biz = Auth::user()?->biz;
+        $positions = $biz ? Auth::user()->biz->positions : Position::all();
+        return view('positions.index', ['positions' => $positions, 'isBiz' => !!$biz]);
     }
 
     public function create()

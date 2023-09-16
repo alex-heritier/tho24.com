@@ -14,17 +14,17 @@
         <input type="number" min="0" step="1" name="min_salary" placeholder="Min salary" required>
         <input type="number" min="0" step="1" name="max_salary" placeholder="Max salary" required>
         <select name="salary_rate" required>
-            <option value="hourly">Hourly</option>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="monthly" selected>Monthly</option>
-            <option value="yearly">Yearly</option>
+            <option selected disabled hidden>Pay how often?</option>
+            @foreach (\App\Models\Position::$salaryRateValues as $key => $val)
+                <option value="{{$key}}">{{$val}}</option>
+            @endforeach
         </select>
         <input type="number" min="1" step="1" name="hire_count" placeholder="Hire how many people?" required>
         <select name="employment_type" required>
-            <option value="fulltime">Full-time</option>
-            <option value="parttime">Part-time</option>
-            <option value="internship">Internship</option>
+            <option selected disabled hidden>Work how often?</option>
+            @foreach (\App\Models\Position::$employmentTypeValues as $key => $val)
+                <option value="{{$key}}">{{$val}}</option>
+            @endforeach
         </select>
 
         <input type="submit" value="Post">
