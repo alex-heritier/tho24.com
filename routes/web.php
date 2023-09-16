@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\BizController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
@@ -26,11 +27,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Resources
-Route::resource('/users', UserController::class);
-Route::resource('/biz', BizController::class);
-Route::resource('/reviews', ReviewController::class);
-Route::resource('/messages', MessageController::class);
-Route::resource('/positions', PositionController::class);
+Route::resources([
+    'users' => UserController::class,
+    'biz' => BizController::class,
+    'reviews' => ReviewController::class,
+    'messages' => MessageController::class,
+    'positions' => PositionController::class,
+    'applies' => ApplyController::class,
+]);
 
 // Biz
 Route::get('/biz/{id}/agenda/{date}', [BizController::class, 'createAgenda']);

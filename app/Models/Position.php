@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Position newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Position newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Position query()
+ * @property-read \App\Models\Biz $biz
  * @mixin \Eloquent
  */
 class Position extends Model

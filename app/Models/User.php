@@ -43,6 +43,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Review> $reviews
  * @property-read int|null $reviews_count
+ * @property-read \App\Models\Biz|null $biz
  * @mixin \Eloquent
  */
 class User extends Authenticatable

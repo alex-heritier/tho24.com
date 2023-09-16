@@ -3,7 +3,7 @@
 
     position: relative;
     margin: 20px 0;
-    padding: 10px;
+    padding: 12px;
 
     &__id {
         position: absolute;
@@ -34,9 +34,6 @@
     }
 
     &__apply-btn {
-        --margin: 2px;
-        margin-inline: var(--margin);
-        width: calc(100% - 2 * var(--margin));
         margin-top: 10px;
     }
 }

@@ -13,7 +13,7 @@
 
         <p class="m-position__description">{{ $position->description }}</p>
 
-        <button class="btn m-position__apply-btn">Apply</button>
+        <a href="/" class="btn m-position__apply-btn">Apply</a>
     </div>
 </section>
 @endsection

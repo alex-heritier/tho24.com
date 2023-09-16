@@ -8,6 +8,8 @@
 }
 
 @mixin button {
+    display: block;
+    text-align: center;
     padding: 4px 12px;
     /* Slightly reduced padding for a more compact look */
     color: #fff;

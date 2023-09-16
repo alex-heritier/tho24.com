@@ -32,6 +32,8 @@ use Illuminate\Support\Facades\Redis;
  * @method static \Illuminate\Database\Eloquent\Builder|Biz newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Biz newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Biz query()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Position> $positions
+ * @property-read int|null $positions_count
  * @mixin \Eloquent
  */
 class Biz extends Model
