@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 
-@section('title', Str::ucfirst(config('app.name')) . ' | Expert Home Services')
+@section('title', Str::ucfirst(config('app.name')) . ' | Job Listing')
 
 
 @section('script')
@@ -25,16 +25,13 @@
         }
 
         console.log(url);
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {"X-CSRF-TOKEN": "{{ csrf_token() }}"},
-        })
-            .then((r) => r.text())
+        const response = await axios.get(url)
+            .then((r) => r.data)
             .catch((err) => console.log("ERROR", err));
         // console.log("Response: ", response);
 
         const bizListing = document.getElementById('search-result-list');
-        let responseView = response ? response : '<p style="margin: 14px">{{ __('No results') }}</p>';
+        const responseView = response || '<p style="margin: 14px">{{ __('No results') }}</p>';
         bizListing.innerHTML = responseView;
     }
 

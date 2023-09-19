@@ -77,7 +77,7 @@ class AccountService
             $request->session()->regenerate();
 
             // Load user
-            $user = User::where('email', $request->email)->first();
+            $user = Auth::user();
 
             // Store important user info in session
             $request->session()->put('my.id', $user->id);

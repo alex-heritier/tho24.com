@@ -2,44 +2,32 @@
 .navbar {
     display: flex;
     align-items: center;
-    /* Vertically center items */
     gap: 10px;
     padding: 16px;
     border-bottom: 1px solid lightgray;
-    /* Slightly thicker border */
-    background-color: var(--color-primary);
-    /* Use your primary color variable for background */
-    color: white;
-    /* Text color */
+    background-color: white;
+    color: var(--color-primary);
+}
 
-    &__title {
-        font-size: 1.4rem;
-        /* Slightly larger title */
-        font-weight: bold;
-        /* Bolder title text */
-        text-transform: uppercase;
-        /* Uppercase title text */
-        margin-right: auto;
-        /* Push title to the left */
-    }
+.navbar__title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: auto;
+}
 
-    &__menu {
-        display: flex;
-        gap: 20px;
-        /* Slightly larger gap between menu items */
-        list-style: none;
-        /* Remove bullet points for list items */
-    }
+.navbar__menu {
+    display: flex;
+    gap: 20px;
+    list-style: none;
 }
 
 .nav-link {
     text-decoration: none;
     color: inherit;
     transition: text-decoration 0.2s ease;
-    /* Smooth underline transition */
 
     &:hover {
         text-decoration: underline;
-        /* Underline on hover */
     }
 }
