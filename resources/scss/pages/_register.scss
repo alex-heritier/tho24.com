@@ -5,6 +5,22 @@
         width: 80%;
         justify-content: space-evenly;
         gap: 20px;
+
+        button {
+            border-bottom: 2px solid transparent;
+            color: var(--color-primary);
+            background-color: unset;
+            border-radius: unset;
+
+            &.btn--active {
+                border-bottom: 3px solid var(--color-primary);
+            }
+
+            &:focus {
+                outline: unset;
+                box-shadow: unset;
+            }
+        }
     }
 
     // label {

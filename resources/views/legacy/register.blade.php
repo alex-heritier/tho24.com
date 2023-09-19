@@ -98,12 +98,8 @@
 @section('content')
 <div id="sign-up-screen">
     <div id="button-container">
-        {{-- <button id="register-button" class="{{ $regClass }}">{{ __('Register') }}</button>
-        <button id="existing-account-button" class="{{ $loginClass }}">{{ __('Sign in') }}</button> --}}
-        <button class="btn" id="register-button" @class(['btn--active'=> (session('err_type') === 'register' ||
-            session('err_type') ===
-            null)])>{{ __('Register') }}</button>
-        <button class="btn" id="existing-account-button" @class(['btn--active'=> session('err_type') === 'login'])>{{
+        <button id="register-button" @class(['btn', 'btn--active'=> session('err_type') !== 'login'])>{{ __('Register') }}</button>
+        <button id="existing-account-button" @class(['btn', 'btn--active'=> session('err_type') === 'login'])>{{
             __('Sign in')
             }}</button>
     </div>
@@ -114,7 +110,7 @@
     @endforeach
     @endif
 
-    <section class="solo-box" id="main-content">
+    <section class="solo-box">
         <div id="register-form">
             <!-- Form elements for registering a new account -->
             <form class="form-24" method="post" action="{{ route('register') }}" enctype="multipart/form-data">
