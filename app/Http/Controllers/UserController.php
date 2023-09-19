@@ -15,7 +15,7 @@ class UserController extends Controller
         $users = User::all();
         if (request()->ajax()) {
             return view('users/partial/index')->with('users', $users);
-        } else if (request()->expectsJson()) {
+        } elseif (request()->expectsJson()) {
             return [];
         } else {
             return view('user/index')->with('users', $users);

@@ -24,15 +24,15 @@ class AccountService
                 $query->where('email', $userData['email']);
             })
             ->get();
-        if (!empty($users) && count($users) > 0) {
+        if (! empty($users) && count($users) > 0) {
             // Log::debug('User already exists - ' . $users);
-            return [null, null, "User already exists"];
+            return [null, null, 'User already exists'];
         }
 
         [$user, $biz] = DB::transaction(function () use ($userData, $bizData, $imagePath) {
             // 1 - Create user
-            $optionalName = array_key_exists('first_name', $bizData) ? ($bizData['first_name'] . ' ' . $bizData['last_name']) : null;
-            $user =  User::create([
+            $optionalName = array_key_exists('first_name', $bizData) ? ($bizData['first_name'].' '.$bizData['last_name']) : null;
+            $user = User::create([
                 'name' => $userData['name'] ?? $optionalName ?? null,
                 'email' => $userData['email'],
                 'phone_code' => $userData['phone_code'],
@@ -41,7 +41,7 @@ class AccountService
             ]);
 
             $is_biz = $bizData['biz_name'] && $bizData['phone'];
-            if (!$is_biz) {
+            if (! $is_biz) {
                 return [$user, null];
             }
 

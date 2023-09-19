@@ -28,12 +28,13 @@ class ApplyController extends Controller
             ...$validated,
         ]);
 
-        return redirect('/applies/' . $apply->id);
+        return redirect('/applies/'.$apply->id);
     }
 
     public function show(string $id)
     {
         $apply = Apply::with('position')->findOrFail($id);
+
         // return view('applies.show')->with('apply', $apply);
         return redirect('/positions/'.$apply->position_id);
     }

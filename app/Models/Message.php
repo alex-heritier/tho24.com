@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $receiver
  * @property-read \App\Models\User $sender
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Message newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Message newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Message query()
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereRcvId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereSndId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Message extends Model
@@ -59,6 +61,7 @@ class Message extends Model
     {
         $min_id = min($id1, $id2);
         $max_id = max($id1, $id2);
-        return $min_id . '::' . $max_id;
+
+        return $min_id.'::'.$max_id;
     }
 }

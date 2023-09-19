@@ -4,10 +4,8 @@ namespace App\Models;
 
 use App\Services\TradeService;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Redis;
 
 /**
  * App\Models\Biz
@@ -29,11 +27,14 @@ use Illuminate\Support\Facades\Redis;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Review> $reviews
  * @property-read int|null $reviews_count
  * @property-read \App\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Biz newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Biz newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Biz query()
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Position> $positions
  * @property-read int|null $positions_count
+ *
  * @mixin \Eloquent
  */
 class Biz extends Model
@@ -75,7 +76,6 @@ class Biz extends Model
         'district',
         'ward',
     ];
-
 
     // CUSTOM
     public function averageRating(): float

@@ -42,7 +42,8 @@ class AccountController extends Controller
         );
 
         if ($errorMsg) {
-            Log::debug("AccountController.register_biz ERROR " . $errorMsg);
+            Log::debug('AccountController.register_biz ERROR '.$errorMsg);
+
             return response("ERROR - $errorMsg", 500);
         }
 
@@ -75,6 +76,7 @@ class AccountController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/');
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\BizService;
 use App\Services\MoneyService;
 use App\Services\SaigonService;
 use App\Services\TradeService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
 class LegacyController extends Controller
@@ -39,7 +39,8 @@ class LegacyController extends Controller
     public function biz(Request $request)
     {
         $id = $request->query('id');
-        return redirect('/biz/' . $id);
+
+        return redirect('/biz/'.$id);
     }
 
     public function register(MoneyService $moneyService)
@@ -47,6 +48,7 @@ class LegacyController extends Controller
         $districts = SaigonService::DISTRICTS['district'];
         $trades = TradeService::TRADES;
         $currencySymbol = $moneyService->getLocaleCurrencySymbol();
+
         return view('legacy/register')->with([
             'districts' => $districts,
             'trades' => $trades,
@@ -71,6 +73,7 @@ class LegacyController extends Controller
 
         // return view('biz/index', ['bizs' => $results]);
         $view = View::make('biz.partial.show');
-        return implode('', $results->map(fn($el) => $view->with(['biz' => $el])->render())->toArray());
+
+        return implode('', $results->map(fn ($el) => $view->with(['biz' => $el])->render())->toArray());
     }
 }

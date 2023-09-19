@@ -6,6 +6,6 @@ class SurveyController extends Controller
 {
     public function show(string $slug)
     {
-        return view('static.survey.' . $slug);
+        return view('static.survey.'.$slug);
     }
 }

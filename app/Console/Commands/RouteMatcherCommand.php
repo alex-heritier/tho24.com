@@ -29,7 +29,7 @@ class RouteMatcherCommand extends Command
             $action = $matchedRoute->getAction();
 
             if (isset($action['controller'])) {
-                $this->info('Matched Controller and Action: ' . $action['controller']);
+                $this->info('Matched Controller and Action: '.$action['controller']);
             } else {
                 $this->info('Matched Route, but no controller specified.');
             }

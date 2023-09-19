@@ -25,18 +25,20 @@ class BizController extends Controller
         $biz = Biz::with('reviews')->find($id);
         $reviews = $biz->reviews->sortByDesc('created_at')->take(2);
         $calendar = (new BizCalendar())->getCalendarGrid();
+
         return view('legacy/biz', [
             'biz' => $biz,
             'avg_rating' => $biz->averageRating(),
             'total_review_count' => count($biz->reviews),
             'reviews' => $reviews,
-            'calendar' => $calendar
+            'calendar' => $calendar,
         ]);
     }
 
     public function createAgenda(int $bizID, string $agendaDate)
     {
         $biz = Biz::findOrFail($bizID);
+
         return view('biz.create_agenda')->with(['biz' => $biz, 'aptDate' => $agendaDate]);
     }
 }

@@ -10,7 +10,7 @@ class MiscController extends Controller
 {
     public function email_tester_view(Request $request)
     {
-        return view('misc/email_tester')->with(['email'=>$request->email]);
+        return view('misc/email_tester')->with(['email' => $request->email]);
     }
 
     public function email_tester_action(Request $request)

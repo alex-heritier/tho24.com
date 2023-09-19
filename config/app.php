@@ -221,7 +221,7 @@ return [
     |
     */
     'available_locales' => [
-        'en', 'vi'
+        'en', 'vi',
         // 'English' => 'en',
         // 'Vietnamese' => 'vi',
     ],

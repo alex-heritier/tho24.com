@@ -21,7 +21,8 @@ class PositionController extends Controller
     {
         $biz = Auth::user()?->biz;
         $positions = $biz ? Auth::user()->biz->positions : Position::all();
-        return view('positions.index', ['positions' => $positions, 'isBiz' => !!$biz]);
+
+        return view('positions.index', ['positions' => $positions, 'isBiz' => (bool) $biz]);
     }
 
     public function create()
@@ -57,12 +58,14 @@ class PositionController extends Controller
     {
         $biz = Auth::user()?->biz;
         $position = Position::with(['biz', 'myApplies'])->findOrFail($id);
+
         return view('positions.show', ['position' => $position, 'isBiz' => $position?->biz->id === $biz?->id]);
     }
 
     public function destroy(string $id)
     {
         Position::find($id)->update(['status' => 'X']);
+
         return redirect('/');
     }
 }

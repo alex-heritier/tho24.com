@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Session;
 
 class MoneyService
 {
-    const USD  = 'usd';
-    const VND  = 'vnd';
+    const USD = 'usd';
+
+    const VND = 'vnd';
+
     const USD_SYMBOL = '$';
+
     const VND_SYMBOL = '₫';
 
     public function getLocaleCurrency(): string

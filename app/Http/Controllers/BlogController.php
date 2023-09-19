@@ -14,14 +14,14 @@ class BlogController extends Controller
         $blogs = [];
 
         $index = 0;
-        if ($handle = opendir(resource_path() . '/blogs/')) {
+        if ($handle = opendir(resource_path().'/blogs/')) {
             while (false !== ($entry = readdir($handle))) {
-                if ($entry != "." && $entry != ".." && str_ends_with($entry, '.php')) {
+                if ($entry != '.' && $entry != '..' && str_ends_with($entry, '.php')) {
                     $stripped_entry = str_replace('.blade.php', '', $entry);
                     $data = [
                         'index' => ++$index,
                         'title' => Str::title(str_replace('-', ' ', $stripped_entry)),
-                        'path' => resource_path() . '/blogs/' . $entry,
+                        'path' => resource_path().'/blogs/'.$entry,
                         'slug' => $stripped_entry,
                     ];
                     array_push($blogs, $data);
@@ -36,7 +36,7 @@ class BlogController extends Controller
     public function show(Request $request, string $slug)
     {
         try {
-            $file_contents = file_get_contents(resource_path() . '/blogs/' . $slug . '.blade.php');
+            $file_contents = file_get_contents(resource_path().'/blogs/'.$slug.'.blade.php');
         } catch (Exception $e) {
             return redirect('/blog')->withErrors('blog', 'Blog not found');
         }

@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 use App\Services\SaigonService;
+use Illuminate\Console\Command;
 
 class BuildJsonToArray extends Command
 {

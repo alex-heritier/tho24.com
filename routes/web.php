@@ -4,16 +4,15 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\BizController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\LegacyController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MiscController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +58,7 @@ Route::get('/', [LegacyController::class, 'home']);
 Route::get('/account', [LegacyController::class, 'account']);
 Route::get('/biz.html', function () {
     $controller = App::make(LegacyController::class);
+
     return App::call([$controller, 'biz']);
 });
 Route::get('/register', [LegacyController::class, 'register']);

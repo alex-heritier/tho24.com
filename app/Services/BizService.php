@@ -22,6 +22,7 @@ class BizService
                     ->orWhere('phone', 'LIKE', "$query%");
             });
         }
+
         return $results->limit(5);
     }
 }

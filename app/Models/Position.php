@@ -24,10 +24,13 @@ use Illuminate\Support\Facades\Auth;
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Position newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Position newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Position query()
+ *
  * @property-read \App\Models\Biz $biz
+ *
  * @mixin \Eloquent
  */
 class Position extends Model
@@ -49,6 +52,7 @@ class Position extends Model
     ];
 
     protected $table = 'positions';
+
     protected $fillable = [
         'biz_id',
         'title',
@@ -87,6 +91,7 @@ class Position extends Model
         if (Auth::user() === null) {
             throw new Exception('Position relationship myApplies needs an auth user');
         }
+
         return $this->applies()->where('user_id', Auth::user()->id);
     }
 }

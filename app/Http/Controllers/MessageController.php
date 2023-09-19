@@ -14,7 +14,7 @@ class MessageController extends Controller
 {
     public function store(Request $request)
     {
-        Log::debug("Request: " . $request);
+        Log::debug('Request: '.$request);
 
         try {
             $request->validate([
@@ -41,8 +41,7 @@ class MessageController extends Controller
          * TODO make sure this actually works
          * this seems too complex
          */
-
-        $sql = "
+        $sql = '
         SELECT messages.*
         FROM messages
         INNER JOIN (
@@ -60,7 +59,7 @@ class MessageController extends Controller
         OR (messages.rcv_id = latest.other_user_id AND messages.snd_id = :user_id5)
         WHERE messages.created_at = latest.latest_created_at
         ORDER BY latest.latest_created_at DESC
-        ";
+        ';
 
         $messages = DB::select($sql, [
             'user_id1' => $id,

@@ -21,7 +21,7 @@ class ReviewController extends Controller
             ]);
 
             // Validate session id
-            if (!$request->session()->has('my.id')) {
+            if (! $request->session()->has('my.id')) {
                 throw new Exception('Session ID does not exist');
             }
 
@@ -30,7 +30,8 @@ class ReviewController extends Controller
                 throw new Exception('Rating is out of bounds');
             }
         } catch (Exception $e) {
-            Log::error('Failed validation: ' . $e->getMessage());
+            Log::error('Failed validation: '.$e->getMessage());
+
             return redirect()->back()->withErrors(['review' => 'Missing data']);
         }
 
@@ -43,7 +44,8 @@ class ReviewController extends Controller
                 'rating' => $request->input('rating'),
             ]);
         } catch (Exception $e) {
-            Log::error('Failed to create review: ' . $e->getMessage());
+            Log::error('Failed to create review: '.$e->getMessage());
+
             return redirect()->back()->withErrors(['review' => 'Failed to create review']);
         }
 
