@@ -36,4 +36,23 @@
             cursor: not-allowed;
         }
     }
+
+    &__row {
+        display: flex;
+        gap: 8px;
+
+        &>* {
+            flex: 1;
+        }
+    }
+
+    &__entry {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        &>* {
+            flex: 1;
+        }
+    }
 }

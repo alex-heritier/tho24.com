@@ -1,67 +1,51 @@
 #sign-up-screen {
-    #main-content {
-        padding: 20px;
-    }
-
     #button-container {
         display: flex;
         margin: 20px auto;
         width: 80%;
         justify-content: space-evenly;
         gap: 20px;
-
-        button {
-            padding: 6px;
-            background-color: transparent;
-            border: none;
-            color: #777;
-
-            &.btn-on {
-                color: #000;
-            }
-        }
     }
 
-    label {
-        display: block;
+    // label {
+    //     display: block;
 
-        &[for] {
-            margin-bottom: 4px;
-        }
-    }
+    //     &[for] {
+    //         margin-bottom: 4px;
+    //     }
+    // }
 
-    input {
-        box-sizing: border-box;
+    // input {
+    //     box-sizing: border-box;
 
-        &[type='submit'] {
-            width: 100%;
-            padding: 12px 0;
-            border: none;
-            border-radius: 4px;
-            background-color: powderblue;
-            font-size: 1.1rem;
-            margin-top: 10px;
-        }
+    //     &[type='submit'] {
+    //         width: 100%;
+    //         padding: 12px 0;
+    //         border: none;
+    //         border-radius: 4px;
+    //         background-color: powderblue;
+    //         font-size: 1.1rem;
+    //         margin-top: 10px;
+    //     }
 
-        &:not([type='submit']):not([type='checkbox']):not([name='phone']),
-        select:not([name='phone_code']) {
-            width: 100%;
-            padding: 6px;
-            margin-bottom: 18px;
-        }
-    }
+    //     &:not([type='submit']):not([type='checkbox']):not([name='phone']),
+    //     select:not([name='phone_code']) {
+    //         width: 100%;
+    //         padding: 6px;
+    //         margin-bottom: 18px;
+    //     }
+    // }
 
-    #loc-picker {
-        display: flex;
-        gap: 10px;
+    // #loc-picker {
+    //     display: flex;
+    //     gap: 10px;
 
-        &>div {
-            display: block;
-            flex: 1;
-            text-overflow: ellipsis;
-        }
+    //     &>div {
+    //         flex: 1;
+    //         text-overflow: ellipsis;
+    //     }
 
-    }
+    // }
 
     option.inactive {
         display: none;
