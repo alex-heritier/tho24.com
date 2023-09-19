@@ -5,110 +5,6 @@
 @section('meta-description', 'Create an account to start finding professionals near you.')
 
 
-@section('style')
-    <style>
-        #main-content {
-            padding: 20px;
-        }
-
-        #button-container {
-            display: flex;
-            margin: 20px auto;
-            width: 80%;
-            justify-content: space-evenly;
-            gap: 20px;
-        }
-
-        #button-container button {
-            padding: 6px;
-            background-color: transparent;
-            border: none;
-            color: #777;
-        }
-
-        #button-container button.btn-on {
-            color: #000;
-        }
-
-        label {
-            display: block;
-        }
-
-        label[for] {
-            margin-bottom: 4px; 
-        }
-
-        input {
-            box-sizing: border-box;
-        }
-
-        input:not([type='submit']):not([type='checkbox']):not([name='phone']), select:not([name='phone_code']) {
-            width: 100%;
-            padding: 6px;
-            margin-bottom: 18px;
-        }
-
-        input[type='submit'] {
-            width: 100%;
-            padding: 12px 0;
-            border: none;
-            border-radius: 4px;
-            background-color: powderblue;
-            font-size: 1.1rem;
-            margin-top: 10px;
-        }
-
-        #loc-picker {
-            display: flex;
-            gap: 10px;
-        }
-
-        #loc-picker>div {
-            display: block;
-            flex: 1;
-            text-overflow: ellipsis;
-        }
-
-        option.inactive {
-            display: none;
-        }
-
-        #file-error:empty::before {
-            content: "\00a0";
-        }
-
-        p.alert {
-            padding: 0 10px;
-            color: black;
-        }
-
-        #phone-fields {
-            height: 40px;
-            margin-bottom: 10px;
-            display: flex;
-            flex-direction: row;
-            gap: 8px;
-            align-items: stretch;
-            align-content: stretch;
-            box-sizing: border-box;
-        }
-
-        #phone-fields select[name="phone_code"] {
-            border: 0.9px solid black;
-            border-radius: 2px;
-        }
-
-        #phone-fields input[type="tel"] {            
-            flex-grow: 1;
-        }
-
-        #phone-fields > * {
-            padding: 6px 4px;
-        }
-    </style>
-@endsection
-
-
 @section('script')
     <script type="text/javascript">
         function validateSize(input) {
@@ -200,21 +96,12 @@
 
 
 @section('content')
-    {{-- <div class="nav-bar">
-        <a href="/"><i class="fa fa-close"></i></a>
-        <div class="spacer"></div>
-    </div> --}}
-
-    @php
-        $err_type = session('err_type');
-        $reg_class = ($err_type === 'register' || $err_type === null) ? 'btn-on' : '';
-        $login_class = $err_type === 'login' ? 'btn-on' : '';
-    @endphp
-
     <div id="sign-up-screen">
         <div id="button-container">
-            <button id="register-button" class="{{ $reg_class }}">{{ __('Register') }}</button>
-            <button id="existing-account-button" class="{{ $login_class }}">{{ __('Sign in') }}</button>
+            {{-- <button id="register-button" class="{{ $regClass }}">{{ __('Register') }}</button>
+            <button id="existing-account-button" class="{{ $loginClass }}">{{ __('Sign in') }}</button> --}}
+            <button id="register-button" @class(['btn-on' => (session('err_type') === 'register' || session('err_type') === null)])>{{ __('Register') }}</button>
+            <button id="existing-account-button"  @class(['btn-on' => session('err_type') === 'login'])>{{ __('Sign in') }}</button>
         </div>
 
          @if($errors->count() > 0)

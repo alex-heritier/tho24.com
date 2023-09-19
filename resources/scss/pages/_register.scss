@@ -1,0 +1,102 @@
+#sign-up-screen {
+    #main-content {
+        padding: 20px;
+    }
+
+    #button-container {
+        display: flex;
+        margin: 20px auto;
+        width: 80%;
+        justify-content: space-evenly;
+        gap: 20px;
+
+        button {
+            padding: 6px;
+            background-color: transparent;
+            border: none;
+            color: #777;
+
+            &.btn-on {
+                color: #000;
+            }
+        }
+    }
+
+    label {
+        display: block;
+
+        &[for] {
+            margin-bottom: 4px;
+        }
+    }
+
+    input {
+        box-sizing: border-box;
+
+        &[type='submit'] {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-radius: 4px;
+            background-color: powderblue;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        &:not([type='submit']):not([type='checkbox']):not([name='phone']),
+        select:not([name='phone_code']) {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 18px;
+        }
+    }
+
+    #loc-picker {
+        display: flex;
+        gap: 10px;
+
+        &>div {
+            display: block;
+            flex: 1;
+            text-overflow: ellipsis;
+        }
+
+    }
+
+    option.inactive {
+        display: none;
+    }
+
+    #file-error:empty::before {
+        content: "\00a0";
+    }
+
+    p.alert {
+        padding: 0 10px;
+        color: black;
+    }
+
+    #phone-fields {
+        height: 40px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: stretch;
+        align-content: stretch;
+        box-sizing: border-box;
+
+        select[name="phone_code"] {
+            border: 0.9px solid black;
+            border-radius: 2px;
+        }
+
+        input[type="tel"] {
+            flex-grow: 1;
+        }
+
+        &>* {
+            padding: 6px 4px;
+        }
+    }
+}

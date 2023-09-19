@@ -10,7 +10,6 @@ export default defineConfig({
 
                 // Old
                 'resources/css/app.css',
-                'resources/css/style.css',
                 'resources/js/app.js',
             ],
             refresh: true,
