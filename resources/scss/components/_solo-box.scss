@@ -1,6 +1,8 @@
 .solo-box {
-    margin-top: 50px;
-    padding-top: 20px;
+    @media screen and (min-width: 600px) {
+        margin-top: 50px;
+        padding-top: 20px;
+    }
 
     &__title {
         margin-bottom: 20px;

@@ -95,19 +95,22 @@
 @section('content')
 <div id="index-body">
     <div id="intro-section">
-        <div id="intro-content">
-            <h1>{{ __('Find top-rated certified pros in your area.') }}</h1>
+        <section id="intro-content">
+            <h1>{!! \Illuminate\Support\Str::replace('. ', '.<br/>', __('Jobs near you. Quick. Easy.')) !!}</h1>
+            <h3 class="cah3tion">Find your dream job today!</h3>
 
-            <div id="search-form">
+            <a class="btn btn--inverse btn--jumbo" href="/positions">Find a job</a>
+
+            {{-- <div id="search-form">
                 <div id="search-box">
                     <i class="fa fa-search"></i>
-                    <input type="text" id="search" name="search" placeholder="{{ __('How can we help?') }}" readonly
+                    <input type="text" id="search" name="search" placeholder="{{ __('What kind of job?') }}" readonly
                         onfocus="onIntroSearchFocus(this)" />
                     <button>Search</button>
                 </div>
-            </div>
+            </div> --}}
 
-            <div id="trade-quick-search">
+            {{-- <div id="trade-quick-search">
                 @foreach (array_slice($trades, 2) as $key => $value)
                 @php
                 $iconClasses = match ($key) {
@@ -122,8 +125,8 @@
                     <p>{{ $value }}</p>
                 </a>
                 @endforeach
-            </div>
-        </div>
+            </div> --}}
+        </section>
     </div>
 
     <div id="search-overlay" class="hidden">
@@ -165,19 +168,18 @@
 
         <div class="howitworks-item">
             <i class="fa-regular fa-xl fa-message"></i>
-            <p><b>1. Tell us what you need</b></p>
-            <p>From housecleaning to home cooking, we can help with it all.</p>
+            <p><b>1. Search for job openings</b></p>
+            <p>From online tutoring to salesperson, there's a job for everyone.</p>
         </div>
         <div class="howitworks-item">
             <i class="fa-solid fa-xl fa-hammer"></i>
-            <p><b>2. We'll connect you with pros nearby</b></p>
-            <p>See your price and book an appointment right away.</p>
+            <p><b>2. Build a quick CV and start applying</b></p>
+            <p>We guide you through building a professional CV to show off your talent.</p>
         </div>
         <div class="howitworks-item">
             <i class="fa-regular fa-xl fa-thumbs-up"></i>
-            <p><b>3. Let us take care of the rest</b></p>
-            <p>Now just wait for the appointment date and your service pro will arrive to make your dreams come true.
-            </p>
+            <p><b>3. Let our partner companies get back to you</b></p>
+            <p>Now just wait for a response and your dream job may just be yours.</p>
         </div>
     </div>
 
