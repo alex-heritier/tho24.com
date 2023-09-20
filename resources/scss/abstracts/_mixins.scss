@@ -53,12 +53,12 @@
 
 
 @mixin card {
-    border: 1px solid #e0e0e0;
+    border: 0.5px solid #e0e0e0;
     /* Slightly thicker border with a soft gray color */
     border-radius: 8px;
     /* Slightly rounded corners for a modern look */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     /* Subtle box shadow for elevation */
     /* Add padding for content within the card */
-    padding: 16px;
+    padding: 18px;
 }
