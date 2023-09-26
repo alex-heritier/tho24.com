@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -89,9 +90,9 @@ class Position extends Model
     public function myApplies()
     {
         if (Auth::user() === null) {
-            throw new Exception('Position relationship myApplies needs an auth user');
+            // throw new Exception('Position relationship myApplies needs an auth user');
         }
 
-        return $this->applies()->where('user_id', Auth::user()->id);
+        return $this->applies()->where('user_id', Auth::user()?->id);
     }
 }

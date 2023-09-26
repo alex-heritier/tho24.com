@@ -15,7 +15,7 @@
 
         {{-- <a href="/" class="btn m-position__apply-btn">Apply</a> --}}
 
-        @if (!$isBiz)
+        @if (Auth::check() && !$isBiz)
         <form action="/applies" method="POST">
             @csrf
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">

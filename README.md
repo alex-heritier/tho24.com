@@ -6,5 +6,7 @@
 
 # Deploy
 - Link storage using relative paths
+    cd public
     ln -s ../storage/app/public storage
     ln -s ../storage/app/images images
+    cd ..

@@ -13,13 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        if (request()->ajax()) {
-            return view('users/partial/index')->with('users', $users);
-        } elseif (request()->expectsJson()) {
-            return [];
-        } else {
-            return view('user/index')->with('users', $users);
-        }
+        return view('user/index')->with('users', $users);
     }
 
     /**

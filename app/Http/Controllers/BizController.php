@@ -13,11 +13,7 @@ class BizController extends Controller
     public function index()
     {
         $bizs = Biz::all();
-        if (request()->ajax()) {
-            return view('biz/partial/index')->with('bizs', $bizs);
-        } else {
-            return view('biz/index')->with(['bizs' => $bizs]);
-        }
+        return view('biz/index')->with(['bizs' => $bizs]);
     }
 
     public function show(int $id)
