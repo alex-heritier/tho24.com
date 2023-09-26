@@ -96,7 +96,7 @@
 <div id="index-body">
     <div id="intro-section">
         <section id="intro-content">
-            <h1>{!! \Illuminate\Support\Str::replace('. ', '.<br/>', __('Jobs near you. Quick. Easy.')) !!}</h1>
+            <h1>{!! \Illuminate\Support\Str::replace('. ', '.<br />', __('Jobs near you. Quick. Easy.')) !!}</h1>
             <h3 class="cah3tion">Find your dream job today!</h3>
 
             <a class="btn btn--inverse btn--jumbo" href="/positions">Find a job</a>
@@ -164,33 +164,37 @@
     </div>
 
     <div id="howitworks-section">
-        <h2>{{ __('How it works') }}</h2>
+        <section>
+            <h2>{{ __('How it works') }}</h2>
 
-        <div class="howitworks-item">
-            <i class="fa-regular fa-xl fa-message"></i>
-            <p><b>1. Search for job openings</b></p>
-            <p>From online tutoring to salesperson, there's a job for everyone.</p>
-        </div>
-        <div class="howitworks-item">
-            <i class="fa-solid fa-xl fa-hammer"></i>
-            <p><b>2. Build a quick CV and start applying</b></p>
-            <p>We guide you through building a professional CV to show off your talent.</p>
-        </div>
-        <div class="howitworks-item">
-            <i class="fa-regular fa-xl fa-thumbs-up"></i>
-            <p><b>3. Let our partner companies get back to you</b></p>
-            <p>Now just wait for a response and your dream job may just be yours.</p>
-        </div>
+            <div class="howitworks-item">
+                <i class="fa-regular fa-xl fa-message"></i>
+                <p><b>1. Search for job openings</b></p>
+                <p>From online tutoring to salesperson, there's a job for everyone.</p>
+            </div>
+            <div class="howitworks-item">
+                <i class="fa-solid fa-xl fa-hammer"></i>
+                <p><b>2. Build a quick CV and start applying</b></p>
+                <p>We guide you through building a professional CV to show off your talent.</p>
+            </div>
+            <div class="howitworks-item">
+                <i class="fa-regular fa-xl fa-thumbs-up"></i>
+                <p><b>3. Let our partner companies get back to you</b></p>
+                <p>Now just wait for a response and your dream job may just be yours.</p>
+            </div>
+        </section>
     </div>
 
     <div id="biz-section">
-        <h2>{{ __('Popular businesses') }}</h2>
+        <section>
+            <h2>{{ __('Popular businesses') }}</h2>
 
-        <div id="biz-list">
-            @foreach ($bizs as $biz)
-            @include('biz/partial/show', ['biz' => $biz])
-            @endforeach
-        </div>
+            <div id="biz-list">
+                @foreach ($bizs as $biz)
+                @include('biz/partial/show', ['biz' => $biz])
+                @endforeach
+            </div>
+        </section>
     </div>
 </div>
 @endsection
