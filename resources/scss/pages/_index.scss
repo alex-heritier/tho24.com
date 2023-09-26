@@ -205,7 +205,7 @@
 
     .biz-item {
         margin: 20px 12px;
-        padding: 4px;
+        padding: 14px;
         display: flex;
         flex-direction: row;
         align-items: stretch;
@@ -215,6 +215,7 @@
 
         img {
             display: block;
+            width: calc(10vh * 16/9);
             height: 10vh;
             flex-grow: 0;
             padding: 0 10px;
