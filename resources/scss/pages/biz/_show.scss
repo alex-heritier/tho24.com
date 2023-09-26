@@ -1,0 +1,98 @@
+#biz--show {
+    .content {
+        padding: 32px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    img {
+        aspect-ratio: 16/9;
+        object-fit: contain;
+        box-sizing: border-box;
+    }
+
+    p {
+        line-height: 1.5rem;
+    }
+
+    .info-section {
+        padding: 10px 0;
+
+        h3 {
+            font-size: 0.9rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+    }
+
+    .rating-stars i {
+        width: 18px;
+        height: 18px;
+        object-position: center;
+
+        .on {
+            color: gold;
+        }
+    }
+
+    .review {
+        margin: 8px 2px;
+    }
+
+    .timeago {
+        color: gray;
+    }
+
+    .contact>p {
+        margin: 4px 0;
+    }
+
+    .contact .btn-row {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    button .t24-btn {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        background-color: aliceblue;
+        border: 1px solid lightgray;
+        border-radius: 4px;
+    }
+
+    #calendar {
+        margin: 6px 10px 0;
+        display: grid;
+        grid-template-columns: repeat(7, auto);
+        grid-template-rows: 24px repeat(5, 36px);
+        border: 0.5px solid lightgray;
+        border-radius: 8px;
+        overflow: hidden;
+
+        span {
+            background-color: #fafafa;
+            border: 0.5px solid lightgray;
+            box-sizing: border-box;
+        }
+    }
+
+    .calendar-cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0.5px solid lightgray;
+        box-sizing: border-box;
+        text-align: center;
+        color: lightgray;
+
+        .busy {
+            background-color: red;
+            color: white;
+        }
+    }
+}
