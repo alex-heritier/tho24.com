@@ -2,6 +2,8 @@
 <html lang="{{ config('app.locale') }}">
 
 <head>
+    <title>@yield('title', Str::ucfirst(config('app.name')) . ' | Find Your Next Job')</title>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -15,13 +17,12 @@
     </script>
     <script>
         window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    gtag('config', 'G-435BPF426T');
+        gtag('config', 'G-435BPF426T');
     </script>
-
-    <title>@yield('title', Str::ucfirst(config('app.name')) . ' | Find Your Next Job')</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">

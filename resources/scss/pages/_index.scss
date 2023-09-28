@@ -1,24 +1,24 @@
 #index-body {
     --search-rounding: 4px;
 
-    #intro-section {
+    div:has(> #intro) {
+        width: 100%;
         background-color: var(--color-alt-primary);
-        padding: 50px 10px;
+    }
+
+    #intro {
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: stretch;
+        padding: 50px 14px;
         color: white;
         margin-inline: auto;
 
-        #intro-content {
-            margin-inline: auto;
-            max-width: 800px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            justify-content: center;
-            align-items: stretch;
-
-            a.btn {
-                margin-top: 20px;
-            }
+        a.btn {
+            margin-top: 20px;
         }
 
         h1 {
@@ -204,25 +204,28 @@
     }
 
     .biz-item {
-        margin: 20px 12px;
+        margin: 10px 0;
         padding: 14px;
         display: flex;
         flex-direction: row;
-        align-items: stretch;
-        gap: 4px;
+        align-items: center;
+        gap: 14px;
         border: 0.5px solid lightgray;
         border-radius: 6px;
 
         img {
+            --size: 12vh;
+            --aspect-ratio: 1;
+
             display: block;
-            width: calc(10vh * 16/9);
-            height: 10vh;
+            width: calc(var(--size) * var(--aspect-ratio));
+            height: var(--size);
+            aspect-ratio: var(--aspect-ratio);
             flex-grow: 0;
-            padding: 0 10px;
-            object-fit: contain;
+            object-fit: cover;
             object-position: center;
-            aspect-ratio: 1;
             box-sizing: border-box;
+            border-radius: 4px;
         }
 
         .info {
@@ -230,17 +233,15 @@
             flex-direction: column;
             justify-content: center;
             gap: 2px;
-            padding: 8px;
             flex-grow: 1;
         }
 
-        p,
-        h2 {
-            color: black;
-            text-decoration: none;
+        h3 {
+            font-size: 1.2rem;
         }
 
-        .title {
+        h4 {
+            font-size: 1rem;
             font-weight: 600;
         }
     }

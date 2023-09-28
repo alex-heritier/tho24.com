@@ -94,40 +94,15 @@
 
 @section('content')
 <div id="index-body">
-    <div id="intro-section">
-        <section id="intro-content">
+    <div>
+        <section id="intro">
             <h1>{!! \Illuminate\Support\Str::replace('. ', '.<br />', __('Jobs near you. Quick. Easy.')) !!}</h1>
             <h3 class="cah3tion">Find your dream job today!</h3>
 
             <a class="btn btn--inverse btn--jumbo" href="/positions">Find a job</a>
-
-            {{-- <div id="search-form">
-                <div id="search-box">
-                    <i class="fa fa-search"></i>
-                    <input type="text" id="search" name="search" placeholder="{{ __('What kind of job?') }}" readonly
-                        onfocus="onIntroSearchFocus(this)" />
-                    <button>Search</button>
-                </div>
-            </div> --}}
-
-            {{-- <div id="trade-quick-search">
-                @foreach (array_slice($trades, 2) as $key => $value)
-                @php
-                $iconClasses = match ($key) {
-                'house_cleaning' => 'fa fa-soap',
-                'water_delivery' => 'fa fa-droplet',
-                'moving' => 'fa fa-dolly',
-                'catering' => 'fa fa-bowl-rice',
-                };
-                @endphp
-                <a class="item" href="#" onclick="showOverlay({tradeValue: '{{ $key }}'})">
-                    <i class="fa-2xl {{ $iconClasses }}"></i>
-                    <p>{{ $value }}</p>
-                </a>
-                @endforeach
-            </div> --}}
         </section>
     </div>
+
 
     <div id="search-overlay" class="hidden">
         {{-- <div id="overlay-search-bar">
