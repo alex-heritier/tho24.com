@@ -25,7 +25,7 @@ class AdminSeeder extends Seeder
                     'name' => 'IT Solutions',
                     'descr' => 'A small, artisanal IT shop focused on the TALL stack. We also make Saigon\'s best com tam!',
                     'trade' => 'catering',
-                    'main_img' => 'file:///' . storage_path('app/images/biz_pfp/2yb9sR0R8pp1qI4yyBz931XN0wg6e3W2mkbchNr4.jpg'),
+                    'main_img' => 'https://upload.wikimedia.org/wikipedia/commons/b/b0/C%C6%A1m_T%E1%BA%A5m%2C_Da_Nang%2C_Vietnam.jpg',
                 ])
             )
             ->create([

@@ -32,7 +32,7 @@ class BizFactory extends Factory
             'main_img' => "https://picsum.photos/1200/350?random=" . mt_rand(1, 55000),
             'email' => fake()->unique()->safeEmail(),
             'phone_code' => '84',
-            'phone' => '9## ### ###',
+            'phone' => fake()->numerify('9## ### ###'),
             'district' => $district,
             'ward' => $ward,
         ];
