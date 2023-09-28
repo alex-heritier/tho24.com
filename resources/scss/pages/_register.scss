@@ -23,46 +23,6 @@
         }
     }
 
-    // label {
-    //     display: block;
-
-    //     &[for] {
-    //         margin-bottom: 4px;
-    //     }
-    // }
-
-    // input {
-    //     box-sizing: border-box;
-
-    //     &[type='submit'] {
-    //         width: 100%;
-    //         padding: 12px 0;
-    //         border: none;
-    //         border-radius: 4px;
-    //         background-color: powderblue;
-    //         font-size: 1.1rem;
-    //         margin-top: 10px;
-    //     }
-
-    //     &:not([type='submit']):not([type='checkbox']):not([name='phone']),
-    //     select:not([name='phone_code']) {
-    //         width: 100%;
-    //         padding: 6px;
-    //         margin-bottom: 18px;
-    //     }
-    // }
-
-    // #loc-picker {
-    //     display: flex;
-    //     gap: 10px;
-
-    //     &>div {
-    //         flex: 1;
-    //         text-overflow: ellipsis;
-    //     }
-
-    // }
-
     option.inactive {
         display: none;
     }
