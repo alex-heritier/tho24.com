@@ -3,6 +3,10 @@
     
     background-color: var(--color-primary);
 
+    &--inline {
+        display: inline-block;
+    }
+
     &--red {
         background-color: red;
     }
@@ -22,5 +26,11 @@
     &--jumbo {
         font-size: 1.4rem;
         padding: 8px 24px;
+    }
+
+    &--icon {
+        & > *:not(:last-child) {
+            margin-right: 8px;
+        }
     }
 }
