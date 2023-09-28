@@ -34,7 +34,7 @@
 <section id="biz--show">
 
     {{-- BANNER IMAGE --}}
-    <img src="/{{ $biz["main_img"] }}" />
+    <img src="{{ $biz["main_img"] }}" />
 
     {{-- DYNAMIC CONTENT --}}
     @auth

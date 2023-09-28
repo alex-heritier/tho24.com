@@ -54,6 +54,10 @@ class Position extends Model
 
     protected $table = 'positions';
 
+    protected $attributes = [
+        'status' => 'A',
+    ];
+
     protected $fillable = [
         'biz_id',
         'title',

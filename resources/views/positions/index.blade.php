@@ -11,7 +11,7 @@
         {{-- <p class="m-position__description">{{ $pos->description }}</p> --}}
         <p class="m-position__biz-name">{{ $pos->biz->name }}</p>
         <p class="m-position__address"><i class="fa fa-location-dot"></i>{{ $pos->address }}</p>
-        <p class="m-position__salary">{{ $pos->min_salary / 100 }} to {{ $pos->max_salary / 100 }} VND ({{ $pos->salary_rate }})</p>
+        <p class="m-position__salary">{{ $pos->min_salary / 100 }} to {{ $pos->max_salary / 100 }} {{ $pos->currency_code }} ({{ $pos->salary_rate }})</p>
         <p class="m-position__type">{{ \App\Models\Position::$employmentTypeValues[$pos->employment_type] }}</p>
 
         @if ($isBiz)
