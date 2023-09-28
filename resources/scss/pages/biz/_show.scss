@@ -7,9 +7,9 @@
     }
 
     img {
-        aspect-ratio: 16/9;
         object-fit: contain;
         box-sizing: border-box;
+        max-height: 30vh;
     }
 
     p {
