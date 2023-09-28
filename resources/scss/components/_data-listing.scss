@@ -1,7 +1,9 @@
 .data-listing {
-    &>div {
+    &>div,
+    &>.data-listing__item {
         @include card;
         margin-bottom: 40px;
+        display: block;
 
         /* target everything but the last child */
         &:not(:last-child) {

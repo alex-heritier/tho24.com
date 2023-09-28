@@ -15,10 +15,10 @@
     @else
 
     @foreach ($positions as $pos)
-    <div class="m-position">
+    <a href="/positions/{{$pos->id}}" class="m-position data-listing__item">
         <span class="m-position__id">{{ $pos->id }}</span>
 
-        <h2 class="m-position__title"><a href="/positions/{{$pos->id}}">{{ $pos->title }}</a></h2>
+        <h2 class="m-position__title">{{ $pos->title }}</h2>
         {{-- <p class="m-position__description">{{ $pos->description }}</p> --}}
         <p class="m-position__biz-name">{{ $pos->biz->name }}</p>
         <p class="m-position__address"><i class="fa fa-location-dot"></i>{{ $pos->address }}</p>
@@ -32,7 +32,7 @@
                     class="fa fa-trash"></i>&nbsp;Delete</button>
         </div>
         @endif
-    </div>
+    </a>
     @endforeach
 
     @endempty

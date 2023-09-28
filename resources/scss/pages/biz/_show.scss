@@ -7,10 +7,11 @@
     }
 
     img {
+        --height: 40vh;
         object-fit: cover;
         box-sizing: border-box;
         width: 100%;
-        max-height: 40vh;
+        height: var(--height);
     }
 
     p {
