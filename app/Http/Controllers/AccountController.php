@@ -42,7 +42,7 @@ class AccountController extends Controller
         );
 
         if ($errorMsg) {
-            Log::debug('AccountController.register_biz ERROR '.$errorMsg);
+            Log::debug('AccountController.register_biz ERROR ' . $errorMsg);
 
             return response("ERROR - $errorMsg", 500);
         }
@@ -59,6 +59,7 @@ class AccountController extends Controller
      */
     public function login(Request $request, AccountService $accountService)
     {
+        // Validate data
         if ($accountService->login($request)) {
             return redirect()->intended('/');
         }

@@ -63,32 +63,7 @@
         }
 
         window.addEventListener("load", function () {
-            document.getElementById("register-button").addEventListener("click", function () {
-
-                // Switch form contents
-                document.getElementById("register-form").style.display = "block";
-                document.getElementById("existing-account-form").style.display = "none";
-
-                // Toggle button class
-                document.getElementById("register-button").classList.add('btn--active');
-                document.getElementById("existing-account-button").classList.remove('btn--active');
-
-                document.querySelector('p.alert').innerText = '';
-            });
-            document.getElementById("existing-account-button").addEventListener("click", function () {
-                // Switch form contents
-                document.getElementById("register-form").style.display = "none";
-                document.getElementById("existing-account-form").style.display = "block";
-
-                // Toggle button class
-                document.getElementById("register-button").classList.remove('btn--active');
-                document.getElementById("existing-account-button").classList.add('btn--active');
-
-                document.querySelector('p.alert').innerText = '';
-            });
-
             setupLocationDropdown();
-
             onBizCheckChange(document.querySelector('input[type="checkbox"]').checked);
         });
 </script>
@@ -96,22 +71,24 @@
 
 
 @section('content')
-<div id="sign-up-screen">
+<div id="sign-up-screen" x-data="{mode: '{{ session('err_type') === 'login' ? 'login' : 'register' }}' }">
     <div id="button-container">
-        <button id="register-button" @class(['btn', 'btn--active'=> session('err_type') !== 'login'])>{{ __('Register') }}</button>
+        <button class="btn" :class="mode == 'register' ? 'btn--active':''" @click="mode = 'register'">Register</button>
+        <button class="btn" :class="mode == 'login' ? 'btn--active':''" @click="mode = 'login'">Login</button>
+        {{-- <button id="register-button" @class(['btn', 'btn--active'=> session('err_type') !== 'login'])>{{ __('Register') }}</button>
         <button id="existing-account-button" @class(['btn', 'btn--active'=> session('err_type') === 'login'])>{{
             __('Sign in')
-            }}</button>
+            }}</button> --}}
     </div>
 
     @if($errors->count() > 0)
     @foreach ($errors->all() as $error)
-    <p class="alert">{{ $error }}</p>
+    <p class="error">{{ $error }}</p>
     @endforeach
     @endif
 
     <section class="solo-box">
-        <div id="register-form">
+        <div id="register-form" x-show="mode == 'register'">
             <!-- Form elements for registering a new account -->
             <form class="form-24" method="post" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
@@ -193,7 +170,11 @@
                     </div>
 
 
-                    <input onchange="validateSize(this)" type="file" name="image" />
+                    <div class="form-24__entry">
+                        <label for="image">{{ __('Image') }}</label>
+                        <input onchange="validateSize(this)" type="file" name="image" />
+                    </div>
+
                     <p id="file-error">&nbsp;</p>
 
                 </div>
@@ -201,7 +182,8 @@
                 <input type="submit" value="{{ __('Submit') }}" />
             </form>
         </div>
-        <div id="existing-account-form" style="display:none">
+
+        <div id="existing-account-form" x-show="mode == 'login'" x-cloak>
             <!-- Form elements for logging into an existing account -->
             <form class="form-24" method="post" action="{{ route('login') }}">
                 @csrf
