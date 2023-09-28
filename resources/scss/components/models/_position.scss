@@ -1,6 +1,10 @@
 .m-position {
     position: relative;
 
+    &>* {
+        margin-bottom: 4px;
+    }
+
     &__id {
         position: absolute;
         top: 10px;
