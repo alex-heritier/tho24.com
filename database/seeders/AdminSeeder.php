@@ -17,21 +17,10 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->has(
-                Biz::factory()
-                    ->has(Position::factory(4))
-                    ->state([
-                        'name' => 'Schoolbird',
-                        'descr' => 'Silicon valley startup focused on disrupting the ed-tech market in Vietnam',
-                        'trade' => 'house_cleaning',
-                        'main_img' => 'https://schoolbird.vn/images/pages/header/logo.png',
-                    ])
-            )
             ->create([
                 'name' => 'Alex Heritier',
                 'email' => 'alex.heritier@gmail.com',
             ]);
-
 
         User::factory()
             ->has(
@@ -47,6 +36,22 @@ class AdminSeeder extends Seeder
             ->create([
                 'name' => 'Papa John',
                 'email' => 'papajohn@sbcglobal.net',
+            ]);
+
+        User::factory()
+            ->has(
+                Biz::factory()
+                    ->has(Position::factory(4))
+                    ->state([
+                        'name' => 'Schoolbird',
+                        'descr' => 'Silicon valley startup focused on disrupting the ed-tech market in Vietnam',
+                        'trade' => 'house_cleaning',
+                        'main_img' => 'https://schoolbird.vn/images/pages/header/logo.png',
+                    ])
+            )
+            ->create([
+                'name' => 'Schoolbird',
+                'email' => 'hello@schoolbird.vn',
             ]);
     }
 }

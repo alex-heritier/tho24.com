@@ -24,13 +24,13 @@ class BizFactory extends Factory
         $ward = $districtData['ward'][array_rand($districtData['ward'])]['code'];
 
         return [
-            'name' => fake()->name(),
+            'name' => fake()->company(),
             'descr' => fake()->text(),
             'trade' => array_rand(TradeService::TRADES),
             'url' => fake()->url(),
             // 'main_img' => fake()->imageUrl(),
             'main_img' => "https://picsum.photos/1200/350?random=" . mt_rand(1, 55000),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => fake()->unique()->companyEmail(),
             'phone_code' => '84',
             'phone' => fake()->numerify('9## ### ###'),
             'district' => $district,

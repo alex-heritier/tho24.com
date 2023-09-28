@@ -3,6 +3,6 @@
     <div class="info">
         <h3 class="title">{{ $biz['name'] }}</h3>
         <h4 class="subtitle">{{ $biz->prettyTrade() }}</h4>
-        <p>{{ $biz['descr'] }}</p>
+        <div class="biz-item__description">{{ $biz['descr'] }}</div>
     </div>
 </a>
