@@ -1,0 +1,11 @@
+.data-listing {
+    &>div {
+        @include card;
+        margin-bottom: 40px;
+
+        /* target everything but the last child */
+        &:not(:last-child) {
+            margin-bottom: 30px;
+        }
+    }
+}

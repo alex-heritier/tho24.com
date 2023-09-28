@@ -2,7 +2,7 @@
 
 
 @section('content')
-<section class="solo-box">
+<section class="solo-box data-listing">
     @foreach ($positions as $pos)
     <div class="m-position">
         <span class="m-position__id">{{ $pos->id }}</span>

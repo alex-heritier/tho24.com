@@ -36,12 +36,14 @@ class PositionController extends Controller
             'title' => 'required',
             'description' => 'required',
             'address' => 'required',
-            'min_salary' => 'required',
-            'max_salary' => 'required',
+            'min_salary' => 'required|integer|min:0',
+            'max_salary' => 'required|integer|min:0',
             'salary_rate' => 'required',
             'hire_count' => 'required',
             'employment_type' => 'required',
         ]);
+        $validated['min_salary'] = 100 * (int) $validated['min_salary'];
+        $validated['max_salary'] = 100 * (int) $validated['max_salary'];
 
         $bizID = Auth::user()->biz->id;
         $position = Position::create([

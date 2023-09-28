@@ -1,9 +1,5 @@
 .m-position {
-    @include card;
-
     position: relative;
-    margin-bottom: 20px;
-    // padding: 12px;
 
     &__id {
         position: absolute;
@@ -14,12 +10,17 @@
     }
 
     &__description {
-        font-size: 1rem; /* Increase the font size for better readability */
-        line-height: 1.4; /* Add line height for improved spacing */
-        margin-top: 10px; /* Add some space above the description */
-        border-top: 1px solid lightgray; /* Add a subtle border at the top */
-        padding-top: 10px; /* Add padding at the top for separation */
+        font-size: 1rem;
+        /* Increase the font size for better readability */
+        line-height: 1.4;
+        /* Add line height for improved spacing */
+        margin-top: 10px;
+        /* Add some space above the description */
+        // border-top: 1px solid lightgray; /* Add a subtle border at the top */
+        padding-top: 10px;
+        /* Add padding at the top for separation */
         margin-bottom: 10px;
+        font-style: italic;
     }
 
     &__address {
