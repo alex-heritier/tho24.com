@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 
-@section('title', Str::ucfirst(config('app.name')) . ' | Job Listing')
+@section('title', Str::ucfirst(config('app.name')) . ' | Jobs for University Students')
 
 
 @section('script')
@@ -96,10 +96,10 @@
 <div id="index-body">
     <div>
         <section id="intro">
-            <h1>{!! \Illuminate\Support\Str::replace('. ', '.<br />', __('Jobs near you. Quick. Easy.')) !!}</h1>
-            <h3 class="cah3tion">Find your dream job today!</h3>
+            <h1>{!! \Illuminate\Support\Str::replace('. ', '.<br />', __('Jobs for students. Quick. Easy.')) !!}</h1>
+            <h3>Find your dream job today!</h3>
 
-            <a class="btn btn--inverse btn--jumbo" href="/positions">Find a job</a>
+            <a class="btn btn--inverse btn--jumbo index-hero-btn" href="/positions">Find a job</a>
         </section>
     </div>
 

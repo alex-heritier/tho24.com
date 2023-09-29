@@ -12,6 +12,10 @@
         background-color: red;
     }
 
+    &--white {
+        background-color: white;
+    }
+
     &--inverse {
         background-color: transparent;
         color: var(--color-primary);
@@ -22,11 +26,13 @@
         font-size: 1.2rem;
         padding-top: 10px;
         padding-bottom: 10px;
+        text-transform: uppercase;
     }
 
     &--jumbo {
         font-size: 1.4rem;
         padding: 8px 24px;
+        text-transform: uppercase;
     }
 
     &--icon {
