@@ -9,4 +9,5 @@
     cd public
     ln -s ../storage/app/public storage
     ln -s ../storage/app/images images
+    ln -s ../storage/app/fonts fonts
     cd ..
