@@ -63,6 +63,11 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
+    public function applies()
+    {
+        return $this->hasMany(Apply::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

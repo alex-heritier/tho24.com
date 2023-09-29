@@ -2,11 +2,11 @@
 
 
 @section('content')
-@include('partials.header')
+@include('partials._header')
 
 <main>
     @yield('content')
 </main>
 
-@include('partials.footer')
+@include('partials._footer')
 @overwrite

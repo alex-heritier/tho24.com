@@ -21,7 +21,7 @@
         <span>Inbox</span>
     </a>
 
-    <a class="btn btn--inline btn--inverse btn--icon" href="/users/{{ Auth::id() }}/applies">
+    <a class="btn btn--inline btn--inverse btn--icon" href="/applies">
         <i class="fa-solid fa-briefcase"></i>
         <span>Job Applications</span>
     </a>

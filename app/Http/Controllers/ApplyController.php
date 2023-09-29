@@ -16,6 +16,13 @@ use Illuminate\Http\Request;
 
 class ApplyController extends Controller
 {
+    public function index()
+    {
+        $applies = Apply::with('position')->where('user_id', auth()->id())->get();
+
+        return view('applies.index')->with('applies', $applies);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
