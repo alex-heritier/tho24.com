@@ -30,12 +30,12 @@
 
 
 @section('content')
-<div class="blog-list">
+<section class="blog-list">
     @foreach ($blogs as $blog)
-        <a href="/blog/{{ $blog['slug'] }}" class="blog-item">
-            <p>Blog #{{ $blog['index'] }}</p>
-            <p>{{ $blog['title'] }}</p>
-        </a>
+    <a href="/blog/{{ $blog['slug'] }}" class="blog-item">
+        <p>Blog #{{ $blog['index'] }}</p>
+        <p>{{ $blog['title'] }}</p>
+    </a>
     @endforeach
-</div>
+</section>
 @endsection
