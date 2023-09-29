@@ -2,6 +2,7 @@
 
 
 @section('title', Str::ucfirst(config('app.name')) . ' | Jobs for University Students')
+@section('meta-description', 'Find jobs for university students in Vietnam. We have a wide range of jobs from online tutoring to salespeople. Build a quick CV and start applying now!')
 
 
 @section('script')
