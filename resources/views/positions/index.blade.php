@@ -16,15 +16,6 @@
 
     @foreach ($positions as $pos)
     <a href="/positions/{{$pos->id}}" class="m-position data-listing__item">
-        {{-- <span class="m-position__id">{{ $pos->id }}</span>
-
-        <h2 class="m-position__title">{{ $pos->title }}</h2>
-        <p class="m-position__biz-name">{{ $pos->biz->name }}</p>
-        <p class="m-position__address"><i class="fa fa-location-dot"></i>{{ $pos->address }}</p>
-        <p class="m-position__salary">{{ $pos->min_salary / 100 }} to {{ $pos->max_salary / 100 }} {{
-            $pos->currency_code }} ({{ $pos->salary_rate }})</p>
-        <p class="m-position__type">{{ \App\Models\Position::$employmentTypeValues[$pos->employment_type] }}</p> --}}
-
         @include('partials._position', ['position' => $pos, 'hideDescription' => true])
 
         @if ($isBiz)

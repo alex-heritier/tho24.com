@@ -38,6 +38,10 @@ class Apply extends Model
         'status',
     ];
 
+    protected $attributes = [
+        'status' => 'A',
+    ];
+
     public function position()
     {
         return $this->belongsTo(Position::class, 'position_id');
