@@ -54,13 +54,12 @@ Route::post('/misc/email_tester', [MiscController::class, 'email_tester_action']
 
 // Legacy
 Route::get('/index2', [LegacyController::class, 'index2']);
-Route::get('/', [LegacyController::class, 'home']);
 Route::get('/account', [LegacyController::class, 'account']);
-Route::get('/biz.html', function () {
-    $controller = App::make(LegacyController::class);
+Route::get('/biz.html', [LegacyController::class, 'biz']);
 
-    return App::call([$controller, 'biz']);
-});
+Route::get('/', [LegacyController::class, 'home']);
+Route::get('/en', [LegacyController::class, 'home']);
+
 Route::get('/register', [LegacyController::class, 'register']);
 Route::get('/dummy', [LegacyController::class, 'dummy']);
 Route::get('/biz_search', [LegacyController::class, 'bizSearch']);
