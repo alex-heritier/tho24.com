@@ -2,7 +2,8 @@
 
 
 @section('title', Str::ucfirst(config('app.name')) . ' | Jobs for University Students')
-@section('meta-description', 'Find jobs for university students in Vietnam. We have a wide range of jobs from online tutoring to salespeople. Build a quick CV and start applying now!')
+@section('meta-description', 'Find jobs for university students in Vietnam. We have a wide range of jobs from online
+tutoring to salespeople. Build a quick CV and start applying now!')
 
 
 @section('script')
@@ -100,7 +101,7 @@
             <h1>{!! \Illuminate\Support\Str::replace('. ', '.<br />', __('Jobs for students. Quick. Easy.')) !!}</h1>
             <h3>Find your dream job today!</h3>
 
-            <a class="btn btn--inverse btn--jumbo index-hero-btn" href="/positions">Find a job</a>
+            <a class="btn btn--text btn--jumbo index-hero-btn" href="/positions">Find a job</a>
         </section>
     </div>
 

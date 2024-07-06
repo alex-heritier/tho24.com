@@ -1,43 +1,96 @@
 .btn {
-    @include button;
-    
+    display: inline-block;
     background-color: var(--color-primary);
-    box-sizing: border-box;
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    text-align: center;
+    text-decoration: none !important;
+    transition: 0.3s filter, 0.3s scale;
 
-    &--inline {
-        display: inline-block;
+    &:disabled {
+        background-color: lightgray;
+        cursor: default !important;
+    }
+
+    &:hover {
+        cursor: pointer;
+        scale: 1.05;
+    }
+
+    &:active,
+    &:hover {
+        filter: brightness(85%);
+    }
+
+    >* {
+        vertical-align: middle;
+    }
+
+    &__img {
+        height: 0.9em;
+        width: auto;
+        // Force color to white
+        filter: invert(40%) sepia(75%) saturate(3144%) hue-rotate(180deg) brightness(93%) contrast(103%);
+        margin-right: 0.5em;
+    }
+
+    &--text {
+        background-color: white;
+        color: var(--color-primary);
+
+        // img {
+        //     // Force color to chao blue
+        //     filter: invert(40%) sepia(75%) saturate(3144%) hue-rotate(180deg) brightness(93%) contrast(103%);
+        // }
+    }
+
+    &--toggle {
+        border: 0.5px solid darkgray;
+        border-radius: 4px;
+        background-color: white;
+        color: initial;
+        font-weight: normal;
+
+        &--on {
+            border-color: var(--color-primary);
+            text-decoration: underline;
+            text-decoration-color: black;
+            font-weight: 600;
+            filter: brightness(98%);
+        }
+
+        &:active,
+        &:hover {
+            filter: unset;
+        }
+    }
+
+    &--large {
+        padding: 18px 26px;
+        border-radius: 100px;
+    }
+
+    &--transparent {
+        background-color: transparent;
+    }
+
+    &--orange {
+        background-color: lightcoral;
     }
 
     &--red {
         background-color: red;
     }
 
-    &--white {
-        background-color: white;
-    }
-
-    &--inverse {
-        background-color: transparent;
-        color: var(--color-primary);
-    }
-
-    &--big {
-        font-weight: bold;
-        font-size: 1.2rem;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        text-transform: uppercase;
-    }
-
-    &--jumbo {
-        font-size: 1.4rem;
-        padding: 8px 24px;
-        text-transform: uppercase;
-    }
-
-    &--icon {
-        & > *:not(:last-child) {
-            margin-right: 8px;
+    @each $name, $color in $colors {
+        &--#{""+$name} {
+            &::before {
+                background-color: rgba($color, 1);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-#sign-up-screen {
+html[x-page-id="/register"],
+html[x-page-id="/login"] {
     #button-container {
         display: flex;
         margin: 20px auto;
@@ -6,7 +7,7 @@
         justify-content: space-evenly;
         gap: 20px;
 
-        button {
+        a {
             border-bottom: 2px solid transparent;
             color: var(--color-primary);
             background-color: unset;

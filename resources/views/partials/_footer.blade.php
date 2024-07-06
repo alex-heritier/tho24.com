@@ -4,5 +4,5 @@
         <a class="footer__link" href="/blog">Blog</a>
     </div>
 
-    <p class="footer__copyright">tho24.com &copy; 2023</p>
+    <p class="footer__copyright">tho24.com &copy; 2024</p>
 </footer>

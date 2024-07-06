@@ -1,0 +1,38 @@
+html {
+    hanging-punctuation: first last;
+}
+
+body {
+    text-size-adjust: 100%;
+}
+
+img {
+    vertical-align: middle; // Replacement for display: block; but less heavy handed
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    text-decoration-skip-ink: auto;
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-color: transparent;
+    transition: 0.3s color, 0.3s text-decoration-color, 0.3s scale;
+    // color: var(--color-primary);
+
+    // Underline anchor without any children ie <a>Hello World</a>
+    &:not(:has(*)) {
+        &:hover {
+            text-decoration-color: inherit;
+        }
+    }
+
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :has(:target) {
+        scroll-behavior: smooth;
+        scroll-padding-top: 3rem;
+    }
+}

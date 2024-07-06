@@ -40,7 +40,7 @@ class LegacyController extends Controller
     {
         $id = $request->query('id');
 
-        return redirect('/biz/'.$id);
+        return redirect('/biz/' . $id);
     }
 
     public function register(MoneyService $moneyService)

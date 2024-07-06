@@ -39,6 +39,9 @@ Route::resources([
 Route::get('/biz/{id}/agenda/{date}', [BizController::class, 'createAgenda']);
 
 // Account
+Route::get('/register', [LegacyController::class, 'register']);
+Route::get('/login', fn () => view('legacy/login'));
+
 Route::post('/acc/register', [AccountController::class, 'register'])->name('register');
 Route::post('/acc/login', [AccountController::class, 'login'])->name('login');
 Route::post('/acc/logout', [AccountController::class, 'logout'])->name('logout');
@@ -60,7 +63,6 @@ Route::get('/biz.html', [LegacyController::class, 'biz']);
 Route::get('/', [LegacyController::class, 'home']);
 Route::get('/en', [LegacyController::class, 'home']);
 
-Route::get('/register', [LegacyController::class, 'register']);
 Route::get('/dummy', [LegacyController::class, 'dummy']);
 Route::get('/biz_search', [LegacyController::class, 'bizSearch']);
 

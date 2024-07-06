@@ -71,14 +71,10 @@
 
 
 @section('content')
-<div id="sign-up-screen" x-data="{mode: '{{ session('err_type') === 'login' ? 'login' : 'register' }}' }">
+<div id="sign-up-screen">
     <div id="button-container">
-        <button class="btn" :class="mode == 'register' ? 'btn--active':''" @click="mode = 'register'">Register</button>
-        <button class="btn" :class="mode == 'login' ? 'btn--active':''" @click="mode = 'login'">Login</button>
-        {{-- <button id="register-button" @class(['btn', 'btn--active'=> session('err_type') !== 'login'])>{{ __('Register') }}</button>
-        <button id="existing-account-button" @class(['btn', 'btn--active'=> session('err_type') === 'login'])>{{
-            __('Sign in')
-            }}</button> --}}
+        <a class="btn btn--text btn--active" href="/register">Register</a>
+        <a class="btn btn--text" href="/login">Login</a>
     </div>
 
     @if($errors->count() > 0)
@@ -178,20 +174,6 @@
                     <p id="file-error">&nbsp;</p>
 
                 </div>
-
-                <input type="submit" value="{{ __('Submit') }}" />
-            </form>
-        </div>
-
-        <div id="existing-account-form" x-show="mode == 'login'" x-cloak>
-            <!-- Form elements for logging into an existing account -->
-            <form class="form-24" method="post" action="{{ route('login') }}">
-                @csrf
-
-                <label for="email">{{ __('Email') }}</label>
-                <input type="email" name="email" placeholder="{{ __('Enter email') }}" />
-                <label for="password">{{ __('Password') }}</label>
-                <input type="password" id="password" name="password" placeholder="{{ __('Create password') }}" />
 
                 <input type="submit" value="{{ __('Submit') }}" />
             </form>

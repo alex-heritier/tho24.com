@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-
+<html 
+    @hasSection('x-custom-tag')
+    x-custom-tag="@yield('x-custom-tag')"
+    @endif
+    lang="{{ App::currentLocale() }}"
+    x-page-id="{{ request()->route()->getName() ?? str_replace('//', '/', array_reduce(config('app.available_locales'), fn($sum, $loc) => str_replace("/$loc", "/", $sum), '/'.request()->path() ) ) }}">
 <head>
     <title>@yield('title', Str::ucfirst(config('app.name')) . ' | Find Your Next Job')</title>
 

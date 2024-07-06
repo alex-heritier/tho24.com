@@ -1,9 +1,39 @@
+// Define the map of color values
+
+// --color-primary: #3498db;
+// --color-secondary: #e67e22;
+// --color-alt-primary: #5fa3e0;
+$colors: (
+    base: #fefefe,
+    primary: #3498db,
+    secondary: #e67e22,
+    transparent: transparent,
+
+    alt-primary: #5fa3e0,
+
+    // # Legacy colors
+    // alt-primary: #5fa3e0,
+    // secondary: #e67e22,
+
+    // https://coolors.co/0088dd-04e762-f5b700-dc0073-89fc00
+    malachite: #04E762,
+    selective-yellow: #F5B700,
+    mexican-pink: #DC0073,
+    chartreuse: #89FC00,
+);
+
+// Function to get color from the map
+@function get-color($color-name) {
+    @return map-get($colors, $color-name);
+}
+
+$COLOR_PRIMARY: get-color('primary');
+$COLOR_SECONDARY: get-color('secondary');
+$COLOR_ALT_PRIMARY: get-color('alt-primary');
+
+
 :root {
-    // --color-primary: lightskyblue;
-    // --color-secondary: #FB8500;
-
-    --color-primary: #3498db;
-    --color-secondary: #e67e22;
-
-    --color-alt-primary: #5fa3e0;
+    @each $name, $color in $colors {
+        --color-#{""+$name}: #{$color};
+    }
 }
