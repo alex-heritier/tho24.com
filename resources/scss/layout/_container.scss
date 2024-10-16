@@ -1,0 +1,22 @@
+.container {
+    $CONTAINER_MAX_WIDTH: $M_CUTOFF;
+
+    max-width: $CONTAINER_MAX_WIDTH;
+    padding: 0 #{12px};
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    // Hacky - remove margin-top for h1 when top of page
+    & h1:first-child {
+        margin-top: 0;
+    }
+
+    & {
+        margin: 32px auto;
+    }
+
+    &--dense {
+        margin: 0 auto;
+    }
+}

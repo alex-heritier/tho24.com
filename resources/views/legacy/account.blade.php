@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 
-@section('title', 'Account Settings')
+@section('title', 'Account | tho24.com')
 
 
 @section('content')
@@ -24,6 +24,11 @@
     <a class="btn btn--inline btn--inverse btn--icon" href="/applies">
         <i class="fa-solid fa-briefcase"></i>
         <span>Job Applications</span>
+    </a>
+
+    <a class="btn btn--inline btn--inverse btn--icon" href="/pagebuilder">
+        <i class="fa-solid fa-brands fa-internet-explorer"></i>
+        <span>Page Builder</span>
     </a>
 
 

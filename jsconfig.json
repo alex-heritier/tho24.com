@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "removeComments": true,
+    "sourceMap": true,
+    "paths": {
+      "@/*": ["./resources/js/*"],
+      "@@/*": ["./resources/jsx"],
+      "$images/*": ["./public/images/*"],
+      "$fonts/*": ["./public/fonts/*"]
+    }
+  },
+  "include": ["./resources/js/**/*", "./resources/jsx/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

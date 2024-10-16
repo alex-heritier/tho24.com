@@ -75,3 +75,6 @@ Route::get('/blog/{slug}', [BlogController::class, 'show']);
 
 // Survey
 Route::get('/survey/{slug}', [SurveyController::class, 'show']);
+
+
+Route::get('/pagebuilder', fn () => view('pagebuilder'));

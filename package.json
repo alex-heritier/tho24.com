@@ -8,6 +8,13 @@
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.7.2",
         "sass": "^1.67.0",
-        "vite": "^4.0.0"
+        "vite": "^4.0.0",
+        "@babel/preset-react": "^7.24.1",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.2.22",
+        "@vitejs/plugin-react": "^4.2.1"
+    },
+    "dependencies": {
+        "react-dom": "^18.2.0"
     }
 }
