@@ -51,10 +51,6 @@ Route::get('/chat/{token}', [MessageController::class, 'showChat']);
 Route::get('/inbox', [MessageController::class, 'userInbox']);
 Route::get('/users/{id}/messages', [MessageController::class, 'userInbox']);
 
-// Misc
-Route::get('/misc/email_tester', [MiscController::class, 'email_tester_view']);
-Route::post('/misc/email_tester', [MiscController::class, 'email_tester_action']);
-
 // Legacy
 Route::get('/index2', [LegacyController::class, 'index2']);
 Route::get('/account', [LegacyController::class, 'account']);
